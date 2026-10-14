@@ -3,7 +3,7 @@ import type { MutableRefObject } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 
 import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
-import type { PayoutMode } from "@/features/returns/index.js";
+import type { PayoutMode } from "@/main-menus/returns/index.js";
 
 import type { ExchangeSettleShortcutHandle } from "../types.js";
 

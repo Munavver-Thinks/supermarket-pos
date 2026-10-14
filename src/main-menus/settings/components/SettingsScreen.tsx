@@ -10,7 +10,7 @@ import { formatSize } from "@/utils/format.js";
 import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 import { useConfirm } from "@/context/ConfirmContext/index.js";
 import { useSessionStore } from "@/store/sessionStore.js";
-import { ActivationForm } from "@/features/auth/index.js";
+import { ActivationForm } from "@/main-menus/auth/index.js";
 
 import { auditService } from "../services/auditService.js";
 import { backupService } from "../services/backupService.js";

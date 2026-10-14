@@ -69,7 +69,7 @@ export default tseslint.config(
   },
   {
     // Renderer architecture (see README "Renderer architecture"): the preload bridge is read in
-    // exactly one place, and a feature is only reached through its public index.
+    // exactly one place, and a main menu folder is only reached through its public index.
     files: ["src/**/*.{ts,tsx}"],
     ignores: ["src/core/**", "src/services/ipcClient.ts", "src/@types/**"],
     rules: {
@@ -77,7 +77,7 @@ export default tseslint.config(
         "error",
         {
           selector: "MemberExpression[object.name=\"window\"][property.name=\"api\"]",
-          message: "Call the preload bridge through a service (src/services or features/*/services), never window.api directly.",
+          message: "Call the preload bridge through a service (src/services or main-menus/*/services), never window.api directly.",
         },
       ],
       "no-restricted-imports": [
@@ -86,8 +86,8 @@ export default tseslint.config(
           paths: MAIN_PROCESS_ONLY,
           patterns: [
             {
-              group: ["@/features/*/*", "!@/features/*/index.js", "**/features/*/components/*", "**/features/*/hooks/*", "**/features/*/services/*"],
-              message: "Import a feature through its index (@/features/<name>/index.js), not its internals.",
+              group: ["@/main-menus/*/*", "!@/main-menus/*/index.js", "**/main-menus/*/components/*", "**/main-menus/*/hooks/*", "**/main-menus/*/services/*"],
+              message: "Import a main menu through its index (@/main-menus/<name>/index.js), not its internals.",
             },
           ],
         },
@@ -95,8 +95,8 @@ export default tseslint.config(
     },
   },
   {
-    // Inside a feature its own files import each other directly.
-    files: ["src/features/**/*.{ts,tsx}"],
+    // Inside a main menu folder its own files import each other directly.
+    files: ["src/main-menus/**/*.{ts,tsx}"],
     rules: { "no-restricted-imports": ["error", { paths: MAIN_PROCESS_ONLY }] },
   },
   // src/core/* were separate packages; these rules keep the import graph their package.json

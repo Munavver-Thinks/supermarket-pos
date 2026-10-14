@@ -3,10 +3,10 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { navShortcutLabel } from "@pos/business-logic";
 
 import { Icon, LogoMark } from "@/components/Icon/index.js";
-import { AlertsBanner } from "@/features/alerts/index.js";
-import { AlertsNavBadge } from "@/features/alerts/index.js";
-import { AppearanceDialog } from "@/features/settings/index.js";
-import { ThemeQuickSwitch } from "@/features/settings/index.js";
+import { AlertsBanner } from "@/main-menus/alerts/index.js";
+import { AlertsNavBadge } from "@/main-menus/alerts/index.js";
+import { AppearanceDialog } from "@/main-menus/settings/index.js";
+import { ThemeQuickSwitch } from "@/main-menus/settings/index.js";
 import { useT } from "@/hooks/useT.js";
 import { useCrashNoticeStore } from "@/store/crashNoticeStore.js";
 import { useSessionStore } from "@/store/sessionStore.js";

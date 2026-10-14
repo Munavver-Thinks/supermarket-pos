@@ -20,7 +20,7 @@ import { storeSettingsService } from "@/services/storeSettingsService.js";
 import { Icon } from "@/components/Icon/index.js";
 import { ManagerApprovalDialog } from "@/components/ManagerApprovalDialog/ManagerApprovalDialog.js";
 import { useSessionStore } from "@/store/sessionStore.js";
-import { REFUND_LABEL, type PayoutMode } from "@/features/returns/index.js";
+import { REFUND_LABEL, type PayoutMode } from "@/main-menus/returns/index.js";
 
 import { useCartStore } from "../store/cartStore.js";
 import type { PaymentShortcutHandle } from "../types.js";

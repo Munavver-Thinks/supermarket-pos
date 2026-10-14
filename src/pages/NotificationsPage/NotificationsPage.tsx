@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { AlertsScreen } from "@/features/alerts/index.js";
+import { AlertsScreen } from "@/main-menus/alerts/index.js";
 import { routePath } from "@/routes/routeConfig.js";
 
 export function NotificationsPage(): JSX.Element {

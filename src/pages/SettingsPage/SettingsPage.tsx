@@ -1,4 +1,4 @@
-import { SettingsScreen } from "@/features/settings/index.js";
+import { SettingsScreen } from "@/main-menus/settings/index.js";
 
 export function SettingsPage(): JSX.Element {
   return <SettingsScreen />;
