@@ -4,7 +4,7 @@ import type { ReturnableSale } from "@pos/types";
 
 import { returnsService } from "@/services/returnsService.js";
 import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
-import { previewReturn, ReturnLinePicker } from "@/main-menus/returns/index.js";
+import { previewReturn, ReturnLinePicker } from "@/main-modules/returns/index.js";
 
 import type { PendingReturn } from "../store/cartStore.js";
 

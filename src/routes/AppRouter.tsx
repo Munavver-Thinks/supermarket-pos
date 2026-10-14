@@ -1,8 +1,8 @@
 import type { ComponentType } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { ActivationScreen } from "@/main-menus/auth/index.js";
-import { LoginScreen } from "@/main-menus/auth/index.js";
+import { ActivationScreen } from "@/main-modules/auth/index.js";
+import { LoginScreen } from "@/main-modules/auth/index.js";
 import {
   AiPage,
   BillingPage,

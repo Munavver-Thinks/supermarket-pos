@@ -17,7 +17,7 @@ electron/                Electron base files: main/ (main process, IPC handlers)
                          shared/ipc.ts (the IPC contract both sides compile against)
 src/                     Everything else
   App.tsx, main.tsx      React renderer entry
-  components/ context/ main-menus/ hooks/ pages/ routes/ services/ store/ utils/
+  components/ context/ main-modules/ hooks/ pages/ routes/ services/ store/ utils/
   core/types/            Shared TypeScript DTOs                        (import "@pos/types")
   core/database/         Kysely schema, migrations, repositories       (import "@pos/database")
   core/validation/       Zod schemas for every IPC input               (import "@pos/validation")
