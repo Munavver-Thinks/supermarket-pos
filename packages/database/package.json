@@ -1,0 +1,29 @@
+{
+  "name": "@pos/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "migrate": "tsx src/migrate-cli.ts",
+    "seed:catalog": "tsx src/seed-catalog-cli.ts",
+    "seed:kirana": "tsx src/seed-kirana-catalog-cli.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pos/types": "workspace:*",
+    "better-sqlite3": "^11.5.0",
+    "kysely": "^0.27.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@pos/business-logic": "workspace:*",
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/uuid": "^9.0.8",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

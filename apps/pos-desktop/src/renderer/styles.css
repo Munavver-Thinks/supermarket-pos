@@ -1,0 +1,4379 @@
+/* Lexend (SIL Open Font License, see assets/fonts/lexend-OFL.txt), bundled so the app stays
+   offline. The latin file has no ₹ (U+20B9); the latin-ext file does. */
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/lexend-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/lexend-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-condensed-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./assets/fonts/barlow-condensed-600.woff2") format("woff2");
+}
+
+/* Basket Bill design tokens (design/basket-bill/tokens.css). */
+/* Basket Bill — generated from tokens.json. Themes: light, dark, contrast, vivid, vivid-night */
+:root, [data-theme="light"] {
+  --surface-100: #f6f4ee;
+  --surface-200: #fdfcf8;
+  --surface-300: #ece8dd;
+  --line: #d9d3c4;
+  --line-strong: #7d8579;
+  --ink: #1e2a22;
+  --ink-muted: #55615a;
+  --brand-500: #1d7a46;
+  --on-brand: #ffffff;
+  --brand-100: #dff0e4;
+  --brand-ink: #155c34;
+  --sun-400: #ffc83d;
+  --on-sun: #1e2a22;
+  --sun-100: #fff3cc;
+  --tomato-600: #b93c0b;
+  --on-tomato: #ffffff;
+  --tomato-100: #fde4d6;
+  --tomato-ink: #9a3209;
+  --sky-600: #1f5fa8;
+  --on-sky: #ffffff;
+  --sky-100: #dde9f7;
+  --sky-ink: #1a4f8c;
+  --shadow-card: 0 1px 2px rgba(30,42,34,0.08), 0 4px 12px rgba(30,42,34,0.06);
+}
+[data-theme="dark"] {
+  --surface-100: #161b18;
+  --surface-200: #1f2622;
+  --surface-300: #2a322d;
+  --line: #4a564f;
+  --line-strong: #7f8c84;
+  --ink: #eef1ea;
+  --ink-muted: #a9b4ad;
+  --brand-500: #4cc581;
+  --on-brand: #0f1a14;
+  --brand-100: #1e3a2a;
+  --brand-ink: #8fe0b0;
+  --sun-400: #ffd166;
+  --on-sun: #1e2a22;
+  --sun-100: #3a3220;
+  --tomato-600: #ff8a5c;
+  --on-tomato: #1a0f0a;
+  --tomato-100: #42241a;
+  --tomato-ink: #ffb08f;
+  --sky-600: #7fb3f0;
+  --on-sky: #0d1a2a;
+  --sky-100: #1c2c42;
+  --sky-ink: #a9cdf7;
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.4);
+}
+[data-theme="contrast"] {
+  --surface-100: #ffffff;
+  --surface-200: #ffffff;
+  --surface-300: #e6e6e6;
+  --line: #595959;
+  --line-strong: #000000;
+  --ink: #000000;
+  --ink-muted: #333333;
+  --brand-500: #0a5a2e;
+  --on-brand: #ffffff;
+  --brand-100: #e3f5e9;
+  --brand-ink: #0a4a26;
+  --sun-400: #ffd23f;
+  --on-sun: #000000;
+  --sun-100: #fff4c2;
+  --tomato-600: #8f2a00;
+  --on-tomato: #ffffff;
+  --tomato-100: #ffe6da;
+  --tomato-ink: #7a2400;
+  --sky-600: #0b3f80;
+  --on-sky: #ffffff;
+  --sky-100: #e1ecfa;
+  --sky-ink: #0b3570;
+  --shadow-card: 0 0 0 2px #000000;
+}
+[data-theme="vivid"] {
+  --surface-100: #e9eef6;
+  --surface-200: #ffffff;
+  --surface-300: #d9e1ee;
+  --line: #c3cddc;
+  --line-strong: #4a5568;
+  --ink: #0a1020;
+  --ink-muted: #3a4558;
+  --brand-500: #007f55;
+  --on-brand: #ffffff;
+  --brand-100: #cff5e3;
+  --brand-ink: #005f3f;
+  --sun-400: #ffb300;
+  --on-sun: #0a1020;
+  --sun-100: #ffefbf;
+  --tomato-600: #d63c00;
+  --on-tomato: #ffffff;
+  --tomato-100: #ffe0d1;
+  --tomato-ink: #a12d00;
+  --sky-600: #1749e0;
+  --on-sky: #ffffff;
+  --sky-100: #dbe5ff;
+  --sky-ink: #1036a8;
+  --shadow-card: 0 1px 2px rgba(10,16,32,0.10), 0 6px 16px rgba(10,16,32,0.08);
+}
+[data-theme="vivid-night"] {
+  --surface-100: #0b1020;
+  --surface-200: #151c30;
+  --surface-300: #222b44;
+  --line: #2e3854;
+  --line-strong: #8a95b0;
+  --ink: #f4f6fb;
+  --ink-muted: #b4bdd2;
+  --brand-500: #1fe08f;
+  --on-brand: #04160d;
+  --brand-100: #0d3a28;
+  --brand-ink: #6ff0b6;
+  --sun-400: #ffd02e;
+  --on-sun: #0b1020;
+  --sun-100: #3d3110;
+  --tomato-600: #ff6a33;
+  --on-tomato: #1a0800;
+  --tomato-100: #45200f;
+  --tomato-ink: #ffa784;
+  --sky-600: #5c9dff;
+  --on-sky: #04112a;
+  --sky-100: #152a52;
+  --sky-ink: #a8c8ff;
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --tap-min: 56px;
+  --tap-main: 72px;
+  --font-ui: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --type-total: 700 56px/60px var(--font-ui);
+  --type-title: 600 28px/34px var(--font-ui);
+  --type-price: 600 22px/28px var(--font-ui);
+  --type-heading: 600 20px/26px var(--font-ui);
+  --type-body: 400 17px/24px var(--font-ui);
+  --type-label: 500 15px/20px var(--font-ui);
+  --type-caption: 400 13px/18px var(--font-ui);
+}
+
+/* Legacy names kept so existing rules and inline styles pick up the tokens. */
+:root,
+[data-theme] {
+  --color-bg: var(--surface-100);
+  --color-surface: var(--surface-200);
+  --color-text: var(--ink);
+  --color-divider: var(--line);
+  --color-accent: var(--brand-500);
+  --color-accent-600: var(--brand-500);
+  --color-accent-100: var(--brand-100);
+  --color-accent-700: var(--brand-ink);
+  --color-accent-800: var(--brand-ink);
+  --color-accent-900: var(--ink);
+  --color-neutral-100: var(--surface-100);
+  --color-neutral-800: var(--ink-muted);
+  --color-neutral-900: var(--ink);
+  --font-body: var(--font-ui);
+  --font-heading: var(--font-ui);
+  --font-heading-weight: 600;
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  margin: 0 0 var(--space-2);
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input,
+select {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.text-muted {
+  color: var(--ink-muted);
+}
+
+/* — app shell — */
+.app-shell {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.rail {
+  width: 216px;
+  flex: none;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--surface-200);
+}
+
+.rail.collapsed {
+  width: 64px;
+}
+
+.rail.collapsed .rail-item,
+.rail.collapsed .rail-foot {
+  justify-content: center;
+}
+
+.rail :is(button):focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.icon {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.rail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rail-title {
+  font: 700 17px/1.1 var(--font-ui);
+  white-space: nowrap;
+}
+
+.rail-toggle {
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  flex: none;
+  cursor: pointer;
+}
+
+.rail-toggle:hover {
+  filter: brightness(0.95);
+}
+
+.rail-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font: 500 15px var(--font-ui);
+  color: var(--ink);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.rail-item:hover {
+  background: var(--surface-300);
+}
+
+.rail-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rail-shortcut {
+  margin-left: auto;
+  font: 400 12px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.rail-item.active {
+  background: var(--brand-100);
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+
+.rail-item.active .rail-shortcut {
+  color: var(--brand-ink);
+}
+
+.rail.collapsed .rail-item {
+  position: relative;
+}
+
+.rail.collapsed .nav-badge {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+.rail-foot {
+  border-top: 1px solid var(--line);
+  padding: 10px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.rail-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+  flex: none;
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font: 700 14px var(--font-ui);
+  display: grid;
+  place-items: center;
+}
+
+.rail-user {
+  min-width: 0;
+  flex: 1 1 calc(100% - 44px);
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.rail-user-name {
+  font: 600 14px var(--font-ui);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rail-signout {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: 400 12px var(--font-ui);
+  color: var(--ink-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rail-signout:hover {
+  text-decoration: underline;
+}
+
+.rail-lang {
+  margin-left: auto;
+  flex: none;
+  white-space: nowrap;
+  font: 600 12px var(--font-ui);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.rail-lang:hover {
+  background: var(--surface-300);
+}
+
+.main-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface-100);
+}
+
+.app-header {
+  flex: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-100);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font: 700 24px/1.1 var(--font-ui);
+}
+
+.status-banner {
+  flex: none;
+  padding: 8px 24px;
+  font: 500 15px var(--font-ui);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.status-banner.offline {
+  background: var(--surface-300);
+  color: var(--ink);
+}
+
+/*
+ * Flex column so a screen that manages its own scrolling (billing) can claim the exact
+ * remaining height with `flex: 1` and scroll inside its own panels. Screens that don't
+ * opt in keep `flex: 0 1 auto` and simply overflow into this container's own scrollbar.
+ */
+.screen-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* — buttons — */
+/* .primary-btn / .secondary-btn are used on their own (without .btn) across most screens and
+   modals, so they share the base button. */
+.btn,
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 600 15px/1.2 var(--font-ui);
+  white-space: nowrap;
+  transition:
+    background-color 0.12s,
+    filter 0.12s;
+}
+
+:is(.btn, .primary-btn, .secondary-btn, .danger-btn):hover:not(:disabled) {
+  background-color: var(--surface-300);
+}
+
+:is(.btn, .primary-btn, .secondary-btn, .danger-btn):active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+:is(.btn, .primary-btn, .secondary-btn, .danger-btn):disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+:is(
+    .btn,
+    .primary-btn,
+    .secondary-btn,
+    .danger-btn,
+    input[type="checkbox"],
+    input[type="radio"],
+    .field textarea,
+    .tab-btn
+  ):focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.primary-btn,
+.btn-primary {
+  background: var(--brand-500);
+  border-color: var(--brand-500);
+  color: var(--on-brand);
+}
+
+:is(.primary-btn, .btn-primary):hover:not(:disabled) {
+  background: var(--brand-500);
+  filter: brightness(0.92);
+}
+
+.primary-btn:disabled {
+  filter: none;
+}
+
+.secondary-btn,
+.btn-secondary {
+  background: var(--surface-200);
+  color: var(--ink);
+}
+
+.btn-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--sky-600);
+  padding: 0 8px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+/* Risky actions (delete, deactivate, discard): --tomato-600, like .pos-btn.danger. */
+.danger-btn {
+  background: var(--tomato-600);
+  border-color: var(--tomato-600);
+  color: var(--on-tomato);
+}
+
+.danger-btn:hover:not(:disabled) {
+  background: var(--tomato-600);
+  filter: brightness(0.92);
+}
+
+/* Compact contexts: banners and table rows use the small button (.pos-btn.sm); the bill action
+   bar and customer bar set the same size in the billing section. */
+:is(.status-banner, .table, table.plain) :is(.btn, .primary-btn, .secondary-btn, .danger-btn) {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+/* — forms — */
+.field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font: 500 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.field input,
+.field select,
+.field textarea,
+input.input,
+select.input {
+  min-height: 44px;
+  padding: 0 14px;
+  font: 400 16px var(--font-ui);
+  color: var(--ink);
+  background: var(--surface-200);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+}
+
+.field textarea {
+  padding: 10px 14px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder,
+input.input::placeholder {
+  color: var(--ink-muted);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+input.input:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+/* — cards — */
+/* BlueprintCard (.blueprint) is the rounded card of the wireframes (.pos-card). Its corner
+   marks are still rendered by the component but hidden, so no screen code has to change. */
+.card,
+.blueprint {
+  position: relative;
+  min-width: 0;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--surface-200);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+}
+
+.blueprint > .corner {
+  display: none;
+}
+
+.blueprint :is(h2, h3) {
+  margin: 0 0 10px;
+  font: 600 19px/1.2 var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blueprint h4 {
+  margin: 0 0 8px;
+  font: 600 16px/1.3 var(--font-ui);
+}
+
+/* Section label above a card's content (.pos-kicker). */
+.card-kicker {
+  font: 600 13px var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Secondary line of text (.pos-note). */
+.note {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+/* A row of filters / search / actions above a table (.pos-tools). */
+.tools-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Nothing to show yet (.pos-empty): dashed box, bold first line. */
+.empty-state {
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+.empty-state-title {
+  display: block;
+  margin-bottom: 4px;
+  font: 600 19px var(--font-ui);
+  color: var(--ink);
+}
+
+/* — status pills (.pos-pill: ok, warn, bad, info, mute) — */
+.pill,
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font: 500 13px/18px var(--font-ui);
+  white-space: nowrap;
+}
+
+.pill.ok,
+.tag-accent {
+  background: var(--brand-100);
+  color: var(--brand-ink);
+}
+
+.pill.warn {
+  background: var(--sun-100);
+  color: var(--ink);
+}
+
+.pill.bad,
+.tag-warn {
+  background: var(--tomato-100);
+  color: var(--tomato-ink);
+}
+
+.pill.info {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+.pill.mute {
+  background: var(--surface-300);
+  color: var(--ink-muted);
+}
+
+/* — tables (.pos-table) — */
+table.plain,
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+table.plain th,
+table.plain td,
+.table th,
+.table td {
+  text-align: left;
+  padding: 9px 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+table.plain th,
+.table th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font: 600 12px var(--font-ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom-color: var(--line-strong);
+}
+
+:is(table.plain, .table) :is(th, td):is(.num, .r) {
+  text-align: right;
+}
+
+table.plain tbody tr:hover,
+.table tbody tr:hover {
+  background: var(--surface-100);
+}
+
+.table tr.sel td {
+  background: var(--sky-100);
+}
+
+.error-text {
+  color: var(--tomato-ink);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* — login — */
+/* Before sign-in there is no app shell. The card is centred with margin:auto so a short window
+   scrolls instead of clipping its top. Phase 5A section below adds the split layout. */
+.login-screen {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--surface-100);
+}
+
+.login-card {
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-card h1 {
+  margin: 0;
+  font: 700 26px var(--font-ui);
+}
+
+/* — billing — */
+/* Every block on the billing screen is a flex-column child with 24px side padding and ~10px
+   between blocks. The cart is a two-column grid inside .billing-layout — the line table card
+   on the left, the totals / payment column (360px) on the right — and the product search is
+   a top search bar (.search-bar) with its results in a floating dropdown, so the table gets
+   the full width instead of sharing it with a docked search column. */
+.billing-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 24px 18px;
+  overflow: hidden;
+}
+
+.bill-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px 0;
+  flex: none;
+}
+
+.bill-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.bill-tab {
+  min-height: 34px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 600 14px var(--font-ui);
+  cursor: pointer;
+}
+
+.bill-tab:hover {
+  background: var(--surface-300);
+}
+
+.bill-tab.active {
+  background: var(--brand-100);
+  border-color: var(--brand-500);
+  color: var(--brand-ink);
+}
+
+.bill-tab-close {
+  margin-left: 8px;
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* The last thing that happened on this bill ("Bill … completed", "… not added"). */
+.billing-message {
+  flex: none;
+  margin: 10px 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font: 400 17px/24px var(--font-ui);
+}
+
+.billing-message.ok {
+  background: var(--brand-100);
+  color: var(--brand-ink);
+}
+
+.billing-message.warn {
+  background: var(--sun-100);
+  color: var(--ink);
+}
+
+.billing-message .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* min-height: 0 — the cart is a flex item and would otherwise be pushed taller than its
+   row by a long line list instead of scrolling inside it. */
+.cart-panel {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 16px;
+  border: none;
+  padding: 0;
+  /* Visible so the cards' shadows aren't clipped; each column scrolls on its own. */
+  overflow: visible;
+}
+
+/* Sits above the cart as a full-width toolbar; .search-dropdown below is what used to be a
+   permanently docked column — now it only appears while the search bar is in use, so the
+   cart is never sharing width with it. */
+.search-bar {
+  position: relative;
+  flex: none;
+  padding: 10px 24px 0;
+}
+
+/* Centred on the 56px input: 10px bar padding + (56 - 20) / 2. */
+.search-icon {
+  position: absolute;
+  left: 40px;
+  top: calc(10px + 18px);
+  display: flex;
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: 0 16px 0 48px;
+  font: 400 18px var(--font-ui);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+}
+
+.search-input::placeholder {
+  color: var(--ink-muted);
+}
+
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 24px;
+  right: 24px;
+  z-index: 20;
+  max-height: min(70vh, 520px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--surface-200);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Stays put above the scrolling list, so "All products" / "Suggestions" is always visible. */
+.search-results-label {
+  flex: none;
+  padding: 8px 14px;
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.search-results {
+  margin-top: 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.search-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.search-result-row:hover {
+  background: var(--surface-300);
+}
+
+.search-result-name {
+  font: 600 17px var(--font-ui);
+}
+
+.search-result-sub {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.search-result-sub.out {
+  color: var(--tomato-ink);
+}
+
+.search-result-price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.search-empty {
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+
+/* The card holding the line table. Only the line items scroll — the totals column beside it
+   stays put. The scroll container has no top padding (the header cell carries it instead) so
+   a sticky header sits flush with the card's top edge and rows never show above it. */
+.cart-table-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 10px 6px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-200);
+  box-shadow: var(--shadow-card);
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-table th {
+  text-align: left;
+  padding: 14px 7px 8px;
+  font: 600 12px var(--font-ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.cart-table td {
+  text-align: left;
+  padding: 9px 7px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.cart-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  /* Opaque — rows scroll underneath this row. */
+  background: var(--surface-200);
+}
+
+.cart-table .num {
+  text-align: right;
+}
+
+.cart-item-name,
+.cart-line-total {
+  font: 600 17px var(--font-ui);
+}
+
+.cart-table .cart-line-total {
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-table input[type="number"] {
+  width: 84px;
+  min-height: 36px;
+  padding: 0 8px;
+  text-align: center;
+  font: 400 16px var(--font-ui);
+  color: var(--ink);
+  background: var(--surface-200);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+}
+
+.cart-table .cart-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+.cart-remove {
+  min-height: 34px;
+  min-width: 34px;
+  padding: 0 10px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--tomato-ink);
+  font: 600 14px var(--font-ui);
+  cursor: pointer;
+}
+
+.cart-remove:hover {
+  background: var(--surface-300);
+}
+
+/* — customer attach bar (billing) — */
+.customer-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 24px 0;
+  border: none;
+  font-size: 15px;
+}
+
+.customer-bar .btn {
+  min-height: 34px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+.customer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+/* Pills: .customer-chip is the info pill, .customer-due the warning one. */
+.customer-chip {
+  padding: 3px 10px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font: 500 13px/18px var(--font-ui);
+}
+
+.customer-due {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--sun-100);
+  color: var(--ink);
+  font: 500 13px/18px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.customer-search {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 380px;
+}
+
+.customer-search input {
+  width: 100%;
+}
+
+.customer-suggestions {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  box-shadow: var(--shadow-card);
+}
+
+.customer-suggestion {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.customer-suggestion:hover,
+.customer-suggestion:focus-visible {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+.customer-suggestion.new {
+  border-top: 1px solid var(--line);
+  color: var(--sky-600);
+}
+
+/* — khata drawer — */
+/* The customer's khata slides in from the right edge (wireframe P18, .pos-drawer). Its backdrop also
+   carries .drawer-backdrop (Phase 4A section). .modal-card.khata-card outranks .modal-card, which is
+   declared later in this file. */
+.modal-card.khata-card {
+  position: relative;
+  width: min(520px, 100vw);
+  max-width: 100vw;
+  height: 100%;
+  max-height: none;
+  padding: 22px;
+  border-radius: 0;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
+  animation: drawer-in 0.2s ease-out;
+}
+
+/* The history takes whatever height the drawer has left and scrolls on its own. */
+.khata-history {
+  flex: 1 1 auto;
+  min-height: 160px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-accent-800);
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.discount-input {
+  width: 70px;
+  min-height: 36px;
+  padding: 0 8px;
+  font: 400 15px var(--font-ui);
+  color: var(--ink);
+  background: var(--surface-200);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+}
+
+.discount-input.bill {
+  width: 100px;
+  font-size: 14px;
+}
+
+.discount-input:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.discount-input.invalid {
+  border-color: var(--tomato-ink);
+}
+
+.discount-hint {
+  margin-top: 2px;
+  font: 400 12px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.discount-hint.invalid {
+  color: var(--tomato-ink);
+}
+
+/* Stock shortfall on a cart line, in orange; bolder under "block", where it stops checkout. */
+.stock-hint {
+  margin-top: 2px;
+  font: 600 13px var(--font-ui);
+  color: var(--tomato-ink);
+}
+
+.stock-hint::before {
+  content: "! ";
+}
+
+.stock-hint.blocking {
+  font-weight: 700;
+}
+
+/* The right column of the cart grid: Net Total, savings, tax breakdown, return, payment. */
+.totals-box {
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* 4px of room inside the scroll box so the cards' shadows show; the negative margin keeps
+     the cards themselves at 360px. */
+  margin: 0 -4px -4px;
+  padding: 0 4px 4px;
+  border: none;
+  font-size: 15px;
+}
+
+.totals-box .stock-hint.blocking {
+  margin-top: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--tomato-100);
+  font: 600 15px/20px var(--font-ui);
+}
+
+.totals-net {
+  flex: none;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--sun-400);
+  color: var(--on-sun);
+}
+
+.totals-net-label {
+  font: 500 16px var(--font-ui);
+}
+
+.totals-net-value {
+  font: 700 46px/50px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.totals-saved {
+  flex: none;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--brand-100);
+  color: var(--brand-ink);
+  font: 600 18px/24px var(--font-ui);
+}
+
+.totals-card {
+  flex: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-200);
+  box-shadow: var(--shadow-card);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.totals-card .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.totals-card label.row {
+  cursor: pointer;
+}
+
+.totals-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The To pay / To give back line of a pending return. */
+.totals-card .row.net {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font: 700 20px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.totals-note {
+  margin-bottom: 4px;
+  font: 400 13px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.wholesale-check {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+/* Also .primary-btn for the brand colours; sits at the foot of the column. */
+.pay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: none;
+  width: 100%;
+  margin-top: auto;
+  min-height: 64px;
+  padding: 0 24px;
+  border: 2px solid var(--brand-500);
+  border-radius: var(--radius-md);
+  font: 600 22px var(--font-ui);
+}
+
+.totals-box .pay-btn {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  box-shadow: 0 -10px 0 var(--surface-100);
+}
+
+.pay-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.pay-btn .kbd {
+  font-size: 14px;
+}
+
+/* — modal — */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 26, 22, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Popups (wireframes P01–P19, .pos-modal): a column of blocks 14px apart. Fields and headings
+   drop their own margins inside it so the gap is the only spacing. */
+.modal-card {
+  background: var(--surface-200);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-card h2 {
+  margin: 0;
+  font: 700 24px/1.2 var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-card :is(h3, h4) {
+  margin: 0;
+  font: 600 16px/1.3 var(--font-ui);
+}
+
+.modal-card .field {
+  margin-bottom: 0;
+}
+
+/* Secondary text in a popup (.pos-note). */
+.modal-card .text-muted {
+  font-size: 14px;
+}
+
+/* Cancel then the main action, right-aligned, 52px (wireframe .pos-tools at the foot of each popup). */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.modal-actions :is(.btn, .primary-btn, .secondary-btn, .danger-btn) {
+  min-height: 52px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+/* Errors inside a popup read as an orange notice (.bb-note.bad) with a "!" badge. */
+.modal-card .error-text {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tomato-100);
+  color: var(--tomato-ink);
+  font: 400 15px/20px var(--font-ui);
+}
+
+.modal-card .error-text::before {
+  content: "!";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-pill);
+  font: 700 13px/1 var(--font-ui);
+}
+
+/* Feature 2: every modal traps Tab and gets arrow-key navigation (useModalKeyboard.ts) —
+   focus must stay visible inside it even outside the billing screen, where the theme's
+   default outline can otherwise be invisible. */
+.modal-card :is(button, input, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+/* The change-due block in PaymentModal, shown when cash tendered exceeds its due share: the
+   yellow total (.bb-total) with the two change choices as buttons inside it. */
+.change-due {
+  margin: 4px 0 0;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--sun-400);
+  color: var(--on-sun);
+}
+
+.change-due .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.change-amount {
+  font: 700 34px/1.1 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ink-muted doesn't read on the yellow in the night themes. */
+.change-due .text-muted {
+  color: var(--on-sun);
+  margin-top: 6px;
+}
+
+.change-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.change-choice button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 600 15px var(--font-ui);
+  cursor: pointer;
+}
+
+.change-choice button:hover {
+  background: var(--surface-300);
+}
+
+.change-due :is(button):focus-visible {
+  outline-color: var(--ink);
+}
+
+.change-choice button[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.recovery-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recovery-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+/* — keyboard billing (shortcuts, focus) — */
+/* A cashier driving the bill from the keyboard must see where the cursor is at a glance, so
+   every control on the billing screen (modals included — they render inside it) gets one
+   strong ring, including buttons the base styles left to the browser default. */
+.billing-screen :is(button, input, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.billing-screen .search-input:focus-visible {
+  outline: none;
+  border-color: var(--sky-600);
+  box-shadow: 0 0 0 3px var(--sky-100);
+}
+
+/* The row the arrow keys have picked; Enter adds it. */
+.search-result-row.highlighted {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  box-shadow: none;
+}
+
+.search-result-row.highlighted .search-result-sub:not(.out) {
+  color: var(--sky-ink);
+}
+
+/* Keycap badge (like .bb-kbd). Tinted from currentColor so it reads on plain and filled (primary) buttons alike. */
+.kbd {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 4px;
+  font: 500 12px/16px var(--font-ui);
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.shortcut-help-toggle {
+  flex: none;
+  margin-left: auto;
+  min-height: 34px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+/* F1 shortcut list (wireframe P07): sections flow across two columns, headings are kickers
+   (.pos-kicker) and a row is never split between columns. */
+.modal-card.shortcut-help {
+  width: min(820px, calc(100vw - 32px));
+}
+
+.shortcut-help-columns {
+  columns: 2;
+  column-gap: 28px;
+  font-size: 15px;
+}
+
+.modal-card .shortcut-help-columns h3 {
+  margin: 10px 0 4px;
+  font: 600 13px/1.3 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  break-after: avoid;
+}
+
+.modal-card .shortcut-help-columns section:first-child h3 {
+  margin-top: 0;
+}
+
+.shortcut-help-list {
+  margin: 0;
+}
+
+.shortcut-help-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line);
+  break-inside: avoid;
+}
+
+.shortcut-help-row dt,
+.shortcut-help-row dd {
+  margin: 0;
+}
+
+.shortcut-help-row .kbd {
+  margin-left: 0;
+}
+
+/* — kpi grid (dashboard / sales / customers / employees) — */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.kpi-card {
+  padding: 16px;
+}
+
+.kpi-value {
+  font: 700 30px/1.15 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+  margin: 4px 0 2px;
+}
+
+.kpi-delta {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.kpi-delta.warn {
+  color: var(--tomato-ink);
+  font-weight: 600;
+}
+
+/* A screen's content column (.pos-body): 24px gutters, 16px between blocks. */
+.screen-section {
+  padding: 18px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* — DEV1: manager approval dialog — */
+/* Opened over another modal (the payment window), so it must sit above it. */
+.modal-backdrop.modal-stacked {
+  z-index: 20;
+}
+
+/* — DEV1: default-password warning — */
+.status-banner.default-password-banner {
+  background: var(--sun-100);
+  color: var(--ink);
+}
+
+/* — DEV1: multiple bills (duplicate / merge / split / customer for…) — */
+.bill-actions-bar {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px 24px 0;
+}
+
+.bill-actions-bar .btn {
+  min-height: 34px;
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+/* — DEV2: inventory, purchase orders and stock alerts — */
+.form-grid-2,
+.form-grid-3 {
+  display: grid;
+  gap: 0 12px;
+}
+
+.form-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Wide tables scroll sideways inside their card instead of stretching the screen. */
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table tr.row-inactive td {
+  color: var(--ink-muted);
+}
+
+.table tr.clickable-row {
+  cursor: pointer;
+}
+
+/* The product picked in Adjust Stock: a bordered inner block with a Change button. */
+.product-picker-chosen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 8px 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-100);
+  font: 400 16px/1.3 var(--font-ui);
+}
+
+.product-picker-chosen .text-muted {
+  font-size: 14px;
+}
+
+.modal-card.product-edit-modal {
+  width: min(960px, 94vw);
+}
+
+.modal-card.receive-goods-modal {
+  width: min(1000px, 96vw);
+}
+
+/* Underlined tabs (.pos-tabs). */
+.tab-strip {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 16px;
+  font: 600 15px var(--font-ui);
+  color: var(--ink-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn.active {
+  border-bottom-color: var(--brand-500);
+  color: var(--brand-ink);
+}
+
+.tab-btn:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.po-stop-confirm {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  max-width: 520px;
+}
+
+.status-banner.alerts-banner {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+.status-banner.crash-banner {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+/* Tamil UI (Gap 14): Barlow has no Tamil glyphs, so anything rendering translated text needs
+ * a font that does. `<html lang>` is kept in sync with the language setting by useT.ts. */
+[lang="ta"],
+:lang(ta) {
+  font-family: "Nirmala UI", "Latha", "Noto Sans Tamil", var(--font-body), sans-serif;
+}
+
+:root:lang(ta),
+[lang="ta"] {
+  --font-ui: "Nirmala UI", "Latha", "Noto Sans Tamil", "Segoe UI", system-ui, sans-serif;
+}
+
+.nav-badge {
+  margin-left: auto;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--tomato-600);
+  color: var(--on-tomato);
+  font: 600 12px/22px var(--font-ui);
+  text-align: center;
+}
+
+/* — Phase 4A: billing popups (P01–P10), manager approval, khata drawer — */
+
+/* Paragraphs inside a popup sit in the 14px column, so they drop the browser's default margins. */
+.modal-card p {
+  margin: 0;
+}
+
+/* P01 quantity: the big weight/quantity box. */
+.field input.qty-input {
+  min-height: 64px;
+  font: 700 32px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.qty-summary {
+  font-size: 15px;
+}
+
+/* P02 payment: wider card, 52px amount boxes in a 10px column, and the balance line. */
+.modal-card.payment-modal {
+  width: 560px;
+}
+
+.payment-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-modal .field input {
+  min-height: 52px;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.payment-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 18px;
+}
+
+.payment-balance .payment-owed {
+  color: var(--tomato-ink);
+}
+
+/* P03 manager approval: a blue lock (a check, not an error) above the title. */
+.modal-card.approval-modal {
+  width: 480px;
+}
+
+.modal-icon {
+  display: flex;
+  line-height: 0;
+}
+
+.modal-icon.info {
+  color: var(--sky-600);
+}
+
+/* P04 return on this bill. */
+.modal-card.return-modal {
+  width: 760px;
+}
+
+.modal-card .return-lookup {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.return-lookup .field {
+  width: 300px;
+  max-width: 100%;
+}
+
+.return-bill-pill {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font: 500 13px/18px var(--font-ui);
+}
+
+.return-replace-note {
+  color: var(--tomato-ink);
+  font-weight: 600;
+}
+
+/* P05 settle exchange: what came back, what was bought, and the yellow amount to hand over. */
+.modal-card.settle-modal {
+  width: 520px;
+}
+
+.settle-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.settle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.settle-row > :last-child {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.settle-total {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--sun-400);
+  color: var(--on-sun);
+}
+
+.settle-total > :first-child {
+  font: 500 16px var(--font-ui);
+}
+
+.settle-total-amount {
+  font: 700 44px/1.1 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+/* P06 unfinished bills. The list rows themselves are .recovery-list above. */
+.modal-card.recovery-modal {
+  width: 560px;
+}
+
+.recovery-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font: 400 15px/20px var(--font-ui);
+}
+
+.recovery-name {
+  font-weight: 700;
+}
+
+.recovery-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recovery-list li :is(.secondary-btn, .primary-btn) {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.recovery-list li .secondary-btn {
+  color: var(--tomato-ink);
+}
+
+.recovery-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* P08 merge bill: each open bill is a selectable row; the native radio stays for the keyboard. */
+.modal-card.merge-modal {
+  width: 520px;
+}
+
+.merge-targets {
+  display: grid;
+  gap: 10px;
+}
+
+.merge-target {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.merge-target.selected {
+  border-color: var(--sky-600);
+}
+
+.merge-target input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--sky-600);
+}
+
+.merge-target-text {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.merge-target-text .text-muted {
+  font-weight: 400;
+}
+
+/* P09 split bill. */
+.modal-card.split-modal {
+  width: 560px;
+}
+
+.split-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.split-qty-input {
+  width: 80px;
+  min-height: 36px;
+  padding: 0 8px;
+  font: 400 15px var(--font-ui);
+  color: var(--ink);
+  background: var(--surface-200);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+}
+
+/* P10 customer for a bill. */
+.modal-card.assign-modal {
+  width: 520px;
+}
+
+.assign-results {
+  display: grid;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.assign-results:empty {
+  display: none;
+}
+
+.assign-modal .customer-suggestion {
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+/* P18 khata drawer: a side drawer on the right edge (the card is .khata-card above). */
+.modal-backdrop.drawer-backdrop {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-card.khata-card {
+    animation: none;
+  }
+}
+
+.modal-card.khata-card h2 {
+  padding-right: 84px;
+}
+
+.khata-phone {
+  margin-top: -10px;
+}
+
+/* Close is last in the DOM (so the amount box keeps the initial focus) and sits in the header. */
+.modal-card .khata-close {
+  position: absolute;
+  top: 19px;
+  right: 14px;
+  min-height: 34px;
+  font-size: 14px;
+}
+
+.khata-balance {
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-300);
+  color: var(--ink);
+}
+
+.khata-balance.owes {
+  background: var(--tomato-100);
+  color: var(--tomato-ink);
+}
+
+.khata-balance-label {
+  font: 500 16px var(--font-ui);
+}
+
+.khata-balance-amount {
+  font: 700 44px/1.1 var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-card > .khata-pay {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.khata-pay .field {
+  min-width: 0;
+}
+
+.khata-pay > h3,
+.khata-pay-wide,
+.khata-pay-submit {
+  grid-column: 1 / -1;
+}
+
+.khata-pay-submit {
+  justify-self: start;
+}
+
+.khata-limit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.khata-limit .field {
+  width: 200px;
+}
+
+.khata-limit-hint {
+  flex: 1 1 100%;
+}
+
+.khata-message {
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font-size: 14px;
+}
+
+.modal-card .khata-kicker {
+  margin-bottom: -6px;
+  font: 600 13px/1.3 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.khata-history .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.khata-history .text-muted {
+  font-size: inherit;
+}
+
+.khata-history .khata-paid {
+  color: var(--brand-ink);
+}
+
+.khata-empty {
+  padding: 16px;
+  text-align: center;
+}
+
+/* — end Phase 4A — */
+
+/* — Phase 4B: customer, inventory, purchase and employee popups (P11–P17, P19) — */
+
+/* Widths (wireframe .pos-modal inline widths). Product edit and receive goods are set above. */
+.modal-card.customer-form-modal {
+  width: 480px;
+}
+
+.modal-card.add-product-modal {
+  width: min(900px, 94vw);
+}
+
+.modal-card.stock-adjust-modal,
+.modal-card.repack-modal,
+.modal-card.edit-employee-modal {
+  width: 560px;
+}
+
+.modal-card.label-print-modal {
+  width: min(820px, 96vw);
+}
+
+/* Popup grids (.pos-grid2/3/4): 12px between rows, 16px between columns. */
+.modal-card :is(.form-grid-2, .form-grid-3, .form-grid-4) {
+  gap: 12px 16px;
+}
+
+.modal-card .form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Title row with a ghost Close (.pos-btn.ghost.sm) at the right. */
+.modal-card .popup-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-card .popup-close,
+.modal-card .popup-btn-sm {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.modal-card .popup-btn-sm {
+  align-self: flex-start;
+}
+
+/* Text: note (.pos-note), small hint under a field, plain paragraph, kicker (.pos-kicker). */
+.modal-card .popup-note {
+  margin: 0;
+  font: 400 14px/1.4 var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.modal-card .popup-hint {
+  margin: 0;
+  font: 400 13px/1.35 var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.modal-card .popup-text {
+  margin: 0;
+  font: 400 16px/1.4 var(--font-ui);
+}
+
+.modal-card .popup-kicker {
+  margin: 0;
+  font: 600 13px/1.3 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.modal-card .popup-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Save result shown beside the action buttons. */
+.modal-card .popup-status {
+  margin-right: auto;
+  font: 500 15px/1.3 var(--font-ui);
+  text-align: left;
+}
+
+.modal-card .modal-actions:empty {
+  display: none;
+}
+
+/* Bordered inner card (.pos-card without shadow): Prices and Pack sizes in product edit. */
+.modal-card .popup-section {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.modal-card .popup-section-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modal-card .popup-section-head .popup-pill {
+  margin-left: auto;
+}
+
+.modal-card .popup-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-300);
+  color: var(--ink-muted);
+  font: 500 13px/18px var(--font-ui);
+}
+
+.modal-card .popup-pill.warn {
+  background: var(--sun-100);
+  color: var(--ink);
+}
+
+/* Notice row (.bb-note.info) with an optional underlined action at the right. */
+.modal-card .popup-callout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font: 400 15px/20px var(--font-ui);
+}
+
+.modal-card .popup-callout.info {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+.modal-card .popup-callout .btn-ghost {
+  margin-left: auto;
+  min-height: 34px;
+  padding: 0 8px;
+  color: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* Checkbox rows (.pos-check): native box, 20px, brand green. */
+.modal-card .popup-check {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 15px/1.3 var(--font-ui);
+  cursor: pointer;
+}
+
+.modal-card .popup-check input[type="checkbox"] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+/* A checkbox that sits in a form grid beside a labelled input: clear the label, centre on the input. */
+.modal-card .popup-check.beside-field {
+  min-height: 44px;
+  margin-top: 24px;
+  align-self: start;
+}
+
+/* Product edit: locked price block for cashiers and linked packs. */
+.modal-card.product-edit-modal .field :is(input, select):disabled {
+  background: var(--surface-300);
+  color: var(--ink-muted);
+  cursor: not-allowed;
+}
+
+/* Pack sizes (inside product edit). */
+.modal-card .pack-total {
+  font: 400 15px/1.4 var(--font-ui);
+}
+
+.modal-card .pack-add-form {
+  align-items: end;
+}
+
+.modal-card .pack-add-form .modal-actions {
+  grid-column: 1 / -1;
+}
+
+.modal-card .repack-history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.modal-card .repack-history li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Tables inside a popup (.pos-table): lines in receive goods, pack sizes. */
+.modal-card .modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-card .modal-table th {
+  padding: 8px 7px;
+  border-bottom: 1px solid var(--line-strong);
+  text-align: left;
+  font: 600 12px var(--font-ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.modal-card .modal-table td {
+  padding: 9px 7px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.modal-card .modal-table :is(th, td).r {
+  text-align: right;
+}
+
+.modal-card .modal-table tbody tr:hover {
+  background: transparent;
+}
+
+.modal-card .modal-table input {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 400 15px var(--font-ui);
+}
+
+.modal-card .modal-table input[type="number"] {
+  text-align: right;
+}
+
+.modal-card .modal-table input::placeholder {
+  color: var(--ink-muted);
+}
+
+.modal-card .modal-table .tag-warn {
+  display: block;
+  max-width: 240px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: left;
+  white-space: normal;
+}
+
+.modal-card .modal-table .popup-hint {
+  margin-top: 2px;
+  text-align: right;
+}
+
+.modal-card .receive-qty {
+  width: 80px;
+}
+
+.modal-card :is(.receive-money, .receive-batch) {
+  width: 96px;
+}
+
+/* Receive goods: the cost-averaging checkbox on the left, the invoice totals on the right. */
+.modal-card .receive-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.modal-card .receive-totals {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-card .receive-totals .row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.modal-card .receive-totals .row span:last-child {
+  font-weight: 600;
+}
+
+.modal-card .receive-totals .row.net {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal-card .receive-totals .row.net span:last-child {
+  font-weight: 700;
+}
+
+/* Print labels: fields on the left, the real-size label preview on the right. */
+.modal-card .label-print-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.modal-card .label-print-fields {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-card .label-print-preview {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The frame's size is set inline (it follows the paper) and its background stays white: a
+   printed label is white paper in every theme. */
+.modal-card .label-preview-frame {
+  display: block;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+}
+
+/* Repack: the "Uses N kg of ..." readout sits beside the quantity field, level with its input. */
+.modal-card .repack-uses {
+  align-self: end;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-card .repack-uses .popup-text {
+  font-size: 15px;
+}
+
+.modal-card .repack-uses .error-text {
+  display: inline;
+  padding: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+}
+
+.modal-card .repack-uses .error-text::before {
+  content: none;
+}
+
+/* — end Phase 4B — */
+
+/* — Phase 5A: auth, dashboard, notifications, coming soon, error (S01-S03, S17, S19, S20) — */
+
+/* S01 activation: 520px card, logo beside the title. */
+.login-card.activation-card {
+  width: 520px;
+}
+
+.activation-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.activation-title svg {
+  flex: none;
+}
+
+.activation-card p.note {
+  margin: 0;
+}
+
+/* The form is also used in Settings, so it carries its own spacing. */
+.activation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activation-form .field,
+.login-card .field {
+  margin-bottom: 0;
+}
+
+.activation-code-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.activation-code {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-300);
+  color: var(--ink);
+  font: 600 20px ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 2px;
+}
+
+.activation-form .field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+/* Error with an icon (bb-note.bad). */
+:is(.login-card, .activation-form) .error-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tomato-100);
+  color: var(--tomato-ink);
+  font: 400 15px/22px var(--font-ui);
+}
+
+:is(.login-card, .activation-form) .error-text .icon {
+  flex: none;
+}
+
+.login-submit {
+  width: 100%;
+  min-height: 56px;
+}
+
+/* S02 login: brand panel on the left, sign-in card on the right. */
+.login-screen.login-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 56px;
+  background: var(--brand-500);
+  color: var(--on-brand);
+}
+
+.login-brand svg {
+  flex: none;
+}
+
+.login-brand-name {
+  margin-top: 16px;
+  font: 700 44px/1.05 var(--font-ui);
+}
+
+.login-brand-tag {
+  font: 400 18px var(--font-ui);
+  opacity: 0.9;
+}
+
+.login-pane {
+  display: flex;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* S03 dashboard */
+.kpi-card.dash-kpi {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  color: var(--ink);
+  text-align: left;
+}
+
+.kpi-card.dash-kpi-btn {
+  cursor: pointer;
+  font: inherit;
+}
+
+.kpi-card.dash-kpi-btn:hover {
+  filter: brightness(0.98);
+}
+
+.kpi-card.dash-kpi-btn:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.dash-lower {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.dash-mix {
+  flex: 1 1 360px;
+}
+
+.dash-register {
+  flex: 0 1 440px;
+  display: flex;
+}
+
+.dash-register > .blueprint {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-bar {
+  width: 220px;
+  max-width: 100%;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-300);
+  overflow: hidden;
+}
+
+.dash-bar i {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--ink-muted);
+}
+
+.dash-bar i.dash-bar-cash {
+  background: var(--brand-500);
+}
+
+.dash-bar i.dash-bar-upi {
+  background: var(--sky-600);
+}
+
+.dash-bar i.dash-bar-card {
+  background: var(--sun-400);
+}
+
+.dash-bar i.dash-bar-credit {
+  background: var(--tomato-600);
+}
+
+.dash-register .pill {
+  margin-bottom: 12px;
+}
+
+.dash-reg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-reg-table td {
+  padding: 4px 0;
+}
+
+.dash-reg-table td:last-child {
+  text-align: right;
+}
+
+.dash-reg-table tr.dash-reg-total {
+  font: 700 18px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.blueprint .dash-count-title {
+  margin: 14px 0 8px;
+  font: 600 16px/1.3 var(--font-ui);
+}
+
+.dash-denoms {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.dash-denoms .field {
+  margin-bottom: 0;
+}
+
+.dash-denoms .field input {
+  padding: 0 8px;
+}
+
+.dash-open-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.dash-open-form .field {
+  margin-bottom: 0;
+  max-width: 180px;
+}
+
+.dash-counted {
+  margin-top: 10px;
+}
+
+.dash-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-counted-value {
+  font-weight: 700;
+}
+
+.dash-variance-off {
+  color: var(--tomato-ink);
+}
+
+.dash-close-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.dash-hint {
+  margin-top: 6px;
+}
+
+.dash-message {
+  margin-top: 10px;
+  font: 500 14px var(--font-ui);
+}
+
+/* S17 notifications: groups in two columns. */
+.notif-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.notif-grid:empty {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .notif-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* S19 coming soon: icon, title, one paragraph, centred. */
+.blueprint.soon-card {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.soon-card > .icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.blueprint.soon-card h2 {
+  justify-content: center;
+  margin: 12px 0 10px;
+}
+
+.soon-card p.note {
+  max-width: 34em;
+  margin: 0 auto;
+}
+
+.soon-card .btn {
+  margin-top: 16px;
+}
+
+/* S20 error page: replaces the whole app, so it fills the window. */
+.error-page {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--surface-100);
+}
+
+.blueprint.error-card {
+  width: 560px;
+  max-width: 100%;
+  margin: auto;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.error-card > .icon {
+  display: block;
+  margin: 0 auto;
+  color: var(--tomato-ink);
+}
+
+.blueprint.error-card h2 {
+  justify-content: center;
+  margin: 12px 0 10px;
+}
+
+.error-card p.note {
+  max-width: 36em;
+  margin: 0 auto 16px;
+}
+
+.error-card code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--surface-300);
+  color: var(--ink);
+  font: 600 14px ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* — end Phase 5A — */
+
+/* — Phase 5B: inventory, sales, customers, suppliers, employees (S06-S08, S12, S16) — */
+
+/* Shared by the five screens. */
+.p5b-search {
+  position: relative;
+  flex: 0 1 380px;
+  min-width: 220px;
+}
+
+.p5b-search > .icon {
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+.p5b-search input.input {
+  width: 100%;
+  padding-left: 42px;
+}
+
+.p5b-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.p5b-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 15px var(--font-ui);
+  cursor: pointer;
+}
+
+.p5b-check input[type="checkbox"] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+.p5b-push {
+  margin-left: auto;
+}
+
+.p5b-nowrap {
+  white-space: nowrap;
+}
+
+.p5b-msg {
+  margin: 8px 0;
+  font: 500 14px var(--font-ui);
+  color: var(--ink);
+}
+
+.btn-ghost.p5b-danger-text,
+.btn-ghost.p5b-danger-text:hover:not(:disabled) {
+  color: var(--tomato-ink);
+}
+
+.btn-ghost.p5b-danger-text:hover:not(:disabled) {
+  background: var(--tomato-100);
+}
+
+/* Inventory */
+.inv-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.inv-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+@media (min-width: 1180px) {
+  .inv-split {
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+}
+
+.inv-pill-after {
+  margin-left: 8px;
+}
+
+.inv-low {
+  color: var(--tomato-ink);
+  font-weight: 700;
+}
+
+.inv-low .note {
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.inv-lead {
+  margin: 0 0 10px;
+}
+
+/* Sales */
+.sal-find {
+  align-items: flex-end;
+}
+
+.sal-find .field {
+  margin-bottom: 0;
+}
+
+.sal-find-field {
+  width: 300px;
+  max-width: 100%;
+}
+
+.sal-hint {
+  flex: 1 1 260px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.sal-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sal-notes .error-text,
+.sal-notes .p5b-msg {
+  margin: 0;
+}
+
+.sal-print-btns {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.sal-empty,
+.cust-empty,
+.sup-empty {
+  margin-top: 12px;
+}
+
+.sal-nomatch {
+  padding: 16px;
+  text-align: center;
+}
+
+/* Customers */
+.cust-owed {
+  margin-top: 10px;
+}
+
+.cust-due {
+  color: var(--tomato-ink);
+  font-weight: 700;
+}
+
+.cust-advance {
+  color: var(--brand-ink);
+  font-weight: 700;
+}
+
+/* Suppliers */
+.sup-grid {
+  column-gap: 16px;
+}
+
+.sup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.sup-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sup-head h2 {
+  margin: 0;
+}
+
+/* Employees */
+.emp-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.emp-layout.with-form {
+  grid-template-columns: clamp(340px, 28vw, 400px) minmax(0, 1fr);
+}
+
+.emp-note {
+  margin: 10px 0;
+}
+
+.emp-add-btn {
+  width: 100%;
+}
+
+.emp-btns {
+  display: inline-flex;
+  gap: 6px;
+}
+
+/* — end Phase 5B — */
+
+/* — Phase 5C: purchases, purchase orders, returns (S09-S11, S13) — */
+
+.purch-screen {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.purch-intro {
+  margin: 0 0 12px;
+}
+
+.purch-narrow {
+  max-width: 520px;
+}
+
+/* Header fields (.pos-grid3 / .pos-grid4). */
+.purch-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.purch-fields .field {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+/* Checkbox rows (.pos-check). */
+.purch-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 0 0 12px;
+}
+
+.purch-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 15px var(--font-ui);
+  cursor: pointer;
+}
+
+.purch-check input[type="checkbox"] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+/* Add-product search + results list (shared with ProductPicker). */
+.purch-search {
+  position: relative;
+}
+
+.product-picker-results {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+}
+
+.product-picker-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  font: 400 16px var(--font-ui);
+  cursor: pointer;
+}
+
+.product-picker-row:first-child {
+  border-top: none;
+}
+
+.product-picker-row:hover {
+  background: var(--surface-300);
+}
+
+.product-picker-sub {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.product-picker-price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-picker-hint {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.product-picker-hint.spaced {
+  margin-top: 4px;
+}
+
+/* Line tables. */
+.purch-lines td {
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.purch-lines input {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 400 15px var(--font-ui);
+}
+
+.purch-lines input[type="number"] {
+  text-align: right;
+}
+
+.purch-lines input::placeholder {
+  color: var(--ink-muted);
+}
+
+.purch-lines input:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.purch-lines .tag-warn {
+  display: block;
+  max-width: 240px;
+  margin: 4px 0 0 auto;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: left;
+  white-space: normal;
+}
+
+.purch-in-qty {
+  width: 80px;
+}
+
+.purch-in-money {
+  width: 100px;
+}
+
+.purch-in-gst {
+  width: 70px;
+}
+
+.purch-in-batch {
+  width: 96px;
+}
+
+.purch-line-hint {
+  font: 400 13px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.purch-table-note {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+/* Totals and actions under a line table (Taxable / GST / Invoice total / Record Purchase). */
+.purch-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px 24px;
+  margin-top: 12px;
+}
+
+.purch-totals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 24px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.purch-foot > .purch-totals.grow {
+  margin-right: auto;
+}
+
+.purch-totals .row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.purch-totals .row span:last-child {
+  font-weight: 600;
+}
+
+.purch-totals .row.net {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.purch-totals .row.net span:last-child {
+  font-weight: 700;
+}
+
+.purch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.purch-message {
+  margin-top: 10px;
+  font: 400 15px/1.4 var(--font-ui);
+}
+
+.purch-hint {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.purch-back {
+  align-self: flex-start;
+}
+
+.purch-card-title {
+  margin-top: 0;
+}
+
+/* Purchase orders list: filter row above the card. */
+.purch-tools .field {
+  margin-bottom: 0;
+}
+
+.purch-status-field {
+  width: 220px;
+}
+
+.purch-new-btn {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.po-stop-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 0 auto;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-100);
+  max-width: 520px;
+}
+
+.po-stop-confirm .field {
+  margin-bottom: 0;
+}
+
+.purch-stop-text {
+  font: 400 15px/1.4 var(--font-ui);
+}
+
+/* Returns: the bill lookup and refund on the left, recent credit notes beside it. */
+.ret-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ret-main {
+  flex: 1 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ret-recent-card {
+  flex: 1 1 420px;
+}
+
+.ret-refund :is(span) {
+  font-variant-numeric: tabular-nums;
+}
+
+.ret-lookup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ret-lookup .field {
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+.ret-options {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(180px, 1fr);
+  gap: 12px 16px;
+  margin-top: 12px;
+}
+
+.ret-options .field {
+  margin-bottom: 0;
+}
+
+.ret-refund {
+  margin-top: 12px;
+  font: 700 20px var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.ret-submit {
+  margin-top: 12px;
+}
+
+.ret-message {
+  margin-top: 10px;
+  font: 400 15px/1.4 var(--font-ui);
+}
+
+.ret-sub {
+  font: 400 13px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.ret-recent td {
+  white-space: nowrap;
+}
+
+/* ReturnLinePicker (also inside the Return-on-bill popup). */
+.ret-picker {
+  margin-top: 8px;
+}
+
+.ret-picker td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ret-qty {
+  width: 70px;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-200);
+  color: var(--ink);
+  font: 400 15px var(--font-ui);
+  text-align: right;
+}
+
+.ret-qty::placeholder {
+  color: var(--ink-muted);
+}
+
+.ret-qty:focus-visible {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+/* — end Phase 5C — */
+
+/* — Phase 5D: reports, settings (S14, S15, S18) — */
+
+/* Reports toolbar (.pos-tools): date fields, Refresh, note. */
+.reports-tools {
+  align-items: flex-end;
+}
+
+.reports-date {
+  width: 200px;
+  margin-bottom: 0;
+}
+
+.reports-tools-note {
+  margin-bottom: 12px;
+}
+
+.reports-message {
+  margin-top: 10px;
+  color: var(--ink);
+}
+
+.reports-kpis {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.reports-kpis .kpi-value {
+  font-size: 24px;
+}
+
+/* Cards side by side (two columns), one column on narrower windows. */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.reports-grid > .reports-wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1180px) {
+  .reports-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Card title with its small Export CSV button on the right. */
+.reports-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.reports-card-head h2 {
+  margin: 0;
+}
+
+.reports-card-head .reports-export {
+  margin-left: auto;
+}
+
+.reports-export {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.reports-note {
+  margin: 0 0 10px;
+}
+
+.reports-kicker {
+  margin: 0 0 2px;
+}
+
+.reports-foot {
+  margin-top: 8px;
+}
+
+.reports-pills {
+  margin-bottom: 8px;
+}
+
+.reports-warn-text {
+  color: var(--tomato-ink);
+  font-weight: 600;
+}
+
+.reports-tag-gap {
+  margin-left: 6px;
+}
+
+.reports-mono {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+.reports-empty {
+  padding: 18px;
+}
+
+/* Settings: two-column card grid; the activity log spans both columns. */
+.settings-screen {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  gap: 16px;
+}
+
+.settings-grid > .settings-wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1180px) {
+  .settings-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.settings-note {
+  margin: 0 0 10px;
+}
+
+.settings-foot {
+  margin-top: 8px;
+}
+
+.settings-message {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.settings-nowrap {
+  white-space: nowrap;
+}
+
+.settings-device td:last-child {
+  overflow-wrap: anywhere;
+}
+
+.settings-license {
+  margin-left: 8px;
+}
+
+.settings-activation {
+  margin-top: 14px;
+}
+
+.settings-printers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.settings-printers li {
+  padding: 9px 7px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.settings-backup-table {
+  margin-top: 12px;
+}
+
+.settings-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-options {
+  display: grid;
+  gap: 2px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-options legend {
+  padding: 0;
+  margin-bottom: 4px;
+}
+
+.settings-option {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.settings-options:disabled .settings-option {
+  cursor: default;
+}
+
+.settings-option input,
+.settings-check input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+.settings-option input {
+  margin-top: 1px;
+}
+
+.settings-option strong,
+.settings-check strong {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.settings-option-detail {
+  display: block;
+}
+
+.settings-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.settings-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.settings-card-head h2 {
+  margin: 0;
+}
+
+.settings-head-btn {
+  margin-left: auto;
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.settings-load-more {
+  margin-top: 10px;
+}
+
+.settings-empty {
+  padding: 18px;
+}
+
+/* Default-password warning inside the Change password card (.bb-note.warn). */
+.settings-warn-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--sun-100);
+  color: var(--ink);
+  font: 400 15px/22px var(--font-ui);
+}
+
+.settings-warn-note code {
+  font: inherit;
+  font-weight: 600;
+}
+
+/* — end Phase 5D — */
+
+
+/* — Phase 6: appearance — */
+.appearance-current {
+  font: 600 16px var(--font-ui);
+}
+
+.rail-theme {
+  margin-left: auto;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 26px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.rail-theme:hover {
+  background: var(--surface-300);
+}
+
+.rail-theme[aria-expanded="true"] {
+  background: var(--sky-100);
+  border-color: var(--sky-600);
+  color: var(--sky-ink);
+}
+
+.rail-theme + .rail-lang {
+  margin-left: 0;
+}
+
+.appearance-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-card.appearance-modal {
+  width: 1000px;
+}
+
+.appearance-kicker {
+  font: 700 13px var(--font-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.theme-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.theme-tiles.dimmed .theme-tile-preview {
+  opacity: 0.55;
+}
+
+.theme-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.theme-tile-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.theme-tile-preview {
+  height: 150px;
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 3px solid transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+  background: var(--surface-100);
+  color: var(--ink);
+}
+
+.theme-tile.selected .theme-tile-preview {
+  border-color: var(--sky-600);
+}
+
+.theme-tile-input:focus-visible + .theme-tile-preview {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.theme-tile-rail {
+  width: 40px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 6px;
+  background: var(--surface-200);
+  border-right: 1px solid var(--line);
+}
+
+.theme-tile-rail i {
+  display: block;
+}
+
+.theme-tile-logo {
+  height: 16px;
+  border-radius: 5px;
+  background: var(--brand-500);
+}
+
+.theme-tile-nav {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface-300);
+}
+
+.theme-tile-nav.active {
+  background: var(--brand-100);
+}
+
+.theme-tile-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+}
+
+.theme-tile-list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-200);
+}
+
+.theme-tile-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.theme-tile-line {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--ink);
+  opacity: 0.8;
+}
+
+.theme-tile-line.wide {
+  width: 56%;
+}
+
+.theme-tile-line.short {
+  width: 22%;
+}
+
+.theme-tile-warn {
+  display: block;
+  width: 40%;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--tomato-600);
+}
+
+.theme-tile-side {
+  width: 74px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.theme-tile-total {
+  flex: 1;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  background: var(--sun-400);
+  color: var(--on-sun);
+  font: 700 13px var(--font-ui);
+}
+
+.theme-tile-chip {
+  height: 12px;
+  border-radius: 4px;
+  background: var(--brand-100);
+}
+
+.theme-tile-pay {
+  height: 26px;
+  border-radius: 6px;
+  background: var(--brand-500);
+  color: var(--on-brand);
+  font: 700 11px/26px var(--font-ui);
+  text-align: center;
+}
+
+.theme-tile-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-tile-dot {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--line-strong);
+}
+
+.theme-tile.selected .theme-tile-dot {
+  background: var(--sky-600);
+  border-color: var(--sky-600);
+  box-shadow: inset 0 0 0 4px var(--surface-200);
+}
+
+.theme-tile-note {
+  margin: -6px 0 0 28px;
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.appearance-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.appearance-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.appearance-label {
+  font: 600 15px var(--font-ui);
+}
+
+.appearance-note {
+  font: 400 14px var(--font-ui);
+  color: var(--ink-muted);
+}
+
+.appearance-segmented {
+  display: inline-flex;
+  overflow: hidden;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+
+.appearance-segmented label {
+  position: relative;
+  padding: 8px 18px;
+  font: 600 15px var(--font-ui);
+  cursor: pointer;
+}
+
+.appearance-segmented label.selected {
+  background: var(--sky-600);
+  color: var(--on-sky);
+}
+
+.appearance-segmented input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.appearance-segmented label:focus-within {
+  outline: 3px solid var(--sky-600);
+  outline-offset: 2px;
+}
+
+.appearance-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 15px var(--font-ui);
+  cursor: pointer;
+}
+
+.appearance-switch input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--brand-500);
+}
+
+.appearance-saved-note {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--sky-100);
+  color: var(--sky-ink);
+  font: 400 15px/22px var(--font-ui);
+}
+
+.modal-card.theme-quick {
+  position: fixed;
+  left: 16px;
+  bottom: 64px;
+  z-index: 7;
+  width: 300px;
+  padding: 16px;
+  gap: 6px;
+}
+
+.theme-quick-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font: 400 15px var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+
+.theme-quick-row:hover {
+  background: var(--surface-300);
+}
+
+.theme-quick-row.selected {
+  background: var(--sky-100);
+  color: var(--sky-ink);
+}
+
+.theme-quick-check {
+  margin-left: auto;
+}
+
+.theme-quick-more {
+  align-self: flex-start;
+}
+
+.theme-swatch {
+  flex: none;
+  display: flex;
+  gap: 2px;
+  width: 36px;
+  height: 24px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-100);
+}
+
+.theme-swatch i {
+  flex: 1;
+  border-radius: 3px;
+}
+
+.theme-swatch-sun {
+  background: var(--sun-400);
+}
+
+.theme-swatch-brand {
+  background: var(--brand-500);
+}
+
+@media (max-width: 1060px) {
+  .modal-card.appearance-modal {
+    width: calc(100vw - 32px);
+  }
+  .theme-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .appearance-options {
+    grid-template-columns: 1fr;
+  }
+}
+/* — end Phase 6 — */
+/* — Phase 7: confirm dialog — */
+.modal-card.confirm-card {
+  width: 440px;
+  max-width: calc(100vw - 32px);
+}
+.confirm-card h2 {
+  font-size: 20px;
+}
+.confirm-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.confirm-message {
+  font-size: 15px;
+  line-height: 22px;
+  white-space: pre-line;
+}
+.confirm-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 12px 16px;
+  background: var(--sun-100);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  line-height: 22px;
+}
+.confirm-notice svg {
+  flex: none;
+  margin-top: 1px;
+}
+.confirm-notice b {
+  font-weight: 700;
+}
+.confirm-note {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+/* — end Phase 7 — */

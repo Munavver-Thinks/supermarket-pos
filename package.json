@@ -1,0 +1,47 @@
+{
+  "name": "supermarket-pos",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm rebuild:electron && pnpm --filter @pos/pos-desktop dev",
+    "build": "pnpm rebuild:electron && pnpm -r --filter=./packages/* build && pnpm --filter @pos/pos-desktop build",
+    "package": "pnpm rebuild:electron && pnpm --filter @pos/pos-desktop package",
+    "test": "pnpm rebuild:node && vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "migrate": "pnpm --filter @pos/database migrate",
+    "rebuild:node": "pnpm rebuild better-sqlite3 --recursive",
+    "rebuild:electron": "pnpm --filter @pos/pos-desktop exec electron-rebuild -f -w better-sqlite3",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0",
+    "vitest": "^2.1.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
