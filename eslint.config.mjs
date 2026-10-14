@@ -71,7 +71,8 @@ export default tseslint.config(
     // Renderer architecture (see README "Renderer architecture"): the preload bridge is read in
     // exactly one place, and a main module folder is only reached through its public index.
     files: ["src/**/*.{ts,tsx}"],
-    ignores: ["src/core/**", "src/services/ipcClient.ts", "src/@types/**"],
+    // Tests (src/tests) exercise internals and the main process directly, so they are exempt.
+    ignores: ["src/core/**", "src/tests/**", "src/services/ipcClient.ts", "src/@types/**"],
     rules: {
       "no-restricted-syntax": [
         "error",

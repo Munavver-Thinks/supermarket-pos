@@ -17,12 +17,14 @@ export default defineConfig({
     },
   },
   test: {
-    // Main-process and core tests must not import electron: they run in plain Node.
-    // React renderer tests get a DOM.
-    include: ["src/**/*.test.{ts,tsx}", "electron/**/*.test.ts"],
+    // Every test lives in src/tests/, mirroring the path of the code it covers
+    // (src/tests/electron/... for the main process). Core and main-process tests must not
+    // import electron: they run in plain Node. React renderer tests get a DOM.
+    include: ["src/tests/**/*.test.{ts,tsx}"],
     environmentMatchGlobs: [
-      ["src/core/**", "node"],
-      ["src/**", "jsdom"],
+      ["src/tests/core/**", "node"],
+      ["src/tests/electron/**", "node"],
+      ["src/tests/**", "jsdom"],
     ],
     testTimeout: 15000,
     exclude: ["**/node_modules/**", "**/dist/**"],

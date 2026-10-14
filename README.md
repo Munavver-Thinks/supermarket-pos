@@ -24,6 +24,8 @@ src/                     Everything else
   core/business-logic/   Pure, unit-tested engines: tax, discount, search, quantity parsing,
                          billing totals, money formatting — no Electron/DB imports
                                                                        (import "@pos/business-logic")
+  tests/                 Every test, mirroring the path of the code it covers:
+                         tests/core/…, tests/utils/…, tests/electron/main/… for the main process
 public/  index.html      Renderer static files and HTML entry
 scripts/                 activation-keys.mjs, proof/ (pnpm proof, check:extensions)
 
@@ -107,7 +109,7 @@ follow); for now update the `users` table directly with a proper bcrypt hash if 
 ## Testing
 
 ```powershell
-pnpm test        # Vitest: business-logic unit tests + database integration tests
+pnpm test        # Vitest: all tests in src/tests/ (unit, database integration, UI)
 pnpm typecheck   # tsc --noEmit over electron/ and src/ (one tsconfig.json)
 pnpm lint        # ESLint, zero warnings allowed
 ```
