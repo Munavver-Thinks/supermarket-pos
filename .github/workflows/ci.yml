@@ -29,6 +29,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: .tsx files contain JSX
+        run: pnpm check:extensions
+
       - name: Rebuild native modules for Node
         run: pnpm rebuild:node
 
