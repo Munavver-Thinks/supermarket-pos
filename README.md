@@ -3,8 +3,8 @@
 A single-counter, offline-first retail billing app for Indian supermarkets: barcode +
 Tanglish/fuzzy product search, multiple concurrent bills, GST-aware billing, cash/UPI/card
 payments, inventory tracking, and crash recovery. Built with Electron + React + TypeScript,
-SQLite locally via Kysely, business logic split into a framework-agnostic, unit-tested
-package. See `plan.md`-equivalent context in the original planning docs for the full
+SQLite locally via Kysely, business logic kept in a framework-agnostic, unit-tested
+module (src/core/business-logic). See `plan.md`-equivalent context in the original planning docs for the full
 multi-phase roadmap (purchases, wholesale/GST, AI, multi-store, mobile) — this repo covers
 **Phase 1** only.
 
@@ -50,7 +50,7 @@ pnpm install
 
 ## A native-module quirk you will hit: Node vs. Electron ABI
 
-`better-sqlite3` is a native addon. It's used both by `@pos/database`'s own test suite
+`better-sqlite3` is a native addon. It's used both by the database tests in `src/core/database`
 (running under plain Node/Vitest) and by the Electron app (running under Electron's bundled
 Node, a different ABI). pnpm shares one physical copy of the compiled binary across both
 consumers, so switching between "run tests" and "run the app" requires re-targeting the
@@ -108,7 +108,7 @@ follow); for now update the `users` table directly with a proper bcrypt hash if 
 
 ```powershell
 pnpm test        # Vitest: business-logic unit tests + database integration tests
-pnpm typecheck   # tsc --noEmit across every package
+pnpm typecheck   # tsc --noEmit over electron/ and src/ (one tsconfig.json)
 pnpm lint        # ESLint, zero warnings allowed
 ```
 

@@ -11,6 +11,22 @@ const MAIN_PROCESS_ONLY = [
   { name: "@pos/validation", message: "IPC input validation runs in the Electron main process." },
 ];
 
+/** Every src/core module stays framework-free; each also gets its own import limits. */
+const CORE_FRAMEWORK_FREE = {
+  group: ["@/**", "@shared/**", "react", "react-dom", "electron"],
+  message: "src/core is shared by the main process and the renderer: no renderer, React or Electron imports.",
+};
+
+function coreModule(files, { paths = [], patterns = [] }, ignores = []) {
+  return {
+    files: [files],
+    ignores,
+    rules: {
+      "no-restricted-imports": ["error", { paths, patterns: [CORE_FRAMEWORK_FREE, ...patterns] }],
+    },
+  };
+}
+
 export default tseslint.config(
   {
     ignores: [
@@ -83,46 +99,43 @@ export default tseslint.config(
     files: ["src/features/**/*.{ts,tsx}"],
     rules: { "no-restricted-imports": ["error", { paths: MAIN_PROCESS_ONLY }] },
   },
-  {
-    // src/core is shared by the Electron main process and the renderer, so it stays framework-free.
-    files: ["src/core/**/*.ts"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
+  // src/core/* were separate packages; these rules keep the import graph their package.json
+  // files used to enforce: types and validation import nothing else from core, business-logic
+  // may use types, and the database may use types plus business-logic *types* only.
+  coreModule("src/core/types/**/*.ts", {
+    patterns: [{ group: ["@pos/*"], message: "types depends on nothing else in src/core." }],
+  }),
+  coreModule("src/core/validation/**/*.ts", {
+    patterns: [{ group: ["@pos/*"], message: "validation depends on nothing else in src/core." }],
+  }),
+  coreModule("src/core/business-logic/**/*.ts", { paths: MAIN_PROCESS_ONLY }),
+  coreModule(
+    "src/core/database/**/*.ts",
+    {
+      paths: [
         {
-          patterns: [
-            {
-              group: ["@/**", "@shared/**", "react", "react-dom", "electron"],
-              message: "src/core is shared by the main process and the renderer: no renderer, React or Electron imports.",
-            },
-          ],
+          name: "@pos/business-logic",
+          allowTypeImports: true,
+          // The formulas it needs are duplicated on purpose (see repositories/purchases.ts, sales.ts).
+          message: "The database layer may import business-logic types only; duplicate the formula instead.",
         },
+        { name: "@pos/validation", message: "IPC input validation belongs to the main-process handlers, not the database." },
       ],
     },
-  },
+    // Database tests may call business-logic to cross-check the duplicated formulas.
+    ["**/*.test.ts"],
+  ),
   {
-    // The database layer may name business-logic types but never call it at runtime — the
-    // formulas it needs are duplicated on purpose (see repositories/purchases.ts, sales.ts).
-    files: ["src/core/database/**/*.ts"],
+    // Core code also runs in the Electron main process, where these browser globals do not exist.
+    files: ["src/core/**/*.ts"],
     ignores: ["**/*.test.ts"],
     rules: {
-      "no-restricted-imports": [
+      "no-restricted-globals": [
         "error",
-        {
-          paths: [
-            {
-              name: "@pos/business-logic",
-              allowTypeImports: true,
-              message: "The database layer may import business-logic types only; duplicate the formula instead.",
-            },
-          ],
-          patterns: [
-            {
-              group: ["@/**", "@shared/**", "react", "react-dom", "electron"],
-              message: "src/core is shared by the main process and the renderer: no renderer, React or Electron imports.",
-            },
-          ],
-        },
+        ...["window", "document", "navigator", "localStorage", "sessionStorage"].map((name) => ({
+          name,
+          message: "src/core runs in the Electron main process too — no browser globals.",
+        })),
       ],
     },
   },
