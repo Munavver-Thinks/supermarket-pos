@@ -18,3 +18,6 @@ coverage/
 .vite/
 .turbo/
 *.tsbuildinfo
+
+# Claude Code personal settings
+.claude/settings.local.json
