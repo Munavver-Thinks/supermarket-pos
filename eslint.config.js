@@ -39,7 +39,7 @@ export default tseslint.config(
   {
     // Plain Node CLI script (run with `node`, not built) — outside the app's browser/Electron
     // type-checked sources, so it needs the two Node globals it uses declared explicitly.
-    files: ["apps/pos-desktop/scripts/*.mjs"],
+    files: ["apps/pos-desktop/scripts/*.mjs", "scripts/**/*.mjs"],
     languageOptions: {
       globals: { process: "readonly", Buffer: "readonly" },
     },
