@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import type { Supplier } from "@pos/types";
 import type { SupplierInput } from "@shared/ipc.js";
 
+import { suppliersService } from "@/services/suppliersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
@@ -38,7 +40,7 @@ export function SuppliersScreen(): JSX.Element {
 
   const refresh = useCallback(() => {
     if (!context) return;
-    window.api.suppliers
+    suppliersService
       .list(context.storeId, showInactive)
       .then(setSuppliers)
       .catch(() => setSuppliers([]));
@@ -73,8 +75,8 @@ export function SuppliersScreen(): JSX.Element {
 
     const input = toInput(form);
     const result = editingId
-      ? await window.api.suppliers.update(editingId, input, user.id)
-      : await window.api.suppliers.create(context.storeId, input, user.id);
+      ? await suppliersService.update(editingId, input, user.id)
+      : await suppliersService.create(context.storeId, input, user.id);
 
     setSaving(false);
 
@@ -91,7 +93,7 @@ export function SuppliersScreen(): JSX.Element {
 
   async function handleToggleActive(supplier: Supplier): Promise<void> {
     if (!user) return;
-    const result = await window.api.suppliers.setActive(supplier.id, !supplier.isActive, user.id);
+    const result = await suppliersService.setActive(supplier.id, !supplier.isActive, user.id);
     if (!result.ok) {
       setMessage(result.error ?? "Could not update the supplier.");
       return;

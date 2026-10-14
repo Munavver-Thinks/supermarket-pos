@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { assignableRoles } from "@pos/business-logic";
 import type { User, UserRole } from "@pos/types";
 
+import { usersService } from "@/services/usersService.js";
+
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 
 export const ROLE_LABEL: Record<UserRole, string> = {
@@ -44,7 +46,7 @@ export function EditEmployeeModal({ employee, actor, onSaved, onClose }: EditEmp
     setSaving(true);
     setError(null);
     try {
-      const result = await window.api.users.update({
+      const result = await usersService.update({
         userId: employee.id,
         actingUserId: actor.id,
         displayName: displayName.trim(),
@@ -144,7 +146,7 @@ export function ResetPasswordModal({ employee, actor, onDone, onClose }: ResetPa
     setSaving(true);
     setError(null);
     try {
-      const result = await window.api.users.resetPassword({
+      const result = await usersService.resetPassword({
         userId: employee.id,
         actingUserId: actor.id,
         newPassword: password,

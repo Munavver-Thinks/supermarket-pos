@@ -7,6 +7,7 @@ import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { PO_STATUS_LABEL, PO_STATUS_PILL, PurchaseOrderEditor } from "./PurchaseOrderEditor.js";
+import { purchaseOrdersService } from "./services/purchaseOrdersService.js";
 
 interface PurchaseOrdersPanelProps {
   suppliers: Supplier[];
@@ -36,7 +37,7 @@ export function PurchaseOrdersPanel({ suppliers }: PurchaseOrdersPanelProps): JS
 
   const refresh = useCallback(() => {
     if (!context || !user) return;
-    window.api.purchaseOrders
+    purchaseOrdersService
       .list({ storeId: context.storeId, actingUserId: user.id, status: filter === "all" ? null : filter, limit: 100 })
       .then((result) => {
         if ("ok" in result) {

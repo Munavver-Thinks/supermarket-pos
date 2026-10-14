@@ -4,6 +4,8 @@ import type { ActivationInfo } from "@pos/types";
 import { Icon } from "../../components/icons.js";
 import { useT } from "../../i18n/useT.js";
 
+import { activationService } from "./services/activationService.js";
+
 interface ActivationFormProps {
   activation: ActivationInfo;
   onActivated: (activation: ActivationInfo) => void;
@@ -38,7 +40,7 @@ export function ActivationForm({ activation, onActivated }: ActivationFormProps)
     setBusy(true);
     setError(null);
     try {
-      const result = await window.api.activation.activate(key);
+      const result = await activationService.activate(key);
       if (result.ok && result.activation) {
         setKey("");
         onActivated(result.activation);

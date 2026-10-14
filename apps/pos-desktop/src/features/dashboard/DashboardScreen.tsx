@@ -7,6 +7,7 @@ import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { CashRegisterCard } from "./CashRegisterCard.js";
+import { dashboardService } from "./services/dashboardService.js";
 
 const PAYMENT_MODE_LABEL: Record<string, string> = {
   cash: "Cash",
@@ -35,7 +36,7 @@ export function DashboardScreen({ onGoBilling, onGoInventory }: DashboardScreenP
 
   useEffect(() => {
     if (!context || !user) return;
-    window.api.dashboard
+    dashboardService
       .getSummary(context.storeId, user.id)
       .then((result) => {
         if ("ok" in result) {

@@ -10,6 +10,9 @@ import {
 } from "@pos/business-logic";
 import type { ProductForEdit, ProductPackRow, RepackHistoryEntry } from "@pos/types";
 
+import { inventoryService } from "@/services/inventoryService.js";
+import { productsService } from "@/services/productsService.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { LabelPrintModal } from "./LabelPrintModal.js";
@@ -42,11 +45,11 @@ export function PackSizesSection({ parent, onChanged }: PackSizesSectionProps): 
 
   const refresh = useCallback(() => {
     if (!user) return;
-    window.api.products
+    productsService
       .listChildren(parent.storeId, user.id, parent.id)
       .then(setChildren)
       .catch(() => setChildren([]));
-    window.api.inventory
+    inventoryService
       .repackHistory(parent.storeId, user.id, parent.id)
       .then((result) => setHistory(Array.isArray(result) ? result : []))
       .catch(() => setHistory([]));
@@ -64,7 +67,7 @@ export function PackSizesSection({ parent, onChanged }: PackSizesSectionProps): 
     }
     setBusy(true);
     setMessage(null);
-    const result = await window.api.products.createChild(parent.storeId, user.id, {
+    const result = await productsService.createChild(parent.storeId, user.id, {
       parentProductId: parent.id,
       name: name.trim(),
       nameTamil: null,

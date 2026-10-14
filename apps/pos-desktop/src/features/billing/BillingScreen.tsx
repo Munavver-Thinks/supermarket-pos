@@ -12,6 +12,12 @@ import type { BillingShortcutAction } from "@pos/business-logic";
 import type { ApproverCredentials, Customer, DraftBill, PaymentInput } from "@pos/types";
 import type { ExchangeReturnInput, NegativeStockPolicy } from "@shared/ipc.js";
 
+import { creditService } from "@/services/creditService.js";
+import { inventoryService } from "@/services/inventoryService.js";
+import { printerService } from "@/services/printerService.js";
+import { returnsService } from "@/services/returnsService.js";
+import { storeSettingsService } from "@/services/storeSettingsService.js";
+
 import { Icon } from "../../components/icons.js";
 import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useCartStore } from "../../store/cartStore.js";
@@ -35,6 +41,7 @@ import {
   paymentFieldId,
   useBillingShortcuts,
 } from "./useBillingShortcuts.js";
+import { billingService } from "./services/billingService.js";
 
 /** Picks the colour of the last-message banner: a problem reads amber, anything else green. */
 function messageTone(text: string): "ok" | "warn" {
@@ -106,7 +113,7 @@ export function BillingScreen(): JSX.Element {
 
   useEffect(() => {
     if (!context) return;
-    window.api.billing
+    billingService
       .listDrafts(context.deviceId)
       .then((found) => {
         if (found.length > 0) {
@@ -127,7 +134,7 @@ export function BillingScreen(): JSX.Element {
 
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
-      window.api.billing
+      billingService
         .saveDraft({
           storeId: context.storeId,
           counterId: context.counterId,
@@ -152,7 +159,7 @@ export function BillingScreen(): JSX.Element {
   useEffect(() => {
     if (!attachedCustomerId || customers[attachedCustomerId]) return;
     let cancelled = false;
-    window.api.billing
+    billingService
       .getCustomer(attachedCustomerId)
       .then((found) => {
         if (found && !cancelled) setCustomers((prev) => ({ ...prev, [found.id]: found }));
@@ -167,14 +174,14 @@ export function BillingScreen(): JSX.Element {
   // they owe changes underneath this screen as bills are rung up.
   useEffect(() => {
     if (!attachedCustomerId) return;
-    window.api.credit
+    creditService
       .getBalance(attachedCustomerId)
       .then((balance) => setBalances((prev) => ({ ...prev, [attachedCustomerId]: balance })))
       .catch(() => undefined);
   }, [attachedCustomerId, lastMessage]);
 
   useEffect(() => {
-    window.api.storeSettings.getNegativeStockPolicy().then(setStockPolicy).catch(() => undefined);
+    storeSettingsService.getNegativeStockPolicy().then(setStockPolicy).catch(() => undefined);
   }, []);
 
   // Re-read stock whenever the set of products on the bill changes, and after every sale.
@@ -184,7 +191,7 @@ export function BillingScreen(): JSX.Element {
     : "";
   useEffect(() => {
     if (!context || cartProductKey === "") return;
-    window.api.inventory
+    inventoryService
       .getStockLevels(context.storeId, cartProductKey.split(","))
       .then((levels) => setStockLevels((prev) => ({ ...prev, ...levels })))
       .catch(() => undefined);
@@ -209,7 +216,7 @@ export function BillingScreen(): JSX.Element {
     const lines = activeBill.cart.lines
       .filter((l) => l.qty > 0)
       .map((l) => ({ productId: l.productId, qty: l.qty }));
-    window.api.billing
+    billingService
       .getMrpCaps(context.storeId, lines)
       .then((caps) => {
         if (cancelled) return;
@@ -362,7 +369,7 @@ export function BillingScreen(): JSX.Element {
   }
 
   function handleDiscard(draft: DraftBill): void {
-    window.api.billing.deleteDraft(draft.clientTxnId).catch(() => undefined);
+    billingService.deleteDraft(draft.clientTxnId).catch(() => undefined);
     setDrafts((prev) => prev.filter((d) => d.clientTxnId !== draft.clientTxnId));
     if (drafts.length <= 1) {
       setShowRecovery(false);
@@ -396,7 +403,7 @@ export function BillingScreen(): JSX.Element {
         : null;
       // Same cart, same clientTxnId on the resend — the server answers a repeat with the bill
       // it already wrote, so an approval that raced a retry can't bill twice.
-      const response = await window.api.billing.createSale(activeBill.cart, payments, approver, exchange);
+      const response = await billingService.createSale(activeBill.cart, payments, approver, exchange);
       if (!response.ok || !response.result) {
         if (response.mrpCaps) {
           // The server wrote nothing and lowered nothing itself — it refused and handed back
@@ -452,7 +459,7 @@ export function BillingScreen(): JSX.Element {
         if (cashLeg.changeAction === "khata") {
           const stillAttached = useCartStore.getState().bills[activeIndex]?.cart.customerId;
           if (stillAttached) {
-            window.api.credit
+            creditService
               .getBalance(stillAttached)
               .then((balance) => setBalances((prev) => ({ ...prev, [stillAttached]: balance })))
               .catch(() => undefined);
@@ -474,7 +481,7 @@ export function BillingScreen(): JSX.Element {
       // Straight back to scanning — the next customer is already at the counter.
       focusById(BILLING_FOCUS_IDS.search);
 
-      const printResult = await window.api.printer.printReceipt(response.result.sale.id, billContext.userId);
+      const printResult = await printerService.printReceipt(response.result.sale.id, billContext.userId);
       if (!printResult.ok) {
         setLastMessage(
           `Bill ${billNo} completed. Printer unavailable: ${printResult.error ?? "unknown error"}. You can reprint from Sales.`,
@@ -498,7 +505,7 @@ export function BillingScreen(): JSX.Element {
     setSubmitting(true);
     setPaymentError(null);
     try {
-      const result = await window.api.returns.create({
+      const result = await returnsService.create({
         storeId: billContext.storeId,
         counterId: billContext.counterId,
         saleId: pendingReturnForSale.originalSaleId,
@@ -524,7 +531,7 @@ export function BillingScreen(): JSX.Element {
       setPendingApproval(null);
       setShowPayment(false);
       setRefundOnlyMode(false);
-      window.api.billing.deleteDraft(activeBill.cart.clientTxnId).catch(() => undefined);
+      billingService.deleteDraft(activeBill.cart.clientTxnId).catch(() => undefined);
       resetActiveBillAfterSale(billContext);
       setLastMessage(
         `Credit note ${result.returnNo} — ${formatIndianCurrency(pendingReturnForSale.refundPaise)} refunded ${

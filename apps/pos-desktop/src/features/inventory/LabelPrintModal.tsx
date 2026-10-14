@@ -10,6 +10,8 @@ import {
 import type { LabelDefaults } from "@pos/types";
 import type { LabelSettings } from "@shared/ipc.js";
 
+import { labelsService } from "@/services/labelsService.js";
+
 import { Icon } from "../../components/icons.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -54,7 +56,7 @@ export function LabelPrintModal({ productId, repackId = null, onClose }: LabelPr
   useEffect(() => {
     if (!user || !context) return;
     let cancelled = false;
-    window.api.labels
+    labelsService
       .getDefaults(context.storeId, user.id, productId, repackId)
       .then((result) => {
         if (cancelled) return;
@@ -70,7 +72,7 @@ export function LabelPrintModal({ productId, repackId = null, onClose }: LabelPr
         setPriceText(String(result.salePricePaise / 100));
       })
       .catch(() => !cancelled && setError("Could not load the label details."));
-    window.api.labels
+    labelsService
       .getSettings()
       .then((s) => !cancelled && setSettings(s))
       .catch(() => undefined);
@@ -141,7 +143,7 @@ export function LabelPrintModal({ productId, repackId = null, onClose }: LabelPr
     setError(null);
     setMessage(null);
     try {
-      const result = await window.api.labels.print(
+      const result = await labelsService.print(
         {
           storeId: context.storeId,
           productId,

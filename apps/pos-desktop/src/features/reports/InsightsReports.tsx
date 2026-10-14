@@ -5,6 +5,8 @@ import type { ReportRequest } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 
+import { reportsService } from "./services/reportsService.js";
+
 type CsvRows = Array<Array<string | number | null>>;
 
 interface InsightsReportsProps {
@@ -45,11 +47,11 @@ export function InsightsReports({ req, reloadKey, exportCsv }: InsightsReportsPr
     let cancelled = false;
     const actor = { storeId, actingUserId };
     void Promise.all([
-      window.api.reports.profit({ storeId, actingUserId, fromIso, toIso }),
-      window.api.reports.margins(storeId, actingUserId),
-      window.api.reports.slowMoving(actor, { lookbackDays: SLOW_LOOKBACK_DAYS, minCoverDays: SLOW_MIN_COVER_DAYS }),
-      window.api.reports.deadStock(actor, { days: DEAD_DAYS }),
-      window.api.reports.expiry(storeId, actingUserId, EXPIRY_ALERT_DAYS),
+      reportsService.profit({ storeId, actingUserId, fromIso, toIso }),
+      reportsService.margins(storeId, actingUserId),
+      reportsService.slowMoving(actor, { lookbackDays: SLOW_LOOKBACK_DAYS, minCoverDays: SLOW_MIN_COVER_DAYS }),
+      reportsService.deadStock(actor, { days: DEAD_DAYS }),
+      reportsService.expiry(storeId, actingUserId, EXPIRY_ALERT_DAYS),
     ])
       .then(([p, m, s, d, e]) => {
         if (cancelled) return;

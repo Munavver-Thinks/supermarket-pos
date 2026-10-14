@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { billingShortcutLabel, formatIndianCurrency, parseQuantityInput } from "@pos/business-logic";
 import type { ProductSearchResult } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+
 import { Icon } from "../../components/icons.js";
 
 import { BILLING_FOCUS_IDS } from "./useBillingShortcuts.js";
@@ -68,7 +70,7 @@ export function SearchPanel({ storeId, onAddProduct }: SearchPanelProps): JSX.El
 
     debounceRef.current = setTimeout(() => {
       setLoading(true);
-      window.api.products
+      productsService
         .search(storeId, parsed.productText)
         .then(setResults)
         .catch(() => setResults([]))

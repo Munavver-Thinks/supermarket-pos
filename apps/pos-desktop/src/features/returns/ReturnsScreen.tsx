@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { canApprove, formatIndianCurrency } from "@pos/business-logic";
 import type { ApproverCredentials, RecentReturn, ReturnableSale } from "@pos/types";
 
+import { returnsService } from "@/services/returnsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -29,7 +31,7 @@ export function ReturnsScreen(): JSX.Element {
 
   const refreshRecent = useCallback(() => {
     if (!context) return;
-    window.api.returns.listRecent(context.storeId, 20).then(setRecent).catch(() => undefined);
+    returnsService.listRecent(context.storeId, 20).then(setRecent).catch(() => undefined);
   }, [context]);
 
   useEffect(refreshRecent, [refreshRecent]);
@@ -43,7 +45,7 @@ export function ReturnsScreen(): JSX.Element {
     setQtys({});
     clientTxnIdRef.current = crypto.randomUUID();
 
-    const found = await window.api.returns.lookup(context.storeId, billNo.trim());
+    const found = await returnsService.lookup(context.storeId, billNo.trim());
     if (!found) {
       setLookupError("No completed bill with that number.");
       return;
@@ -85,7 +87,7 @@ export function ReturnsScreen(): JSX.Element {
     setBusy(true);
     setMessage(null);
 
-    const result = await window.api.returns.create({
+    const result = await returnsService.create({
       storeId: context.storeId,
       counterId: context.counterId,
       saleId: sale.saleId,

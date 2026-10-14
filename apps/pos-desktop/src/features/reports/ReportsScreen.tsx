@@ -6,6 +6,7 @@ import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { InsightsReports } from "./InsightsReports.js";
+import { reportsService } from "./services/reportsService.js";
 
 /** A local calendar date as YYYY-MM-DD, for the date inputs. */
 function isoDate(d: Date): string {
@@ -61,11 +62,11 @@ export function ReportsScreen(): JSX.Element {
     };
 
     const [salesResult, gstResult, hsnResult, topResult, stockResult] = await Promise.all([
-      window.api.reports.sales(req),
-      window.api.reports.gst(req),
-      window.api.reports.hsn(req),
-      window.api.reports.topProducts(req, 15),
-      window.api.reports.stockValuation(context.storeId, user.id),
+      reportsService.sales(req),
+      reportsService.gst(req),
+      reportsService.hsn(req),
+      reportsService.topProducts(req, 15),
+      reportsService.stockValuation(context.storeId, user.id),
     ]);
 
     setLoading(false);
@@ -86,7 +87,7 @@ export function ReportsScreen(): JSX.Element {
   }, [load]);
 
   async function exportCsv(name: string, headers: string[], rows: Array<Array<string | number | null>>): Promise<void> {
-    const result = await window.api.reports.exportCsv(`${name}_${from}_to_${to}.csv`, toCsv(headers, rows));
+    const result = await reportsService.exportCsv(`${name}_${from}_to_${to}.csv`, toCsv(headers, rows));
     setExportMessage(result.ok ? `Saved to ${result.path}` : (result.error ?? "Could not save the file."));
   }
 

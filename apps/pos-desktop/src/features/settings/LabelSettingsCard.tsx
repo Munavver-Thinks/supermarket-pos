@@ -9,6 +9,8 @@ import {
   type LabelPaper,
 } from "@pos/business-logic";
 
+import { labelsService } from "@/services/labelsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
@@ -62,7 +64,7 @@ export function LabelSettingsCard({ printers }: { printers: string[] }): JSX.Ele
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    window.api.labels
+    labelsService
       .getSettings()
       .then((s) => {
         const { printerName: name, ...layout } = s;
@@ -110,7 +112,7 @@ export function LabelSettingsCard({ printers }: { printers: string[] }): JSX.Ele
     if (!user || !valid) return;
     setBusy(true);
     setMessage(null);
-    const result = await window.api.labels.setSettings({ printerName: printerName || null, ...layout }, user.id);
+    const result = await labelsService.setSettings({ printerName: printerName || null, ...layout }, user.id);
     setBusy(false);
     setMessage(result.ok ? "Saved. Applies to the next labels printed." : (result.error ?? "Could not save the setting."));
   }

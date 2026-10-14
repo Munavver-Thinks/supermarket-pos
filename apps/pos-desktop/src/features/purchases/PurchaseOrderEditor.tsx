@@ -9,10 +9,14 @@ import {
 } from "@pos/business-logic";
 import type { ProductSearchResult, PurchaseOrderDetail, PurchaseOrderStatus, PurchasePriceSnapshot, Supplier } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { ReceiveGoodsModal } from "./ReceiveGoodsModal.js";
+import { purchaseOrdersService } from "./services/purchaseOrdersService.js";
+import { purchasesService } from "./services/purchasesService.js";
 
 export const PO_STATUS_LABEL: Record<PurchaseOrderStatus, string> = {
   draft: "Draft",
@@ -89,7 +93,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
   const load = useCallback(
     (id: string) => {
       if (!user || !context) return;
-      window.api.purchaseOrders
+      purchaseOrdersService
         .get(id, user.id)
         .then((result) => {
           if ("ok" in result) {
@@ -116,7 +120,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
 
           const productIds = [...new Set(result.items.map((i) => i.productId))];
           if (productIds.length === 0) return;
-          window.api.purchases
+          purchasesService
             .getPriceSnapshots(context.storeId, productIds, user.id)
             .then((snapshots) => {
               if (isDenied(snapshots)) return;
@@ -144,7 +148,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
       return;
     }
     debounceRef.current = setTimeout(() => {
-      window.api.products
+      productsService
         .search(context.storeId, trimmed)
         .then((found) => setProductResults(found.slice(0, 8)))
         .catch(() => setProductResults([]));
@@ -206,7 +210,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     setProductQuery("");
     setProductResults([]);
 
-    window.api.purchases
+    purchasesService
       .getPriceSnapshots(context.storeId, [product.productId], user.id)
       .then((result) => {
         if (isDenied(result)) return;
@@ -246,14 +250,14 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     }
     setBusy(true);
     const result = detail
-      ? await window.api.purchaseOrders.update({
+      ? await purchaseOrdersService.update({
           poId: detail.order.id,
           actingUserId: user.id,
           expectedDate: expectedDate || null,
           notes: notes.trim() || null,
           lines: payloadLines(),
         })
-      : await window.api.purchaseOrders.create({
+      : await purchaseOrdersService.create({
           storeId: context.storeId,
           actingUserId: user.id,
           supplierId,
@@ -275,7 +279,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     if (!detail || !user) return;
     setBusy(true);
     setMessage(null);
-    const result = await window.api.purchaseOrders.place(detail.order.id, user.id);
+    const result = await purchaseOrdersService.place(detail.order.id, user.id);
     setBusy(false);
     if (!result.ok) {
       setMessage(result.error ?? "Could not place the order.");
@@ -291,7 +295,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     const closing = detail.order.status === "partially_received";
     setBusy(true);
     setMessage(null);
-    const result = await window.api.purchaseOrders.cancel(detail.order.id, user.id, stopReason.trim() || null);
+    const result = await purchaseOrdersService.cancel(detail.order.id, user.id, stopReason.trim() || null);
     setBusy(false);
     setStopping(false);
     setStopReason("");

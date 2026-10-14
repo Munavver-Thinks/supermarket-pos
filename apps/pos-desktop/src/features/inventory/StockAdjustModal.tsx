@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { canApprove, isFractionalUom, roundQtyForUom } from "@pos/business-logic";
 import type { ApproverCredentials, StockMovementReason } from "@pos/types";
 
+import { inventoryService } from "@/services/inventoryService.js";
+
 import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -76,7 +78,7 @@ export function StockAdjustModal({ preset, onSaved, onClose }: StockAdjustModalP
   async function submit(approver: ApproverCredentials | null): Promise<void> {
     if (!context || !user || !product) return;
     setBusy(true);
-    const result = await window.api.inventory.adjustStock({
+    const result = await inventoryService.adjustStock({
       storeId: context.storeId,
       productId: product.productId,
       userId: user.id,

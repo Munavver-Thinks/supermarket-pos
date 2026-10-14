@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { assignableRoles, canManageStaff, canManageStaffMember } from "@pos/business-logic";
 import type { User, UserRole } from "@pos/types";
 
+import { usersService } from "@/services/usersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -30,7 +32,7 @@ export function EmployeesScreen(): JSX.Element {
 
   const refresh = useCallback(() => {
     if (!context) return;
-    window.api.users
+    usersService
       .listByStore(context.storeId)
       .then(setUsers)
       .catch(() => undefined);
@@ -45,7 +47,7 @@ export function EmployeesScreen(): JSX.Element {
     setSaving(true);
     setMessage(null);
 
-    const result = await window.api.users.create({
+    const result = await usersService.create({
       storeId: context.storeId,
       actingUserId: currentUser.id,
       username: form.username.trim().toLowerCase(),
@@ -88,7 +90,7 @@ export function EmployeesScreen(): JSX.Element {
     setBusyId(target.id);
     setRowMessage(null);
     try {
-      const result = await window.api.users.setActive({
+      const result = await usersService.setActive({
         userId: target.id,
         actingUserId: currentUser.id,
         isActive: !target.isActive,

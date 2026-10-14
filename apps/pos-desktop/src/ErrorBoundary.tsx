@@ -1,5 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
+import { errorsService } from "@/services/errorsService.js";
+
 import { Icon } from "./components/icons.js";
 
 interface ErrorBoundaryProps {
@@ -28,7 +30,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   override componentDidCatch(error: unknown, info: ErrorInfo): void {
     const message = error instanceof Error ? error.message : String(error);
     const stack = error instanceof Error ? (error.stack ?? null) : null;
-    window.api.errors
+    errorsService
       .report({ message, stack, componentStack: info.componentStack ?? null, context: "ErrorBoundary" })
       .then((result) => this.setState({ errorId: result.errorId ?? "unknown" }))
       .catch(() => this.setState({ errorId: "unknown" }));

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 import type { ReturnableSale } from "@pos/types";
 
+import { returnsService } from "@/services/returnsService.js";
+
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import type { PendingReturn } from "../../store/cartStore.js";
 import { previewReturn, ReturnLinePicker } from "../returns/ReturnLinePicker.js";
@@ -53,7 +55,7 @@ export function ReturnAgainstBillModal({
     setSale(null);
     setQtys({});
     setBusy(true);
-    const found = await window.api.returns.lookup(storeId, billNo.trim());
+    const found = await returnsService.lookup(storeId, billNo.trim());
     setBusy(false);
     if (!found) {
       setLookupError("No completed bill with that number.");

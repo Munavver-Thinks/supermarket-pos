@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { defaultBestBefore, localDateIso } from "@pos/business-logic";
 import type { ProductPackRow } from "@pos/types";
 
+import { inventoryService } from "@/services/inventoryService.js";
+
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
@@ -83,7 +85,7 @@ export function RepackModal({
     setBusy(true);
     setError(null);
     try {
-      const result = await window.api.inventory.repack(
+      const result = await inventoryService.repack(
         { storeId, parentProductId, childProductId: child.id, childQty, packedOn, expiryDate: expiryDate || null },
         user.id,
       );

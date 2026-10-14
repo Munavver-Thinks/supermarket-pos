@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { canChangeStoreSettings, formatIndianCurrency } from "@pos/business-logic";
 import type { CustomerLedgerEntry } from "@pos/types";
 
+import { creditService } from "@/services/creditService.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 
@@ -50,8 +52,8 @@ export function KhataDrawer({ customer, onClose, onChanged }: KhataDrawerProps):
   useModalKeyboard(cardRef);
 
   const refresh = useCallback(() => {
-    window.api.credit.getBalance(customer.id).then(setBalancePaise).catch(() => undefined);
-    window.api.credit.listEntries(customer.id, 50).then(setEntries).catch(() => undefined);
+    creditService.getBalance(customer.id).then(setBalancePaise).catch(() => undefined);
+    creditService.listEntries(customer.id, 50).then(setEntries).catch(() => undefined);
   }, [customer.id]);
 
   useEffect(refresh, [refresh]);
@@ -68,7 +70,7 @@ export function KhataDrawer({ customer, onClose, onChanged }: KhataDrawerProps):
 
     setBusy(true);
     setMessage(null);
-    const result = await window.api.credit.recordRepayment({
+    const result = await creditService.recordRepayment({
       storeId: context.storeId,
       customerId: customer.id,
       userId: user.id,
@@ -93,7 +95,7 @@ export function KhataDrawer({ customer, onClose, onChanged }: KhataDrawerProps):
     if (!user) return;
     setBusy(true);
     setMessage(null);
-    const result = await window.api.credit.setLimit(
+    const result = await creditService.setLimit(
       customer.id,
       Math.round((Number(limitRupees) || 0) * 100),
       user.id,

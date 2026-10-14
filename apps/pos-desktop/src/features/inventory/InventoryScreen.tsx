@@ -8,6 +8,10 @@ import {
 } from "@pos/business-logic";
 import type { LowStockRow, ProductAdminRow, Supplier } from "@pos/types";
 
+import { inventoryService } from "@/services/inventoryService.js";
+import { productsService } from "@/services/productsService.js";
+import { suppliersService } from "@/services/suppliersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { Icon } from "../../components/icons.js";
@@ -47,12 +51,12 @@ export function InventoryScreen(): JSX.Element {
 
   const refreshLowStock = useCallback(() => {
     if (!context) return;
-    window.api.inventory.getLowStock(context.storeId).then(setLowStock).catch(() => undefined);
+    inventoryService.getLowStock(context.storeId).then(setLowStock).catch(() => undefined);
   }, [context]);
 
   const refreshProducts = useCallback(() => {
     if (!context || !user) return;
-    window.api.products
+    productsService
       .listAdmin({
         storeId: context.storeId,
         actingUserId: user.id,
@@ -96,7 +100,7 @@ export function InventoryScreen(): JSX.Element {
 
   useEffect(() => {
     if (!context) return;
-    window.api.suppliers
+    suppliersService
       .list(context.storeId)
       .then(setSuppliers)
       .catch(() => setSuppliers([]));
@@ -126,7 +130,7 @@ export function InventoryScreen(): JSX.Element {
       }
       if (!ok) return;
     }
-    const result = await window.api.products.setActive({
+    const result = await productsService.setActive({
       productId: row.id,
       actingUserId: user.id,
       isActive: !row.isActive,

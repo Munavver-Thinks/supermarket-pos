@@ -3,6 +3,9 @@ import { auditActionLabel, canChangeStoreSettings, canViewAuditLog, describeAudi
 import type { ActivationInfo, AuditActivityEntry } from "@pos/types";
 import type { BackupFile, NegativeStockPolicy, ReceiptLanguage } from "@shared/ipc.js";
 
+import { printerService } from "@/services/printerService.js";
+import { storeSettingsService } from "@/services/storeSettingsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -13,6 +16,9 @@ import { AppearanceCard } from "./AppearanceCard.js";
 import { ExpirySettingsCard } from "./ExpirySettingsCard.js";
 import { LabelSettingsCard } from "./LabelSettingsCard.js";
 import { LanguageCard } from "./LanguageCard.js";
+import { auditService } from "./services/auditService.js";
+import { backupService } from "./services/backupService.js";
+import { catalogService } from "./services/catalogService.js";
 
 /** Wording per the activation plan: "Activated" / "Not activated" only — never "protected",
  * "secure" or "licensed copy verified online". Activation is a deterrent, not real protection
@@ -119,7 +125,7 @@ export function SettingsScreen(): JSX.Element {
       if (!user || !canViewAuditLog(user.role)) return;
       setActivityLoading(true);
       setActivityError(null);
-      const result = await window.api.audit.list(user.id, { limit: ACTIVITY_PAGE, beforeIso });
+      const result = await auditService.list(user.id, { limit: ACTIVITY_PAGE, beforeIso });
       setActivityLoading(false);
       if (!Array.isArray(result)) {
         setActivityError(result.error);
@@ -139,7 +145,7 @@ export function SettingsScreen(): JSX.Element {
   const [stockPolicyMessage, setStockPolicyMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    window.api.storeSettings.getNegativeStockPolicy().then(setStockPolicy).catch(() => undefined);
+    storeSettingsService.getNegativeStockPolicy().then(setStockPolicy).catch(() => undefined);
   }, []);
 
   async function handleStockPolicyChange(next: NegativeStockPolicy): Promise<void> {
@@ -147,7 +153,7 @@ export function SettingsScreen(): JSX.Element {
     const previous = stockPolicy;
     setStockPolicy(next);
     setStockPolicyMessage(null);
-    const result = await window.api.storeSettings.setNegativeStockPolicy(next, user.id);
+    const result = await storeSettingsService.setNegativeStockPolicy(next, user.id);
     if (!result.ok) {
       // Put the control back, so it never shows a rule that isn't actually in force.
       setStockPolicy(previous);
@@ -161,7 +167,7 @@ export function SettingsScreen(): JSX.Element {
   const [receiptLanguageMessage, setReceiptLanguageMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    window.api.storeSettings.getReceiptLanguage().then(setReceiptLanguage).catch(() => undefined);
+    storeSettingsService.getReceiptLanguage().then(setReceiptLanguage).catch(() => undefined);
   }, []);
 
   async function handleReceiptLanguageChange(next: ReceiptLanguage): Promise<void> {
@@ -169,7 +175,7 @@ export function SettingsScreen(): JSX.Element {
     const previous = receiptLanguage;
     setReceiptLanguage(next);
     setReceiptLanguageMessage(null);
-    const result = await window.api.storeSettings.setReceiptLanguage(next, user.id);
+    const result = await storeSettingsService.setReceiptLanguage(next, user.id);
     if (!result.ok) {
       // Put the control back, so it never shows a setting that isn't actually in force.
       setReceiptLanguage(previous);
@@ -180,11 +186,11 @@ export function SettingsScreen(): JSX.Element {
   }
 
   useEffect(() => {
-    window.api.printer.listPrinters().then(setPrinters).catch(() => undefined);
+    printerService.listPrinters().then(setPrinters).catch(() => undefined);
   }, []);
 
   const refreshBackups = useCallback(() => {
-    window.api.backup
+    backupService
       .list()
       .then(setBackups)
       .catch(() => setBackups([]));
@@ -196,7 +202,7 @@ export function SettingsScreen(): JSX.Element {
     setBackingUp(true);
     setBackupMessage(null);
     try {
-      const result = await window.api.backup.run();
+      const result = await backupService.run();
       setBackupMessage(
         result.ok && result.backup
           ? `Backed up — ${formatSize(result.backup.sizeBytes)} saved.`
@@ -231,7 +237,7 @@ export function SettingsScreen(): JSX.Element {
     const name = backup.name;
     setBackupMessage(null);
     // On success the app restarts, so nothing after this resolves.
-    const result = await window.api.backup.restore(name, user.id);
+    const result = await backupService.restore(name, user.id);
     if (!result.ok) {
       setBackupMessage(result.error ?? "Could not restore that backup.");
     }
@@ -242,7 +248,7 @@ export function SettingsScreen(): JSX.Element {
     setSeedingCatalog(true);
     setCatalogMessage(null);
     try {
-      const result = await window.api.catalog.seedDemo(context.storeId, user.id);
+      const result = await catalogService.seedDemo(context.storeId, user.id);
       if (!result.ok) {
         setCatalogMessage(result.error ?? "Could not load the demo catalog.");
       } else if (result.seeded) {

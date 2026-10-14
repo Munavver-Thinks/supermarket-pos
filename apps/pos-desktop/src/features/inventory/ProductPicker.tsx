@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { ProductSearchResult } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+
 /** The little a stock form needs to know about the product it is changing. */
 export interface PickedProduct {
   productId: string;
@@ -37,7 +39,7 @@ export function ProductPicker({ storeId, value, onChange, label = "Product" }: P
       return;
     }
     debounceRef.current = setTimeout(() => {
-      window.api.products
+      productsService
         .search(storeId, trimmed)
         .then((found) => setResults(found.slice(0, 8)))
         .catch(() => setResults([]))

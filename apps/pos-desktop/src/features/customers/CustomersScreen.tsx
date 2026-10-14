@@ -2,6 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 import type { Customer, CustomerBalance } from "@pos/types";
 
+import { creditService } from "@/services/creditService.js";
+import { customersService } from "@/services/customersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { Icon } from "../../components/icons.js";
 import { CustomerFormModal } from "../../components/CustomerFormModal.js";
@@ -27,7 +30,7 @@ export function CustomersScreen(): JSX.Element {
 
   const refreshOutstanding = useCallback(() => {
     if (!context) return;
-    window.api.credit.listOutstanding(context.storeId).then(setOutstanding).catch(() => undefined);
+    creditService.listOutstanding(context.storeId).then(setOutstanding).catch(() => undefined);
   }, [context]);
 
   useEffect(refreshOutstanding, [refreshOutstanding]);
@@ -36,8 +39,8 @@ export function CustomersScreen(): JSX.Element {
     if (!context) return;
     const trimmed = query.trim();
     const request = trimmed
-      ? window.api.customers.search(context.storeId, trimmed)
-      : window.api.customers.listRecent(context.storeId, 50);
+      ? customersService.search(context.storeId, trimmed)
+      : customersService.listRecent(context.storeId, 50);
     request.then(setCustomers).catch(() => undefined);
   }, [context, query]);
 
@@ -191,7 +194,7 @@ export function CustomersScreen(): JSX.Element {
           initialName={editingCustomer.name}
           initialPhone={editingCustomer.phone ?? ""}
           initialAddress={editingCustomer.address ?? ""}
-          onSubmit={(values) => window.api.customers.update(editingCustomer.id, values, user.id)}
+          onSubmit={(values) => customersService.update(editingCustomer.id, values, user.id)}
           onSuccess={() => {
             setEditingCustomer(null);
             refreshCustomers();

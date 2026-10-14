@@ -13,12 +13,17 @@ import {
 } from "@pos/business-logic";
 import type { ProductSearchResult, PurchaseListRow, PurchasePriceSnapshot, Supplier } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+import { suppliersService } from "@/services/suppliersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { PurchaseOrdersPanel } from "./PurchaseOrdersPanel.js";
+import { purchasesService } from "./services/purchasesService.js";
+
 
 interface DraftLine {
   lineId: string;
@@ -57,7 +62,7 @@ export function PurchasesScreen(): JSX.Element {
 
   useEffect(() => {
     if (!context) return;
-    window.api.suppliers
+    suppliersService
       .list(context.storeId)
       .then(setSuppliers)
       .catch(() => setSuppliers([]));
@@ -137,7 +142,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
 
   const refreshRecent = useCallback(() => {
     if (!context) return;
-    window.api.purchases
+    purchasesService
       .listRecent(context.storeId, 20)
       .then(setRecent)
       .catch(() => setRecent([]));
@@ -156,7 +161,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
     }
 
     debounceRef.current = setTimeout(() => {
-      window.api.products
+      productsService
         .search(context.storeId, trimmed)
         .then((found) => setProductResults(found.slice(0, 8)))
         .catch(() => setProductResults([]));
@@ -191,7 +196,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
     setProductResults([]);
 
     if (!context || !user) return;
-    window.api.purchases
+    purchasesService
       .getPriceSnapshots(context.storeId, [product.productId], user.id)
       .then((result) => {
         if (isDenied(result)) return;
@@ -329,7 +334,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
     }
 
     setSaving(true);
-    const result = await window.api.purchases.create({
+    const result = await purchasesService.create({
       storeId: context.storeId,
       supplierId,
       userId: user.id,

@@ -9,6 +9,8 @@ import {
 } from "@pos/business-logic";
 import type { ProductForEdit, Supplier } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { Icon } from "../../components/icons.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
@@ -86,7 +88,7 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
 
   const loadProduct = useCallback(() => {
     if (!user) return;
-    window.api.products
+    productsService
       .get(productId, user.id)
       .then((result) => {
         if ("ok" in result) {
@@ -129,7 +131,7 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
       return;
     }
     const parentProductId = product.parentProductId;
-    window.api.products
+    productsService
       .get(parentProductId, user.id)
       .then((result) => {
         if ("ok" in result) {
@@ -175,7 +177,7 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
       return;
     }
     setBusy(true);
-    const result = await window.api.products.update({
+    const result = await productsService.update({
       productId,
       actingUserId: user.id,
       details: {
@@ -236,7 +238,7 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
       if (!ok) return;
     }
     setBusy(true);
-    const result = await window.api.products.changePrices({
+    const result = await productsService.changePrices({
       productId,
       actingUserId: user.id,
       prices: { mrpPaise, salePricePaise, costPricePaise, wholesalePricePaise, isTaxInclusive: prices.isTaxInclusive },
@@ -258,7 +260,7 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
     if (!user) return;
     setBusy(true);
     setPricesMessage(null);
-    const result = await window.api.products.relinkChildPrice(productId, user.id);
+    const result = await productsService.relinkChildPrice(productId, user.id);
     setBusy(false);
     if (!result.ok) {
       setPricesMessage(result.error ?? "Could not relink the price.");

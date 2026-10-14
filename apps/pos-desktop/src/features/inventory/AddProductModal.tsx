@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { findMarginWarnings, isFractionalUom, marginConfirmText, roundQtyForUom } from "@pos/business-logic";
 import type { Supplier } from "@pos/types";
 
+import { productsService } from "@/services/productsService.js";
+
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 
@@ -94,7 +96,7 @@ export function AddProductModal({ storeId, userId, suppliers, onCreated, onClose
     }
     setBusy(true);
 
-    const result = await window.api.products.create({
+    const result = await productsService.create({
       storeId,
       userId,
       name: form.name,

@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { alertsSignature } from "@pos/business-logic";
 import type { StockAlert } from "@pos/types";
 
+import { alertsService } from "@/services/alertsService.js";
+
 const SEEN_KEY = "pos.alerts.lastSeenSignature";
 
 function readSeen(): string {
@@ -35,7 +37,7 @@ export const useAlertsStore = create<AlertsState>((set, get) => ({
   refresh: async (storeId) => {
     let next: StockAlert[];
     try {
-      next = await window.api.alerts.list(storeId);
+      next = await alertsService.list(storeId);
       if (!Array.isArray(next)) return;
     } catch {
       return;

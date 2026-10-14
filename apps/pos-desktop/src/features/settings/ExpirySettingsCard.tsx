@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { canChangeStoreSettings } from "@pos/business-logic";
 
+import { storeSettingsService } from "@/services/storeSettingsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
@@ -12,7 +14,7 @@ export function ExpirySettingsCard(): JSX.Element {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    window.api.storeSettings
+    storeSettingsService
       .getBlockExpiredSale()
       .then(setEnabled)
       .catch(() => setMessage("Could not load this setting."));
@@ -24,7 +26,7 @@ export function ExpirySettingsCard(): JSX.Element {
     if (!user) return;
     setBusy(true);
     setMessage(null);
-    const result = await window.api.storeSettings.setBlockExpiredSale(next, user.id);
+    const result = await storeSettingsService.setBlockExpiredSale(next, user.id);
     setBusy(false);
     if (!result.ok) {
       setMessage(result.error ?? "Could not change this setting.");

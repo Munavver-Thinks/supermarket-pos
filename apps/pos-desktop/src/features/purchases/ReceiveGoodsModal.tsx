@@ -17,6 +17,9 @@ import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
+import { purchaseOrdersService } from "./services/purchaseOrdersService.js";
+import { purchasesService } from "./services/purchasesService.js";
+
 /** Narrows the `T | {ok:false}` the price-snapshot channel returns when access is refused. */
 function isDenied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
   return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
@@ -97,7 +100,7 @@ export function ReceiveGoodsModal({ detail, onClose, onReceived }: ReceiveGoodsM
     if (!context || !user) return;
     const productIds = [...new Set(detail.items.map((i) => i.productId))];
     if (productIds.length === 0) return;
-    window.api.purchases
+    purchasesService
       .getPriceSnapshots(context.storeId, productIds, user.id)
       .then((result) => {
         if (isDenied(result)) return;
@@ -241,7 +244,7 @@ export function ReceiveGoodsModal({ detail, onClose, onReceived }: ReceiveGoodsM
     }
 
     setBusy(true);
-    const result = await window.api.purchaseOrders.receive({
+    const result = await purchaseOrdersService.receive({
       poId: detail.order.id,
       actingUserId: user.id,
       clientTxnId: clientTxnId.current,

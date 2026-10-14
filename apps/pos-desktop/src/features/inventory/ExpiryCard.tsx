@@ -7,6 +7,8 @@ import { useConfirm } from "../../components/ConfirmDialog.js";
 import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
+import { batchesService } from "./services/batchesService.js";
+
 interface ExpiryCardProps {
   /** Bumped by the screen when stock changed elsewhere, to reload the list. */
   refreshKey: number;
@@ -32,7 +34,7 @@ export function ExpiryCard({ refreshKey, onChanged }: ExpiryCardProps): JSX.Elem
 
   const load = useCallback(() => {
     if (!context) return;
-    window.api.batches
+    batchesService
       .listExpiring(context.storeId, EXPIRY_ALERT_DAYS)
       .then(setRows)
       .catch(() => setRows([]));
@@ -72,7 +74,7 @@ export function ExpiryCard({ refreshKey, onChanged }: ExpiryCardProps): JSX.Elem
   async function submit(row: ExpiringBatchRow, approver: ApproverCredentials | null): Promise<void> {
     if (!user) return;
     setBusy(true);
-    const result = await window.api.batches.writeOff({
+    const result = await batchesService.writeOff({
       batchId: row.batchId,
       actingUserId: user.id,
       note: `Expired ${row.expiryDate}`,

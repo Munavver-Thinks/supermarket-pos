@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Icon, LogoMark } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
+import { authService } from "./services/authService.js";
+
 export function LoginScreen(): JSX.Element {
   const setUser = useSessionStore((s) => s.setUser);
   const [username, setUsername] = useState("admin");
@@ -15,7 +17,7 @@ export function LoginScreen(): JSX.Element {
     setLoading(true);
     setError(null);
     try {
-      const result = await window.api.auth.login(username, password);
+      const result = await authService.login(username, password);
       if (result.ok && result.user) {
         setUser(result.user, result.usingDefaultPassword === true);
       } else {

@@ -5,6 +5,8 @@ import {
   parseThemePreference,
   resolveTheme, type ThemeId, type ThemePreference } from "@pos/business-logic";
 
+import { uiService } from "@/services/uiService.js";
+
 interface ThemeState {
   /** The user the preference belongs to; null on the login and activation screens. */
   userId: string | null;
@@ -39,7 +41,7 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
     const token = requestToken;
     set({ userId, preference: DEFAULT_THEME_PREFERENCE, loaded: false });
     try {
-      const result = await window.api.ui.getTheme(userId);
+      const result = await uiService.getTheme(userId);
       // A failed call can arrive as `{ ok: false, error }`; the parser falls back field by field.
       const preference = parseThemePreference(JSON.stringify(result));
       if (get().userId === userId && token === requestToken) set({ preference, loaded: true });
@@ -54,7 +56,7 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
     const previous = get().preference;
     set({ preference });
     try {
-      const result = await window.api.ui.setTheme(preference, actingUserId);
+      const result = await uiService.setTheme(preference, actingUserId);
       if (!result.ok) set({ preference: previous });
       return result;
     } catch {

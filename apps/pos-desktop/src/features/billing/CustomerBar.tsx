@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { billingShortcutLabel, formatIndianCurrency } from "@pos/business-logic";
 import type { Customer } from "@pos/types";
 
+import { customersService } from "@/services/customersService.js";
+
 import { CustomerFormModal } from "../../components/CustomerFormModal.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
@@ -36,7 +38,7 @@ export function CustomerBar({ storeId, customer, balancePaise, onAttach, onClear
       return;
     }
     let cancelled = false;
-    window.api.customers
+    customersService
       .search(storeId, trimmed)
       .then((found) => {
         if (!cancelled) setResults(found);
@@ -169,7 +171,7 @@ export function CustomerBar({ storeId, customer, balancePaise, onAttach, onClear
           initialName={createInitialName}
           initialPhone={createInitialPhone}
           initialAddress=""
-          onSubmit={(values) => window.api.customers.create(storeId, values, user.id)}
+          onSubmit={(values) => customersService.create(storeId, values, user.id)}
           onSuccess={(created) => {
             setShowCreate(false);
             attach(created);

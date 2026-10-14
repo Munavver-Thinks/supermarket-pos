@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { usersService } from "@/services/usersService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { Icon } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -26,7 +28,7 @@ export function ChangePasswordCard(): JSX.Element {
     setSaving(true);
     setMessage(null);
     try {
-      const result = await window.api.users.changeOwnPassword({
+      const result = await usersService.changeOwnPassword({
         actingUserId: user.id,
         currentPassword: current,
         newPassword: next,

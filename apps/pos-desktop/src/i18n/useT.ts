@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { create } from "zustand";
 import { translate, type UiLanguage, type UiStringKey } from "@pos/business-logic";
 
+import { uiService } from "@/services/uiService.js";
+
 interface UiLanguageState {
   language: UiLanguage;
   /** False until the stored preference has loaded — screens render in English meanwhile. */
@@ -20,7 +22,7 @@ export const useUiLanguageStore = create<UiLanguageState>((set, get) => ({
   loaded: false,
   load: async () => {
     try {
-      const language = await window.api.ui.getLanguage();
+      const language = await uiService.getLanguage();
       set({ language, loaded: true });
     } catch {
       set({ loaded: true });
@@ -30,7 +32,7 @@ export const useUiLanguageStore = create<UiLanguageState>((set, get) => ({
     const previous = get().language;
     set({ language }); // optimistic — a signed-in user changing their own display preference
     try {
-      const result = await window.api.ui.setLanguage(language, actingUserId);
+      const result = await uiService.setLanguage(language, actingUserId);
       if (!result.ok) set({ language: previous });
       return result;
     } catch {

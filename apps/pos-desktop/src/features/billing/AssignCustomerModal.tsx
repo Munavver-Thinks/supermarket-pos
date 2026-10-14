@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { Customer } from "@pos/types";
 
+import { customersService } from "@/services/customersService.js";
+
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import type { BillTab } from "../../store/cartStore.js";
 
@@ -51,7 +53,7 @@ export function AssignCustomerModal({
       return;
     }
     let cancelled = false;
-    window.api.customers
+    customersService
       .search(storeId, trimmed)
       .then((found) => {
         if (!cancelled) {

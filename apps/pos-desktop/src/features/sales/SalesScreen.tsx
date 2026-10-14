@@ -3,9 +3,14 @@ import { formatIndianCurrency } from "@pos/business-logic";
 import type { RecentSale } from "@pos/types";
 import type { SalePrintResponse } from "@shared/ipc.js";
 
+import { printerService } from "@/services/printerService.js";
+import { returnsService } from "@/services/returnsService.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { Icon } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
+
+import { salesService } from "./services/salesService.js";
 
 const RECENT_LIMIT = 50;
 
@@ -32,7 +37,7 @@ export function SalesScreen(): JSX.Element {
 
   useEffect(() => {
     if (!context) return;
-    window.api.sales.listRecent(context.storeId, RECENT_LIMIT).then(setSales).catch(() => undefined);
+    salesService.listRecent(context.storeId, RECENT_LIMIT).then(setSales).catch(() => undefined);
   }, [context]);
 
   const needle = filter.trim().toLowerCase();
@@ -45,7 +50,7 @@ export function SalesScreen(): JSX.Element {
     setFound(null);
     setLookupMessage(null);
     try {
-      const bill = await window.api.returns.lookup(context.storeId, filter.trim());
+      const bill = await returnsService.lookup(context.storeId, filter.trim());
       if (!bill) {
         setLookupMessage("No completed bill with that exact number.");
         return;
@@ -69,9 +74,9 @@ export function SalesScreen(): JSX.Element {
     setMessage(null);
     try {
       let result: SalePrintResponse;
-      if (kind === "receipt") result = await window.api.printer.printReceipt(sale.id, user.id);
-      else if (kind === "a4") result = await window.api.printer.printInvoiceA4(sale.id, user.id);
-      else result = await window.api.printer.saveInvoicePdf(sale.id, user.id);
+      if (kind === "receipt") result = await printerService.printReceipt(sale.id, user.id);
+      else if (kind === "a4") result = await printerService.printInvoiceA4(sale.id, user.id);
+      else result = await printerService.saveInvoicePdf(sale.id, user.id);
 
       if (!result.ok) {
         setMessage({ text: `${sale.billNo}: ${result.error ?? "Could not print."}`, error: true });

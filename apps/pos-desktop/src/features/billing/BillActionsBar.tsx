@@ -9,6 +9,7 @@ import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 import { AssignCustomerModal } from "./AssignCustomerModal.js";
 import { MergeBillModal } from "./MergeBillModal.js";
 import { SplitBillModal } from "./SplitBillModal.js";
+import { billingService } from "./services/billingService.js";
 
 type OpenDialog = "merge" | "split" | "customer" | null;
 
@@ -59,7 +60,7 @@ export function BillActionsBar({
 
   function saveDraft(bill: BillTab | undefined): void {
     if (!bill || bill.cart.lines.length === 0) return;
-    window.api.billing
+    billingService
       .saveDraft({
         storeId: context.storeId,
         counterId: context.counterId,
@@ -93,7 +94,7 @@ export function BillActionsBar({
       return;
     }
     // The source bill no longer exists; its draft must not come back after a restart.
-    window.api.billing.deleteDraft(source.cart.clientTxnId).catch(() => undefined);
+    billingService.deleteDraft(source.cart.clientTxnId).catch(() => undefined);
     const { bills: after, activeIndex: mergedIndex } = useCartStore.getState();
     saveDraft(after[mergedIndex]);
     close();

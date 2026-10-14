@@ -5,6 +5,8 @@ import type { CashSessionSummary } from "@shared/ipc.js";
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
+import { cashSessionService } from "./services/cashSessionService.js";
+
 /** Notes and coins in circulation, largest first — the order a drawer is counted in. */
 const DENOMINATIONS = [500, 200, 100, 50, 20, 10, 5, 2, 1];
 
@@ -28,7 +30,7 @@ export function CashRegisterCard(): JSX.Element {
 
   const refresh = useCallback(() => {
     if (!context) return;
-    window.api.cashSession
+    cashSessionService
       .summary(context.counterId)
       .then(setSummary)
       .catch(() => undefined);
@@ -42,7 +44,7 @@ export function CashRegisterCard(): JSX.Element {
     setBusy(true);
     setMessage(null);
 
-    const result = await window.api.cashSession.open({
+    const result = await cashSessionService.open({
       storeId: context.storeId,
       counterId: context.counterId,
       userId: user.id,
@@ -66,7 +68,7 @@ export function CashRegisterCard(): JSX.Element {
     setMessage(null);
 
     const counted = countedPaise(counts);
-    const result = await window.api.cashSession.close({
+    const result = await cashSessionService.close({
       id: summary.session.id,
       userId: user.id,
       closingCashPaise: summary.expectedPaise,
