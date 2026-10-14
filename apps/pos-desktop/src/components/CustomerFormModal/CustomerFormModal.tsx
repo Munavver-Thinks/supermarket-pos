@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Customer } from "@pos/types";
 
-import { useModalKeyboard } from "./useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 interface CustomerFormModalProps {
   title: string;

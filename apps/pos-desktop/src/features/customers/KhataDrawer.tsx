@@ -4,9 +4,9 @@ import type { CustomerLedgerEntry } from "@pos/types";
 
 import { creditService } from "@/services/creditService.js";
 import { parseRupeesOrZero } from "@/utils/money.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 import { useSessionStore } from "../../store/sessionStore.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 
 /** Everything the drawer needs — deliberately not a full Customer, so a row from the
  *  outstanding list can open it without first being found in the customer list. */

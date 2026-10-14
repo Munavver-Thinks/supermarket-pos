@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useThemeStore } from "../../theme/useTheme.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useThemeStore } from "@/store/themeStore.js";
 
 import { AppearanceDialog } from "./AppearanceDialog.js";
 import { describeThemePreference } from "./ThemeTiles.js";

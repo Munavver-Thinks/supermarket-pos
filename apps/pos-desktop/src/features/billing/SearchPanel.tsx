@@ -3,8 +3,7 @@ import { billingShortcutLabel, formatIndianCurrency, parseQuantityInput } from "
 import type { ProductSearchResult } from "@pos/types";
 
 import { productsService } from "@/services/productsService.js";
-
-import { Icon } from "../../components/icons.js";
+import { Icon } from "@/components/Icon/index.js";
 
 import { BILLING_FOCUS_IDS } from "./useBillingShortcuts.js";
 import { QuantityModal } from "./QuantityModal.js";

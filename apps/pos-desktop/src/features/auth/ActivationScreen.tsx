@@ -1,7 +1,7 @@
 import type { ActivationInfo } from "@pos/types";
 
-import { LogoMark } from "../../components/icons.js";
-import { useT } from "../../i18n/useT.js";
+import { LogoMark } from "@/components/Icon/index.js";
+import { useT } from "@/hooks/useT.js";
 
 import { ActivationForm } from "./ActivationForm.js";
 

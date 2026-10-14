@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import { usersService } from "@/services/usersService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { Icon } from "@/components/Icon/index.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { Icon } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 /** Lets whoever is signed in change their own password. The current one is always asked for. */

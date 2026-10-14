@@ -4,8 +4,8 @@ import type { GstRateRow, HsnSummaryRow, SalesReport, StockValuationRow, TopProd
 
 import { isDenied } from "@/services/ipcResult.js";
 import { endOfLocalDay, isoDate, startOfLocalDay } from "@/utils/date.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { InsightsReports } from "./InsightsReports.js";

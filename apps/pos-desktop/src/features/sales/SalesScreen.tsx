@@ -5,9 +5,9 @@ import type { SalePrintResponse } from "@shared/ipc.js";
 
 import { printerService } from "@/services/printerService.js";
 import { returnsService } from "@/services/returnsService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { Icon } from "@/components/Icon/index.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { Icon } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { salesService } from "./services/salesService.js";

@@ -3,9 +3,9 @@ import { canApprove, isFractionalUom, roundQtyForUom } from "@pos/business-logic
 import type { ApproverCredentials, StockMovementReason } from "@pos/types";
 
 import { inventoryService } from "@/services/inventoryService.js";
+import { ManagerApprovalDialog } from "@/components/ManagerApprovalDialog/ManagerApprovalDialog.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { ProductPicker, type PickedProduct } from "./ProductPicker.js";

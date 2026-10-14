@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { create } from "zustand";
-import { translate, type UiLanguage, type UiStringKey } from "@pos/business-logic";
+import type { UiLanguage } from "@pos/business-logic";
 
 import { uiService } from "@/services/uiService.js";
 
-interface UiLanguageState {
+export interface UiLanguageState {
   language: UiLanguage;
   /** False until the stored preference has loaded — screens render in English meanwhile. */
   loaded: boolean;
@@ -41,24 +40,3 @@ export const useUiLanguageStore = create<UiLanguageState>((set, get) => ({
     }
   },
 }));
-
-/** Loads the saved language once and keeps `<html lang>` in sync — screen readers and the
- * `[lang="ta"]` font-stack rule in styles.css both depend on it being correct. Call once,
- * from the app shell. */
-export function useLoadUiLanguage(): void {
-  const load = useUiLanguageStore((s) => s.load);
-  const language = useUiLanguageStore((s) => s.language);
-  useEffect(() => {
-    void load();
-  }, [load]);
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
-}
-
-/** `t(key)` bound to the current language, with the same `{name}` placeholder support as
- * `translate` itself. */
-export function useT(): (key: UiStringKey, params?: Record<string, string | number>) => string {
-  const language = useUiLanguageStore((s) => s.language);
-  return (key, params) => translate(key, language, params);
-}

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { alertsSignature, summarizeAlerts } from "@pos/business-logic";
 
-import { Icon } from "../../components/icons.js";
+import { Icon } from "@/components/Icon/index.js";
+
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 

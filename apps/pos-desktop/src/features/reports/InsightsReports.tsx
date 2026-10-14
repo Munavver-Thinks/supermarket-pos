@@ -4,8 +4,7 @@ import type { DeadStockRow, ExpiringBatchRow, MarginRow, ProfitReport, SlowMovin
 import type { ReportRequest } from "@shared/ipc.js";
 
 import { isDenied } from "@/services/ipcResult.js";
-
-import { BlueprintCard } from "../../components/BlueprintCard.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
 import { reportsService } from "./services/reportsService.js";
 

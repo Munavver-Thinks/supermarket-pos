@@ -4,9 +4,8 @@ import type { Supplier } from "@pos/types";
 
 import { productsService } from "@/services/productsService.js";
 import { parseRupeesOrZero, parseRupeesStrict } from "@/utils/money.js";
-
-import { useConfirm } from "../../components/ConfirmDialog.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 interface AddProductModalProps {
   storeId: string;

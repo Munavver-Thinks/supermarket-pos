@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { canChangeStoreSettings } from "@pos/business-logic";
 
 import { storeSettingsService } from "@/services/storeSettingsService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 /** "Block sale of expired stock" — off by default, owner or manager to change. */

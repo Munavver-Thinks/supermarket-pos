@@ -17,13 +17,13 @@ import { inventoryService } from "@/services/inventoryService.js";
 import { printerService } from "@/services/printerService.js";
 import { returnsService } from "@/services/returnsService.js";
 import { storeSettingsService } from "@/services/storeSettingsService.js";
+import { Icon } from "@/components/Icon/index.js";
+import { ManagerApprovalDialog } from "@/components/ManagerApprovalDialog/ManagerApprovalDialog.js";
 
-import { Icon } from "../../components/icons.js";
-import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
-import { useCartStore } from "../../store/cartStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 import { REFUND_LABEL, type PayoutMode } from "../returns/ReturnLinePicker.js";
 
+import { useCartStore } from "./store/cartStore.js";
 import { BillActionsBar } from "./BillActionsBar.js";
 import { CartPanel } from "./CartPanel.js";
 import { CustomerBar } from "./CustomerBar.js";

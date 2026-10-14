@@ -4,10 +4,10 @@ import type { Customer, CustomerBalance } from "@pos/types";
 
 import { creditService } from "@/services/creditService.js";
 import { customersService } from "@/services/customersService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { Icon } from "@/components/Icon/index.js";
+import { CustomerFormModal } from "@/components/CustomerFormModal/CustomerFormModal.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { Icon } from "../../components/icons.js";
-import { CustomerFormModal } from "../../components/CustomerFormModal.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { KhataDrawer, type KhataTarget } from "./KhataDrawer.js";

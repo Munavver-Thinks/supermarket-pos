@@ -3,8 +3,7 @@ import { assignableRoles } from "@pos/business-logic";
 import type { User, UserRole } from "@pos/types";
 
 import { usersService } from "@/services/usersService.js";
-
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 export const ROLE_LABEL: Record<UserRole, string> = {
   owner: "Owner",

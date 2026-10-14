@@ -18,9 +18,10 @@ import { productsService } from "@/services/productsService.js";
 import { suppliersService } from "@/services/suppliersService.js";
 import { isDenied } from "@/services/ipcResult.js";
 import { parsePositiveRupeesOrNull } from "@/utils/money.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { afterFirstLine } from "@/utils/text.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 

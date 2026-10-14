@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { isFractionalUom, roundQtyForUom } from "@pos/business-logic";
 import type { Cart } from "@pos/types";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 interface SplitBillModalProps {
   label: string;

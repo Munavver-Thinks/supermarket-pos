@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ThemeMode } from "@pos/business-logic";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
+import { useThemeStore } from "@/store/themeStore.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
-import { useThemeStore } from "../../theme/useTheme.js";
 
 import { ThemeTiles } from "./ThemeTiles.js";
 

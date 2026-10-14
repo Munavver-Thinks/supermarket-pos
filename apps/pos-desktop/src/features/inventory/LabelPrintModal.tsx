@@ -12,9 +12,9 @@ import type { LabelSettings } from "@shared/ipc.js";
 
 import { labelsService } from "@/services/labelsService.js";
 import { parseNonNegativeRupees } from "@/utils/money.js";
+import { Icon } from "@/components/Icon/index.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { Icon } from "../../components/icons.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 interface LabelPrintModalProps {

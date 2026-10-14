@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useLoadUiLanguage, useUiLanguageStore } from "../../i18n/useT.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useLoadUiLanguage } from "@/hooks/useLoadUiLanguage.js";
+import { useUiLanguageStore } from "@/store/uiLanguageStore.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
 
 /**

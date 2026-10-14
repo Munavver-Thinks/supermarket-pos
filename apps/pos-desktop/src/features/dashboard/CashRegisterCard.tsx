@@ -3,8 +3,8 @@ import { formatIndianCurrency } from "@pos/business-logic";
 import type { CashSessionSummary } from "@shared/ipc.js";
 
 import { parseRupeesOrZero } from "@/utils/money.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { cashSessionService } from "./services/cashSessionService.js";

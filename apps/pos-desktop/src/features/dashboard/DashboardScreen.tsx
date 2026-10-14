@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 import type { DashboardSummary } from "@pos/types";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 

@@ -2,7 +2,7 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { errorsService } from "@/services/errorsService.js";
 
-import { Icon } from "./components/icons.js";
+import { Icon } from "../Icon/index.js";
 
 interface ErrorBoundaryProps {
   children: ReactNode;

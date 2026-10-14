@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import type { MutableRefObject } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
+
 import type { PayoutMode } from "../returns/ReturnLinePicker.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";

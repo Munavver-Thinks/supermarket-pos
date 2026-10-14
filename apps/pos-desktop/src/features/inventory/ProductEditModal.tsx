@@ -11,10 +11,10 @@ import type { ProductForEdit, Supplier } from "@pos/types";
 
 import { productsService } from "@/services/productsService.js";
 import { parseRupeesStrict } from "@/utils/money.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { Icon } from "@/components/Icon/index.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { useConfirm } from "../../components/ConfirmDialog.js";
-import { Icon } from "../../components/icons.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { PackSizesSection } from "./PackSizesSection.js";

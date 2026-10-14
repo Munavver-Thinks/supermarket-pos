@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import type { Customer } from "@pos/types";
 
 import { customersService } from "@/services/customersService.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
-import type { BillTab } from "../../store/cartStore.js";
+import type { BillTab } from "./store/cartStore.js";
 
 interface AssignCustomerModalProps {
   storeId: string;

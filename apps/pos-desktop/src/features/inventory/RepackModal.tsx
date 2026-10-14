@@ -3,8 +3,8 @@ import { defaultBestBefore, localDateIso } from "@pos/business-logic";
 import type { ProductPackRow } from "@pos/types";
 
 import { inventoryService } from "@/services/inventoryService.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { LabelPrintModal } from "./LabelPrintModal.js";

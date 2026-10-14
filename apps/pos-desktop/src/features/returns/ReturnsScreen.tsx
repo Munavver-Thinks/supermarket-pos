@@ -3,9 +3,9 @@ import { canApprove, formatIndianCurrency } from "@pos/business-logic";
 import type { ApproverCredentials, RecentReturn, ReturnableSale } from "@pos/types";
 
 import { returnsService } from "@/services/returnsService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { ManagerApprovalDialog } from "@/components/ManagerApprovalDialog/ManagerApprovalDialog.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { PAYOUT_MODES, previewReturn, REFUND_LABEL, ReturnLinePicker, type PayoutMode } from "./ReturnLinePicker.js";

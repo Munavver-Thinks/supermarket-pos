@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import type { DraftBill } from "@pos/types";
 
-import { Icon } from "../../components/icons.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { Icon } from "@/components/Icon/index.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 

@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { canApprove, EXPIRY_ALERT_DAYS, formatIndianCurrency } from "@pos/business-logic";
 import type { ApproverCredentials, ExpiringBatchRow } from "@pos/types";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useConfirm } from "../../components/ConfirmDialog.js";
-import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { ManagerApprovalDialog } from "@/components/ManagerApprovalDialog/ManagerApprovalDialog.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { batchesService } from "./services/batchesService.js";

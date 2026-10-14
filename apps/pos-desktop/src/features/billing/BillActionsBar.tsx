@@ -3,8 +3,7 @@ import { isFractionalUom } from "@pos/business-logic";
 import type { Customer } from "@pos/types";
 import type { SessionContext } from "@shared/ipc.js";
 
-import { useCartStore, type BillTab } from "../../store/cartStore.js";
-
+import { useCartStore, type BillTab } from "./store/cartStore.js";
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 import { AssignCustomerModal } from "./AssignCustomerModal.js";
 import { MergeBillModal } from "./MergeBillModal.js";

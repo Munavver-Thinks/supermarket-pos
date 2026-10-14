@@ -5,9 +5,12 @@ import type { ActivationInfo, UserRole } from "@pos/types";
 
 import { errorsService } from "@/services/errorsService.js";
 import { sessionService } from "@/services/sessionService.js";
+import { Icon, LogoMark } from "@/components/Icon/index.js";
+import { useLoadUiLanguage } from "@/hooks/useLoadUiLanguage.js";
+import { useT } from "@/hooks/useT.js";
+import { useUiLanguageStore } from "@/store/uiLanguageStore.js";
 
-import { ComingSoonScreen } from "./components/ComingSoonScreen.js";
-import { Icon, LogoMark } from "./components/icons.js";
+import { ComingSoonScreen } from "./components/ComingSoon/ComingSoon.js";
 import { AlertsBanner } from "./features/alerts/AlertsBanner.js";
 import { AlertsNavBadge } from "./features/alerts/AlertsNavBadge.js";
 import { AlertsScreen } from "./features/alerts/AlertsScreen.js";
@@ -26,9 +29,8 @@ import { AppearanceDialog } from "./features/settings/AppearanceDialog.js";
 import { SettingsScreen } from "./features/settings/SettingsScreen.js";
 import { ThemeQuickSwitch } from "./features/settings/ThemeQuickSwitch.js";
 import { SuppliersScreen } from "./features/suppliers/SuppliersScreen.js";
-import { useLoadUiLanguage, useT, useUiLanguageStore } from "./i18n/useT.js";
 import { useSessionStore } from "./store/sessionStore.js";
-import { useApplyTheme } from "./theme/useTheme.js";
+import { useApplyTheme } from "./hooks/useApplyTheme.js";
 
 type Screen =
   | "dashboard"

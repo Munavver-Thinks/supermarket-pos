@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { BILLING_SHORTCUTS, billingShortcutLabel } from "@pos/business-logic";
 import type { BillingShortcutAction, BillingShortcutBinding } from "@pos/business-logic";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 /** The key for an action, drawn as a keycap — used on buttons so shortcuts are discoverable. */
 export function ShortcutKey({ action }: { action: BillingShortcutAction }): JSX.Element {

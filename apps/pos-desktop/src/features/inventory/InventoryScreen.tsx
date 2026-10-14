@@ -11,10 +11,10 @@ import type { LowStockRow, ProductAdminRow, Supplier } from "@pos/types";
 import { inventoryService } from "@/services/inventoryService.js";
 import { productsService } from "@/services/productsService.js";
 import { suppliersService } from "@/services/suppliersService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { Icon } from "@/components/Icon/index.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useConfirm } from "../../components/ConfirmDialog.js";
-import { Icon } from "../../components/icons.js";
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 

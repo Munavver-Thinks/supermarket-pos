@@ -11,8 +11,7 @@ import type { StockShortfall } from "@pos/business-logic";
 import type { Cart } from "@pos/types";
 import type { NegativeStockPolicy } from "@shared/ipc.js";
 
-import { useCartStore, type PendingReturn } from "../../store/cartStore.js";
-
+import { useCartStore, type PendingReturn } from "./store/cartStore.js";
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 import { BILLING_FOCUS_IDS, focusById, lineQtyInputId } from "./useBillingShortcuts.js";
 

@@ -3,9 +3,9 @@ import { assignableRoles, canManageStaff, canManageStaffMember } from "@pos/busi
 import type { User, UserRole } from "@pos/types";
 
 import { usersService } from "@/services/usersService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { EditEmployeeModal, ResetPasswordModal, ROLE_LABEL } from "./EditEmployeeModal.js";

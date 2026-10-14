@@ -3,8 +3,8 @@ import { billingShortcutLabel, formatIndianCurrency } from "@pos/business-logic"
 import type { Customer } from "@pos/types";
 
 import { customersService } from "@/services/customersService.js";
+import { CustomerFormModal } from "@/components/CustomerFormModal/CustomerFormModal.js";
 
-import { CustomerFormModal } from "../../components/CustomerFormModal.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";

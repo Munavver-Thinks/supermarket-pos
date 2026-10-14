@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Icon, LogoMark } from "../../components/icons.js";
+import { Icon, LogoMark } from "@/components/Icon/index.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { authService } from "./services/authService.js";

@@ -10,8 +10,8 @@ import {
 } from "@pos/business-logic";
 
 import { labelsService } from "@/services/labelsService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 type NumberField = Exclude<keyof LabelLayout, "paper">;

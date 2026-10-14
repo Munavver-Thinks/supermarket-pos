@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 
-import { Icon } from "../../components/icons.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { Icon } from "@/components/Icon/index.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
+import { useThemeStore } from "@/store/themeStore.js";
+
 import { useSessionStore } from "../../store/sessionStore.js";
-import { useThemeStore } from "../../theme/useTheme.js";
 
 import { currentChoice, THEME_CHOICES, ThemeSwatch } from "./ThemeTiles.js";
 

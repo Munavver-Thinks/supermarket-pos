@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import type { StockAlert, StockAlertKind, UserRole } from "@pos/types";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+
 import { useAlertsStore } from "../../store/alertsStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 

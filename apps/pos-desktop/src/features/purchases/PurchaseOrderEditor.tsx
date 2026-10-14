@@ -12,8 +12,8 @@ import { rupeesToPaise } from "@pos/business-logic";
 
 import { productsService } from "@/services/productsService.js";
 import { isDenied } from "@/services/ipcResult.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { ReceiveGoodsModal } from "./ReceiveGoodsModal.js";

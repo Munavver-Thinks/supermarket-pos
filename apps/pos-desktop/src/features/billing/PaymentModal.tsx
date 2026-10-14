@@ -12,8 +12,7 @@ import {
 import type { ChangeAction, PaymentInput } from "@pos/types";
 
 import { parseRupeesOrZero } from "@/utils/money.js";
-
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 import { paymentFieldId } from "./useBillingShortcuts.js";

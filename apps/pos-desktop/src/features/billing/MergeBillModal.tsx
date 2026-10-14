@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
-import type { BillTab } from "../../store/cartStore.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
+
+import type { BillTab } from "./store/cartStore.js";
 
 interface MergeBillModalProps {
   bills: BillTab[];

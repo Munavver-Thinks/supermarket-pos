@@ -7,9 +7,9 @@ import { printerService } from "@/services/printerService.js";
 import { storeSettingsService } from "@/services/storeSettingsService.js";
 import { formatWhen } from "@/utils/date.js";
 import { formatSize } from "@/utils/format.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
-import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 import { ActivationForm } from "../auth/ActivationForm.js";
 

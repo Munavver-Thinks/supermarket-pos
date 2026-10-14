@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { ActivationInfo } from "@pos/types";
 
-import { Icon } from "../../components/icons.js";
-import { useT } from "../../i18n/useT.js";
+import { Icon } from "@/components/Icon/index.js";
+import { useT } from "@/hooks/useT.js";
 
 import { activationService } from "./services/activationService.js";
 

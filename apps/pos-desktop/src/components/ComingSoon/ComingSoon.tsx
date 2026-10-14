@@ -1,5 +1,5 @@
-import { BlueprintCard } from "./BlueprintCard.js";
-import { Icon, type IconName } from "./icons.js";
+import { BlueprintCard } from "../BlueprintCard/BlueprintCard.js";
+import { Icon, type IconName } from "../Icon/index.js";
 
 interface ComingSoonScreenProps {
   title: string;

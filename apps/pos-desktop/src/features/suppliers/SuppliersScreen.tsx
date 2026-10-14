@@ -3,8 +3,8 @@ import type { Supplier } from "@pos/types";
 import type { SupplierInput } from "@shared/ipc.js";
 
 import { suppliersService } from "@/services/suppliersService.js";
+import { BlueprintCard } from "@/components/BlueprintCard/BlueprintCard.js";
 
-import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 const EMPTY_FORM = {

@@ -3,10 +3,11 @@ import { formatIndianCurrency } from "@pos/business-logic";
 import type { ReturnableSale } from "@pos/types";
 
 import { returnsService } from "@/services/returnsService.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
-import type { PendingReturn } from "../../store/cartStore.js";
 import { previewReturn, ReturnLinePicker } from "../returns/ReturnLinePicker.js";
+
+import type { PendingReturn } from "./store/cartStore.js";
 
 interface ReturnAgainstBillModalProps {
   storeId: string;

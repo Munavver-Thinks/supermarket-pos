@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { ApproverCredentials } from "@pos/types";
 
-import { useT } from "../i18n/useT.js";
+import { useT } from "@/hooks/useT.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { Icon } from "./icons.js";
-import { useModalKeyboard } from "./useModalKeyboard.js";
+import { Icon } from "../Icon/index.js";
 
 interface ManagerApprovalDialogProps {
   title: string;

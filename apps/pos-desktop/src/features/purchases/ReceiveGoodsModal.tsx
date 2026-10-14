@@ -15,9 +15,10 @@ import type { PurchaseOrderDetail, PurchasePriceSnapshot } from "@pos/types";
 
 import { isDenied } from "@/services/ipcResult.js";
 import { parsePositiveRupeesOrNull, parseRupeesStrict } from "@/utils/money.js";
+import { useConfirm } from "@/context/ConfirmContext/index.js";
+import { afterFirstLine } from "@/utils/text.js";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard.js";
 
-import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
-import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { purchaseOrdersService } from "./services/purchaseOrdersService.js";
