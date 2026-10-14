@@ -8,11 +8,11 @@ import {
   type LabelLayout,
 } from "@pos/business-logic";
 import type { LabelDefaults } from "@pos/types";
+import type { LabelSettings } from "@shared/ipc.js";
 
 import { Icon } from "../../components/icons.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { LabelSettings } from "../../../shared/ipc.js";
 
 interface LabelPrintModalProps {
   productId: string;

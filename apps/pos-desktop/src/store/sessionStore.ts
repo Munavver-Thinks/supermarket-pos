@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import type { User } from "@pos/types";
-
-import type { SessionContext } from "../../shared/ipc.js";
+import type { SessionContext } from "@shared/ipc.js";
 
 interface SessionState {
   context: SessionContext | null;

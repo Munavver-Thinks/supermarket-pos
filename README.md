@@ -11,7 +11,7 @@ multi-phase roadmap (purchases, wholesale/GST, AI, multi-store, mobile) — this
 ## Repo layout
 
 ```
-apps/pos-desktop      Electron app (main process, preload, React renderer)
+apps/pos-desktop      Electron app: electron/ (main process, preload, shared IPC contract) and src/ (React renderer)
 packages/types        Shared TypeScript DTOs
 packages/database      Kysely schema, migrations, repositories (SQLite)
 packages/validation    Zod schemas for every IPC input

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { auditActionLabel, canChangeStoreSettings, canViewAuditLog, describeAuditEntry } from "@pos/business-logic";
 import type { ActivationInfo, AuditActivityEntry } from "@pos/types";
+import type { BackupFile, NegativeStockPolicy, ReceiptLanguage } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { BackupFile, NegativeStockPolicy, ReceiptLanguage } from "../../../shared/ipc.js";
 import { ActivationForm } from "../auth/ActivationForm.js";
 
 import { ChangePasswordCard } from "./ChangePasswordCard.js";

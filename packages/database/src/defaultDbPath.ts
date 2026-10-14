@@ -1,7 +1,7 @@
 import os from "node:os";
 import path from "node:path";
 
-/** Must match `app.setName(...)` in apps/pos-desktop/src/main/index.ts. */
+/** Must match `app.setName(...)` in apps/pos-desktop/electron/main/index.ts. */
 const APP_NAME = "Supermarket POS";
 
 /**

@@ -1,14 +1,22 @@
+import { fileURLToPath } from "node:url";
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import electron from "vite-plugin-electron/simple";
 import renderer from "vite-plugin-electron-renderer";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@shared": fileURLToPath(new URL("./electron/shared", import.meta.url)),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   plugins: [
     react(),
     electron({
       main: {
-        entry: "src/main/index.ts",
+        entry: "electron/main/index.ts",
         vite: {
           build: {
             outDir: "dist-electron/main",
@@ -24,7 +32,7 @@ export default defineConfig({
         },
       },
       preload: {
-        input: "src/preload/index.ts",
+        input: "electron/preload/index.ts",
         vite: {
           build: {
             outDir: "dist-electron/preload",

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { isFractionalUom } from "@pos/business-logic";
 import type { Customer } from "@pos/types";
+import type { SessionContext } from "@shared/ipc.js";
 
 import { useCartStore, type BillTab } from "../../store/cartStore.js";
-import type { SessionContext } from "../../../shared/ipc.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
 import { AssignCustomerModal } from "./AssignCustomerModal.js";

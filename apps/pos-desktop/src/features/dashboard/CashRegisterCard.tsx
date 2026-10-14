@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
+import type { CashSessionSummary } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { CashSessionSummary } from "../../../shared/ipc.js";
 
 /** Notes and coins in circulation, largest first — the order a drawer is counted in. */
 const DENOMINATIONS = [500, 200, 100, 50, 20, 10, 5, 2, 1];

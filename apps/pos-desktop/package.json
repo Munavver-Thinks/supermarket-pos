@@ -18,6 +18,8 @@
     "@pos/database": "workspace:*",
     "@pos/types": "workspace:*",
     "@pos/validation": "workspace:*",
+    "@testing-library/dom": "^10",
+    "@testing-library/react": "^16",
     "@types/bcryptjs": "^2.4.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -40,10 +42,15 @@
     "directories": {
       "output": "release"
     },
-    "files": ["dist", "dist-electron"],
+    "files": [
+      "dist",
+      "dist-electron"
+    ],
     "npmRebuild": false,
     "extraResources": [],
-    "asarUnpack": ["**/node_modules/better-sqlite3/**"],
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**"
+    ],
     "win": {
       "target": "nsis"
     },

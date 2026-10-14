@@ -4,13 +4,13 @@
 //   node scripts/activation-keys.mjs keygen <outDir>
 //       Writes activation-private.pem and activation-public.pem into <outDir>.
 //       Keep the private key OUT of the repository and in safe storage. Paste the public key
-//       into src/main/activationPublicKey.ts (append — never replace — so keys issued with an
+//       into electron/main/activationPublicKey.ts (append — never replace — so keys issued with an
 //       older private key keep working).
 //
 //   node scripts/activation-keys.mjs issue <privateKeyPem> <requestCode> <storeName> [licenseId]
 //       Prints an activation key for the request code shown on the shop's screen.
 //
-// The key format must match src/main/activation.ts:
+// The key format must match electron/main/activation.ts:
 //   POS1.<base64url(JSON payload)>.<base64url(Ed25519 signature over the payload segment)>
 import { createPrivateKey, generateKeyPairSync, randomUUID, sign } from "node:crypto";
 import fs from "node:fs";

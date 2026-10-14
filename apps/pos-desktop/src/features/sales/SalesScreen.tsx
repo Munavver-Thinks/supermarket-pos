@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { formatIndianCurrency } from "@pos/business-logic";
 import type { RecentSale } from "@pos/types";
+import type { SalePrintResponse } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { Icon } from "../../components/icons.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { SalePrintResponse } from "../../../shared/ipc.js";
 
 const RECENT_LIMIT = 50;
 

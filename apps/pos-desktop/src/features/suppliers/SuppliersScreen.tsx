@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Supplier } from "@pos/types";
+import type { SupplierInput } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { SupplierInput } from "../../../shared/ipc.js";
 
 const EMPTY_FORM = {
   name: "",

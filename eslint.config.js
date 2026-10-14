@@ -31,6 +31,12 @@ export default tseslint.config(
         "warn",
         {
           groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+          // The `@/` and `@shared/` path aliases (tsconfig + vite) are first-party code.
+          pathGroups: [
+            { pattern: "@/**", group: "internal" },
+            { pattern: "@shared/**", group: "internal" },
+          ],
+          pathGroupsExcludedImportTypes: ["builtin", "external"],
           "newlines-between": "always",
         },
       ],

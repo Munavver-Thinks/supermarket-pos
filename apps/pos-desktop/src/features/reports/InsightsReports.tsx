@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { EXPIRY_ALERT_DAYS, formatIndianCurrency, paiseForCsv } from "@pos/business-logic";
 import type { DeadStockRow, ExpiringBatchRow, MarginRow, ProfitReport, SlowMovingRow } from "@pos/types";
+import type { ReportRequest } from "@shared/ipc.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
-import type { ReportRequest } from "../../../shared/ipc.js";
 
 type CsvRows = Array<Array<string | number | null>>;
 

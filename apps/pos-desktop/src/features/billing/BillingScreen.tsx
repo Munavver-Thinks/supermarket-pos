@@ -10,12 +10,12 @@ import {
 } from "@pos/business-logic";
 import type { BillingShortcutAction } from "@pos/business-logic";
 import type { ApproverCredentials, Customer, DraftBill, PaymentInput } from "@pos/types";
+import type { ExchangeReturnInput, NegativeStockPolicy } from "@shared/ipc.js";
 
 import { Icon } from "../../components/icons.js";
 import { ManagerApprovalDialog } from "../../components/ManagerApprovalDialog.js";
 import { useCartStore } from "../../store/cartStore.js";
 import { useSessionStore } from "../../store/sessionStore.js";
-import type { ExchangeReturnInput, NegativeStockPolicy } from "../../../shared/ipc.js";
 import { REFUND_LABEL, type PayoutMode } from "../returns/ReturnLinePicker.js";
 
 import { BillActionsBar } from "./BillActionsBar.js";
