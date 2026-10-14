@@ -5,6 +5,12 @@ import importPlugin from "eslint-plugin-import";
 import prettier from "eslint-config-prettier";
 import reactRefresh from "eslint-plugin-react-refresh";
 
+/** Node-only code (native SQLite, IPC input validation) that only the Electron main process may load. */
+const MAIN_PROCESS_ONLY = [
+  { name: "@pos/database", message: "The database runs in the Electron main process; reach it through IPC (src/services)." },
+  { name: "@pos/validation", message: "IPC input validation runs in the Electron main process." },
+];
+
 export default tseslint.config(
   {
     ignores: [
@@ -14,6 +20,8 @@ export default tseslint.config(
       "**/node_modules/**",
       "**/*.config.js",
       "**/*.config.ts",
+      "**/*.config.mjs",
+      "**/*.config.mts",
     ],
   },
   js.configs.recommended,
@@ -46,8 +54,8 @@ export default tseslint.config(
   {
     // Renderer architecture (see README "Renderer architecture"): the preload bridge is read in
     // exactly one place, and a feature is only reached through its public index.
-    files: ["apps/pos-desktop/src/**/*.{ts,tsx}"],
-    ignores: ["apps/pos-desktop/src/services/ipcClient.ts", "apps/pos-desktop/src/@types/**"],
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/core/**", "src/services/ipcClient.ts", "src/@types/**"],
     rules: {
       "no-restricted-syntax": [
         "error",
@@ -59,6 +67,7 @@ export default tseslint.config(
       "no-restricted-imports": [
         "error",
         {
+          paths: MAIN_PROCESS_ONLY,
           patterns: [
             {
               group: ["@/features/*/*", "!@/features/*/index.js", "**/features/*/components/*", "**/features/*/hooks/*", "**/features/*/services/*"],
@@ -71,12 +80,55 @@ export default tseslint.config(
   },
   {
     // Inside a feature its own files import each other directly.
-    files: ["apps/pos-desktop/src/features/**/*.{ts,tsx}"],
-    rules: { "no-restricted-imports": "off" },
+    files: ["src/features/**/*.{ts,tsx}"],
+    rules: { "no-restricted-imports": ["error", { paths: MAIN_PROCESS_ONLY }] },
+  },
+  {
+    // src/core is shared by the Electron main process and the renderer, so it stays framework-free.
+    files: ["src/core/**/*.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/**", "@shared/**", "react", "react-dom", "electron"],
+              message: "src/core is shared by the main process and the renderer: no renderer, React or Electron imports.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // The database layer may name business-logic types but never call it at runtime — the
+    // formulas it needs are duplicated on purpose (see repositories/purchases.ts, sales.ts).
+    files: ["src/core/database/**/*.ts"],
+    ignores: ["**/*.test.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "@pos/business-logic",
+              allowTypeImports: true,
+              message: "The database layer may import business-logic types only; duplicate the formula instead.",
+            },
+          ],
+          patterns: [
+            {
+              group: ["@/**", "@shared/**", "react", "react-dom", "electron"],
+              message: "src/core is shared by the main process and the renderer: no renderer, React or Electron imports.",
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     // A .tsx file exports components only; constants, types-with-values and helpers live in .ts files.
-    files: ["apps/pos-desktop/src/**/*.tsx"],
+    files: ["src/**/*.tsx"],
     ignores: ["**/*.test.tsx"],
     plugins: { "react-refresh": reactRefresh },
     rules: { "react-refresh/only-export-components": ["error", { allowConstantExport: false }] },
@@ -84,7 +136,7 @@ export default tseslint.config(
   {
     // Plain Node CLI script (run with `node`, not built) — outside the app's browser/Electron
     // type-checked sources, so it needs the two Node globals it uses declared explicitly.
-    files: ["apps/pos-desktop/scripts/*.mjs", "scripts/**/*.mjs"],
+    files: ["scripts/**/*.mjs"],
     languageOptions: {
       globals: { process: "readonly", Buffer: "readonly" },
     },

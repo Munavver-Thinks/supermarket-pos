@@ -11,12 +11,25 @@ multi-phase roadmap (purchases, wholesale/GST, AI, multi-store, mobile) — this
 ## Repo layout
 
 ```
-apps/pos-desktop      Electron app: electron/ (main process, preload, shared IPC contract) and src/ (React renderer)
-packages/types        Shared TypeScript DTOs
-packages/database      Kysely schema, migrations, repositories (SQLite)
-packages/validation    Zod schemas for every IPC input
-packages/business-logic Pure, unit-tested engines: tax, discount, search, quantity parsing,
+One package: a single package.json and node_modules at the root.
+
+electron/                Electron base files: main/ (main process, IPC handlers), preload/,
+                         shared/ipc.ts (the IPC contract both sides compile against)
+src/                     Everything else
+  App.tsx, main.tsx      React renderer entry
+  components/ context/ features/ hooks/ pages/ routes/ services/ store/ utils/
+  core/types/            Shared TypeScript DTOs                        (import "@pos/types")
+  core/database/         Kysely schema, migrations, repositories       (import "@pos/database")
+  core/validation/       Zod schemas for every IPC input               (import "@pos/validation")
+  core/business-logic/   Pure, unit-tested engines: tax, discount, search, quantity parsing,
                          billing totals, money formatting — no Electron/DB imports
+                                                                       (import "@pos/business-logic")
+public/  index.html      Renderer static files and HTML entry
+scripts/                 activation-keys.mjs, proof/ (pnpm proof, check:extensions)
+
+@pos/* are path aliases (tsconfig.json, vite.config.mts, vitest.config.mts), not packages.
+ESLint keeps the boundaries: the renderer never imports @pos/database or @pos/validation, and
+src/core/database may only import business-logic types.
 ```
 
 ## Prerequisites
@@ -110,7 +123,7 @@ and bill numbers are atomic and gap-free per counter.
 pnpm package
 ```
 
-Produces a Windows NSIS installer under `apps/pos-desktop/release/`. Unsigned by default —
+Produces a Windows NSIS installer under `release/`. Unsigned by default —
 code-signing is a business decision (needs a cert) to revisit before wide distribution.
 `electron-updater` is wired in as a dependency but not yet pointed at a real release feed;
 wiring that up is a fast follow once you have somewhere to publish releases (GitHub Releases
@@ -126,7 +139,7 @@ activation with it; editing `device-config.json` or patching the app bypasses it
 
 **The keypair checked into this repo is a pre-release placeholder — its private key was not
 kept anywhere.** No real activation key can ever be issued against it. Before relying on this
-gate, generate a real pair (`node apps/pos-desktop/scripts/activation-keys.mjs keygen`), put
+gate, generate a real pair (`node scripts/activation-keys.mjs keygen`), put
 the new public key in `activationPublicKey.ts`, and keep the private key out of the repo
 entirely — it's what you (or whoever issues keys to shops) sign requests with. Until then,
 `activationRequired` is never set on a fresh install, so the gate stays off and every install
@@ -140,7 +153,7 @@ in Settings and can activate whenever you're ready, without being forced.
 Settings → Screen language, and the "EN | த" toggle in the nav rail, switch the nav labels,
 screen titles, sign-out, the offline/default-password banners, the login screen (shown
 bilingually, with no toggle before sign-in), and the activation/manager-approval dialogs
-between English and Tamil. See `packages/business-logic/src/uiStrings.ts` for the exact
+between English and Tamil. See `src/core/business-logic/uiStrings.ts` for the exact
 string table.
 
 Everything else — every screen body (Dashboard, Billing, Inventory, Purchases, Suppliers,
@@ -172,7 +185,7 @@ front of a real shop.
 ## Coding standards (enforced, not just documented)
 
 - TypeScript `strict` + `noUncheckedIndexedAccess`; no `any` (ESLint-enforced)
-- Money is always an integer number of paise — see `packages/business-logic/src/money.ts`
+- Money is always an integer number of paise — see `src/core/business-logic/money.ts`
 - `stock_ledger` and `audit_logs` are append-only at the repository layer
 - Every financial write is one DB transaction; sale creation is idempotent via a
   client-generated `clientTxnId`

@@ -11,7 +11,7 @@ import ts from "typescript";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const baselinePath = path.join(root, "scripts/proof/ipc-inventory.baseline.json");
-const rendererDir = "apps/pos-desktop/src";
+const rendererDir = "src";
 
 function sourceFiles(dir) {
   const out = [];

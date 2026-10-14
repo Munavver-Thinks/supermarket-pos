@@ -5,19 +5,32 @@ import react from "@vitejs/plugin-react";
 import electron from "vite-plugin-electron/simple";
 import renderer from "vite-plugin-electron-renderer";
 
+const fromRoot = (p: string): string => fileURLToPath(new URL(p, import.meta.url));
+
+/**
+ * The same aliases as tsconfig.json `paths`. The Electron main and preload builds get their own
+ * Vite config from vite-plugin-electron, so they are passed the aliases explicitly as well.
+ * Output format: this package.json has no "type" field, so the plugin builds main and preload as
+ * CommonJS, which the sandboxed preload needs.
+ */
+const alias = {
+  "@pos/business-logic": fromRoot("./src/core/business-logic/index.ts"),
+  "@pos/database": fromRoot("./src/core/database/index.ts"),
+  "@pos/types": fromRoot("./src/core/types/index.ts"),
+  "@pos/validation": fromRoot("./src/core/validation/index.ts"),
+  "@shared": fromRoot("./electron/shared"),
+  "@": fromRoot("./src"),
+};
+
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@shared": fileURLToPath(new URL("./electron/shared", import.meta.url)),
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
-  },
+  resolve: { alias },
   plugins: [
     react(),
     electron({
       main: {
         entry: "electron/main/index.ts",
         vite: {
+          resolve: { alias },
           build: {
             outDir: "dist-electron/main",
             rollupOptions: {
@@ -34,6 +47,7 @@ export default defineConfig({
       preload: {
         input: "electron/preload/index.ts",
         vite: {
+          resolve: { alias },
           build: {
             outDir: "dist-electron/preload",
           },

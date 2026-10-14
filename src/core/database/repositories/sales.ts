@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 
-// Type-only: packages/database can't depend on @pos/business-logic at runtime (devDependency
+// Type-only: the database layer can't depend on @pos/business-logic at runtime (type imports
 // only — see returns.ts's identical import for why), but these shapes are safe to name here.
 import type { ReturnLineTotal, ReturnTotals } from "@pos/business-logic";
 import type { CartLineTotal, CartTotals, PaymentInput, RecentSale, RefundMode, Sale, SaleItem, SalesSummary } from "@pos/types";

@@ -262,8 +262,8 @@ function unitCost(line: PurchaseLineTotal): number {
 
 /**
  * Duplicate of @pos/business-logic's weightedAverageCost — this package can't import
- * business-logic at runtime (only as a devDependency for types/tests), so the formula is
- * copied here. Keep in sync with packages/business-logic/src/costing.ts.
+ * business-logic at runtime (type imports only; tests may use it), so the formula is
+ * copied here. Keep in sync with src/core/business-logic/costing.ts.
  */
 function weightedAverageCostLocal(input: {
   qtyOnHandBefore: number;
