@@ -2,9 +2,9 @@ import type { ActivationStatus, UserRole } from "@pos/types";
 
 import type { AppRoute } from "./routeConfig.js";
 
-export type AccessResult = "ok" | "needsActivation" | "needsLogin" | "forbidden";
+type AccessResult = "ok" | "needsActivation" | "needsLogin" | "forbidden";
 
-export interface AccessContext {
+interface AccessContext {
   activationStatus: ActivationStatus;
   userRole: UserRole | null;
 }

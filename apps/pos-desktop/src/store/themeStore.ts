@@ -3,7 +3,7 @@ import { DEFAULT_THEME_PREFERENCE, parseThemePreference, type ThemeId, type Them
 
 import { uiService } from "@/services/uiService.js";
 
-export interface ThemeState {
+interface ThemeState {
   /** The user the preference belongs to; null on the login and activation screens. */
   userId: string | null;
   preference: ThemePreference;

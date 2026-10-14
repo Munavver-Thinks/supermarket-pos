@@ -28,7 +28,7 @@ export interface BillTab {
   pendingReturn?: PendingReturn | null;
 }
 
-export interface BillContext {
+interface BillContext {
   storeId: string;
   counterId: string;
   userId: string;

@@ -3,7 +3,7 @@ import type { UiLanguage } from "@pos/business-logic";
 
 import { uiService } from "@/services/uiService.js";
 
-export interface UiLanguageState {
+interface UiLanguageState {
   language: UiLanguage;
   /** False until the stored preference has loaded — screens render in English meanwhile. */
   loaded: boolean;

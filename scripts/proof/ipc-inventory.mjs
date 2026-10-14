@@ -1,7 +1,7 @@
 // Lists every IPC channel the renderer calls, as a sorted set of "<namespace>.<function>".
 //   node scripts/proof/ipc-inventory.mjs --write   regenerate the baseline file from the current tree
 //   node scripts/proof/ipc-inventory.mjs           compare the current tree against the baseline
-// A call counts when its root is `window.api` (before the refactor) or `posApi()` (after it), so
+// A call counts when its root is `window.api` (before the refactor) or `posApi()` (after it; the baseline was recorded when the renderer lived in src/renderer), so
 // the same script proves nothing was dropped or invented when calls moved behind services/.
 import fs from "node:fs";
 import path from "node:path";
@@ -11,7 +11,7 @@ import ts from "typescript";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const baselinePath = path.join(root, "scripts/proof/ipc-inventory.baseline.json");
-const rendererDirs = ["apps/pos-desktop/src/renderer", "apps/pos-desktop/src"];
+const rendererDir = "apps/pos-desktop/src";
 
 function sourceFiles(dir) {
   const out = [];
@@ -34,9 +34,8 @@ function isApiRoot(node) {
 }
 
 function collect() {
-  const dir = rendererDirs.map((d) => path.join(root, d)).find((d) => fs.existsSync(d));
-  // `src/` also holds the pre-refactor `main`, `preload` and `shared` folders — skip them.
-  const files = sourceFiles(dir).filter((f) => !/[\\/]src[\\/](main|preload|shared)[\\/]/.test(f));
+  const dir = path.join(root, rendererDir);
+  const files = sourceFiles(dir);
   const found = new Set();
   for (const file of files) {
     const sf = ts.createSourceFile(file, fs.readFileSync(file, "utf8"), ts.ScriptTarget.ES2022, true);
