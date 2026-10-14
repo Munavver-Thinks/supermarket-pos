@@ -1,0 +1,15 @@
+export { AiPage } from "./AiPage/index.js";
+export { BillingPage } from "./BillingPage/index.js";
+export { CustomersPage } from "./CustomersPage/index.js";
+export { DashboardPage } from "./DashboardPage/index.js";
+export { EmployeesPage } from "./EmployeesPage/index.js";
+export { HelpPage } from "./HelpPage/index.js";
+export { InventoryPage } from "./InventoryPage/index.js";
+export { MobilePage } from "./MobilePage/index.js";
+export { NotificationsPage } from "./NotificationsPage/index.js";
+export { PurchasesPage } from "./PurchasesPage/index.js";
+export { ReportsPage } from "./ReportsPage/index.js";
+export { ReturnsPage } from "./ReturnsPage/index.js";
+export { SalesPage } from "./SalesPage/index.js";
+export { SettingsPage } from "./SettingsPage/index.js";
+export { SuppliersPage } from "./SuppliersPage/index.js";

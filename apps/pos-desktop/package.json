@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "better-sqlite3": "^11.5.0",
-    "electron-updater": "^6.3.9"
+    "electron-updater": "^6.3.9",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@electron/rebuild": "^3.7.0",

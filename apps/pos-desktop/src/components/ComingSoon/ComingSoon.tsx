@@ -1,7 +1,7 @@
 import { BlueprintCard } from "../BlueprintCard/BlueprintCard.js";
 import { Icon, type IconName } from "../Icon/index.js";
 
-interface ComingSoonScreenProps {
+interface ComingSoonProps {
   title: string;
   text: string;
   ctaLabel?: string;
@@ -11,7 +11,7 @@ interface ComingSoonScreenProps {
 }
 
 /** Honest "not built yet" placeholder — never render fabricated numbers or sample rows here. */
-export function ComingSoonScreen({ title, text, ctaLabel, onCta, icon = "info" }: ComingSoonScreenProps): JSX.Element {
+export function ComingSoon({ title, text, ctaLabel, onCta, icon = "info" }: ComingSoonProps): JSX.Element {
   return (
     <div className="screen-section">
       <BlueprintCard className="soon-card">
