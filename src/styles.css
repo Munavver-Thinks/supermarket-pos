@@ -54,8 +54,7 @@
   src: url("./assets/fonts/barlow-condensed-600.woff2") format("woff2");
 }
 
-/* Basket Bill design tokens (design/basket-bill/tokens.css). */
-/* Basket Bill — generated from tokens.json. Themes: light, dark, contrast, vivid, vivid-night */
+/* Basket Bill design tokens. Themes: light, dark, contrast, vivid, vivid-night */
 :root, [data-theme="light"] {
   --surface-100: #f6f4ee;
   --surface-200: #fdfcf8;
