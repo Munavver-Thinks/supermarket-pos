@@ -8,8 +8,10 @@ import {
   roundQtyForUom,
 } from "@pos/business-logic";
 import type { ProductSearchResult, PurchaseOrderDetail, PurchaseOrderStatus, PurchasePriceSnapshot, Supplier } from "@pos/types";
+import { rupeesToPaise } from "@pos/business-logic";
 
 import { productsService } from "@/services/productsService.js";
+import { isDenied } from "@/services/ipcResult.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
@@ -49,11 +51,6 @@ interface EditorLine {
    * Seeds the cost box and drives the margin warning tag; a purchase order moves no stock or
    * cost itself, so there's no confirm-on-save here, unlike the receipt screens. */
   snapshot: PurchasePriceSnapshot | null;
-}
-
-/** Narrows the `T | {ok:false}` the price-snapshot channel returns when access is refused. */
-function isDenied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
-  return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
 }
 
 interface PurchaseOrderEditorProps {
@@ -169,7 +166,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     lines.map((l) => ({
       productId: l.productId,
       qty: l.qty,
-      costPricePaise: Math.round(l.costRupees * 100),
+      costPricePaise: rupeesToPaise(l.costRupees),
       taxRatePercent: l.taxRatePercent,
       isTaxInclusive,
     })),
@@ -230,7 +227,7 @@ export function PurchaseOrderEditor({ poId, suppliers, onBack, onChanged }: Purc
     return lines.map((l) => ({
       productId: l.productId,
       qtyOrdered: l.qty,
-      costPricePaise: Math.round(l.costRupees * 100),
+      costPricePaise: rupeesToPaise(l.costRupees),
       taxRatePercent: l.taxRatePercent,
       isTaxInclusive,
     }));

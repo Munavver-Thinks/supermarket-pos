@@ -11,6 +11,8 @@ import {
 } from "@pos/business-logic";
 import type { ChangeAction, PaymentInput } from "@pos/types";
 
+import { parseRupeesOrZero } from "@/utils/money.js";
+
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 
 import { ShortcutKey } from "./ShortcutHelpOverlay.js";
@@ -74,10 +76,10 @@ export function PaymentModal({
   useModalKeyboard(cardRef);
 
   const amountsPaise = {
-    cash: Math.max(0, Math.round((Number(amounts.cash) || 0) * 100)),
-    upi: Math.max(0, Math.round((Number(amounts.upi) || 0) * 100)),
-    card: Math.max(0, Math.round((Number(amounts.card) || 0) * 100)),
-    credit: Math.max(0, Math.round((Number(amounts.credit) || 0) * 100)),
+    cash: Math.max(0, parseRupeesOrZero(amounts.cash)),
+    upi: Math.max(0, parseRupeesOrZero(amounts.upi)),
+    card: Math.max(0, parseRupeesOrZero(amounts.card)),
+    credit: Math.max(0, parseRupeesOrZero(amounts.credit)),
   };
   const t = computeTender(netPaise, amountsPaise);
   const khataAllowed = canKeepChangeOnKhata({ customerId, creditPaise: amountsPaise.credit });

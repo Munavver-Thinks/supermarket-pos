@@ -13,17 +13,15 @@ import {
 } from "@pos/business-logic";
 import type { PurchaseOrderDetail, PurchasePriceSnapshot } from "@pos/types";
 
+import { isDenied } from "@/services/ipcResult.js";
+import { parsePositiveRupeesOrNull, parseRupeesStrict } from "@/utils/money.js";
+
 import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { purchaseOrdersService } from "./services/purchaseOrdersService.js";
 import { purchasesService } from "./services/purchasesService.js";
-
-/** Narrows the `T | {ok:false}` the price-snapshot channel returns when access is refused. */
-function isDenied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
-  return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
-}
 
 interface ReceiveGoodsModalProps {
   detail: PurchaseOrderDetail;
@@ -43,12 +41,6 @@ interface ReceiveLine {
   expiryDate: string;
   /** Rupees as typed; blank/zero means "no change" to the product's recorded MRP. */
   mrpRupees: string;
-}
-
-/** Empty or zero means "box left empty / no change" — never sent as a real MRP of 0. */
-function mrpRupeesToPaiseOrNull(mrpRupees: string): number | null {
-  const paise = Math.round(Number(mrpRupees) * 100);
-  return paise > 0 ? paise : null;
 }
 
 /**
@@ -118,7 +110,7 @@ export function ReceiveGoodsModal({ detail, onClose, onReceived }: ReceiveGoodsM
     chosen.map((l) => ({
       productId: l.productId,
       qty: roundQtyForUom(Number(l.qty), l.uom),
-      costPricePaise: Math.round(Number(l.costRupees) * 100),
+      costPricePaise: parseRupeesStrict(l.costRupees),
       taxRatePercent: taxById.get(l.poItemId)?.taxRatePercent ?? 0,
       isTaxInclusive: taxById.get(l.poItemId)?.isTaxInclusive ?? false,
     })),
@@ -149,7 +141,7 @@ export function ReceiveGoodsModal({ detail, onClose, onReceived }: ReceiveGoodsM
             receivedTaxablePaise: computed.taxablePaise,
           })
         : null;
-    const mrpPaise = mrpRupeesToPaiseOrNull(l.mrpRupees);
+    const mrpPaise = parsePositiveRupeesOrNull(l.mrpRupees);
     const mrpWarnings =
       mrpPaise !== null && snapshot
         ? findMrpWarnings({
@@ -255,10 +247,10 @@ export function ReceiveGoodsModal({ detail, onClose, onReceived }: ReceiveGoodsM
       lines: chosen.map((l) => ({
         poItemId: l.poItemId,
         qty: roundQtyForUom(Number(l.qty), l.uom),
-        costPricePaise: Math.round(Number(l.costRupees) * 100),
+        costPricePaise: parseRupeesStrict(l.costRupees),
         batchNo: l.batchNo.trim() || null,
         expiryDate: l.expiryDate || null,
-        mrpPaise: mrpRupeesToPaiseOrNull(l.mrpRupees),
+        mrpPaise: parsePositiveRupeesOrNull(l.mrpRupees),
       })),
     });
     setBusy(false);

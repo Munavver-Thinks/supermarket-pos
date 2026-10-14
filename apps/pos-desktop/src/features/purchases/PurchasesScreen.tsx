@@ -12,9 +12,12 @@ import {
   weightedAverageCost,
 } from "@pos/business-logic";
 import type { ProductSearchResult, PurchaseListRow, PurchasePriceSnapshot, Supplier } from "@pos/types";
+import { rupeesToPaise } from "@pos/business-logic";
 
 import { productsService } from "@/services/productsService.js";
 import { suppliersService } from "@/services/suppliersService.js";
+import { isDenied } from "@/services/ipcResult.js";
+import { parsePositiveRupeesOrNull } from "@/utils/money.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { afterFirstLine, useConfirm } from "../../components/ConfirmDialog.js";
@@ -42,18 +45,7 @@ interface DraftLine {
   snapshot: PurchasePriceSnapshot | null;
 }
 
-/** Empty or zero means "box left empty / no change" — never sent as a real MRP of 0. */
-function mrpRupeesToPaiseOrNull(mrpRupees: string): number | null {
-  const paise = Math.round(Number(mrpRupees) * 100);
-  return paise > 0 ? paise : null;
-}
-
 type PurchasesTab = "orders" | "direct";
-
-/** Narrows the `T | {ok:false}` the price-snapshot channel returns when access is refused. */
-function isDenied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
-  return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
-}
 
 export function PurchasesScreen(): JSX.Element {
   const context = useSessionStore((s) => s.context);
@@ -222,7 +214,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
     lines.map((line) => ({
       productId: line.productId,
       qty: line.qty,
-      costPricePaise: Math.round(line.costRupees * 100),
+      costPricePaise: rupeesToPaise(line.costRupees),
       taxRatePercent: line.taxRatePercent,
       isTaxInclusive,
     })),
@@ -251,7 +243,7 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
             receivedTaxablePaise: computed.taxablePaise,
           })
         : null;
-    const mrpPaise = mrpRupeesToPaiseOrNull(line.mrpRupees);
+    const mrpPaise = parsePositiveRupeesOrNull(line.mrpRupees);
     const mrpWarnings =
       mrpPaise !== null && line.snapshot
         ? findMrpWarnings({
@@ -346,12 +338,12 @@ function DirectReceiptPanel({ suppliers }: { suppliers: Supplier[] }): JSX.Eleme
       lines: lines.map((line) => ({
         productId: line.productId,
         qty: line.qty,
-        costPricePaise: Math.round(line.costRupees * 100),
+        costPricePaise: rupeesToPaise(line.costRupees),
         taxRatePercent: line.taxRatePercent,
         isTaxInclusive,
         batchNo: line.batchNo.trim() || null,
         expiryDate: line.expiryDate || null,
-        mrpPaise: mrpRupeesToPaiseOrNull(line.mrpRupees),
+        mrpPaise: parsePositiveRupeesOrNull(line.mrpRupees),
       })),
     });
     setSaving(false);

@@ -10,6 +10,7 @@ import {
 import type { ProductForEdit, Supplier } from "@pos/types";
 
 import { productsService } from "@/services/productsService.js";
+import { parseRupeesStrict } from "@/utils/money.js";
 
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { Icon } from "../../components/icons.js";
@@ -41,10 +42,6 @@ function parseList(text: string): string[] {
 
 function rupees(paise: number): string {
   return (paise / 100).toFixed(2);
-}
-
-function toPaise(text: string): number {
-  return Math.round(Number(text) * 100);
 }
 
 /**
@@ -158,9 +155,9 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
 
   const priceWarnings = product
     ? findMarginWarnings({
-        costPricePaise: toPaise(prices.costPrice || "0"),
-        salePricePaise: toPaise(prices.salePrice || "0"),
-        wholesalePricePaise: prices.wholesalePrice.trim() ? toPaise(prices.wholesalePrice) : null,
+        costPricePaise: parseRupeesStrict(prices.costPrice || "0"),
+        salePricePaise: parseRupeesStrict(prices.salePrice || "0"),
+        wholesalePricePaise: prices.wholesalePrice.trim() ? parseRupeesStrict(prices.wholesalePrice) : null,
         taxRatePercent: product.taxRatePercent,
         isTaxInclusive: prices.isTaxInclusive,
       })
@@ -210,10 +207,10 @@ export function ProductEditModal({ productId, suppliers, onClose, onSaved }: Pro
     e.preventDefault();
     if (!user || confirmingRef.current) return;
     setPricesMessage(null);
-    const mrpPaise = toPaise(prices.mrp);
-    const salePricePaise = toPaise(prices.salePrice);
-    const costPricePaise = toPaise(prices.costPrice);
-    const wholesalePricePaise = prices.wholesalePrice.trim() ? toPaise(prices.wholesalePrice) : null;
+    const mrpPaise = parseRupeesStrict(prices.mrp);
+    const salePricePaise = parseRupeesStrict(prices.salePrice);
+    const costPricePaise = parseRupeesStrict(prices.costPrice);
+    const wholesalePricePaise = prices.wholesalePrice.trim() ? parseRupeesStrict(prices.wholesalePrice) : null;
     if ([mrpPaise, salePricePaise, costPricePaise].some((v) => !Number.isFinite(v) || v < 0)) {
       setPricesMessage("Enter each price as an amount in rupees.");
       return;

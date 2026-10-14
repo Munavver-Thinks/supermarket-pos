@@ -11,6 +11,7 @@ import type { LabelDefaults } from "@pos/types";
 import type { LabelSettings } from "@shared/ipc.js";
 
 import { labelsService } from "@/services/labelsService.js";
+import { parseNonNegativeRupees } from "@/utils/money.js";
 
 import { Icon } from "../../components/icons.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
@@ -21,13 +22,6 @@ interface LabelPrintModalProps {
   /** Set right after a repack, so the dates, MRP and copy count come from that run. */
   repackId?: string | null;
   onClose: () => void;
-}
-
-/** Rupees typed in a box to integer paise; null when it isn't a non-negative amount. */
-function parseRupees(text: string): number | null {
-  const value = Number(text);
-  if (text.trim() === "" || !Number.isFinite(value) || value < 0) return null;
-  return Math.round(value * 100);
 }
 
 /** The preview shows one label at its real size, whatever the paper. */
@@ -96,8 +90,8 @@ export function LabelPrintModal({ productId, repackId = null, onClose }: LabelPr
 
   const copies = Number(copiesText);
   const copiesValid = Number.isInteger(copies) && copies >= 1 && copies <= 500;
-  const mrpPaise = parseRupees(mrpText);
-  const salePricePaise = parseRupees(priceText);
+  const mrpPaise = parseNonNegativeRupees(mrpText);
+  const salePricePaise = parseNonNegativeRupees(priceText);
   const priceTooHigh = mrpPaise !== null && salePricePaise !== null && mrpPaise > 0 && salePricePaise > mrpPaise;
   const datesOrdered = packedOn === "" || expiryDate === "" || expiryDate >= packedOn;
 

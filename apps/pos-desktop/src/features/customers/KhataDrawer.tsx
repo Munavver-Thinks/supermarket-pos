@@ -3,6 +3,7 @@ import { canChangeStoreSettings, formatIndianCurrency } from "@pos/business-logi
 import type { CustomerLedgerEntry } from "@pos/types";
 
 import { creditService } from "@/services/creditService.js";
+import { parseRupeesOrZero } from "@/utils/money.js";
 
 import { useSessionStore } from "../../store/sessionStore.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
@@ -62,7 +63,7 @@ export function KhataDrawer({ customer, onClose, onChanged }: KhataDrawerProps):
     e.preventDefault();
     if (!context || !user) return;
 
-    const amountPaise = Math.round((Number(amount) || 0) * 100);
+    const amountPaise = parseRupeesOrZero(amount);
     if (amountPaise <= 0) {
       setMessage("Enter the amount received.");
       return;
@@ -97,7 +98,7 @@ export function KhataDrawer({ customer, onClose, onChanged }: KhataDrawerProps):
     setMessage(null);
     const result = await creditService.setLimit(
       customer.id,
-      Math.round((Number(limitRupees) || 0) * 100),
+      parseRupeesOrZero(limitRupees),
       user.id,
     );
     setBusy(false);

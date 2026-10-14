@@ -2,32 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { formatIndianCurrency, paiseForCsv, toCsv } from "@pos/business-logic";
 import type { GstRateRow, HsnSummaryRow, SalesReport, StockValuationRow, TopProductRow } from "@pos/types";
 
+import { isDenied } from "@/services/ipcResult.js";
+import { endOfLocalDay, isoDate, startOfLocalDay } from "@/utils/date.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useSessionStore } from "../../store/sessionStore.js";
 
 import { InsightsReports } from "./InsightsReports.js";
 import { reportsService } from "./services/reportsService.js";
-
-/** A local calendar date as YYYY-MM-DD, for the date inputs. */
-function isoDate(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
-function startOfLocalDay(date: string): string {
-  const [y, m, d] = date.split("-").map(Number);
-  return new Date(y ?? 1970, (m ?? 1) - 1, d ?? 1, 0, 0, 0, 0).toISOString();
-}
-
-/** Exclusive end: the start of the day *after* the one chosen, so the last day is included. */
-function endOfLocalDay(date: string): string {
-  const [y, m, d] = date.split("-").map(Number);
-  return new Date(y ?? 1970, (m ?? 1) - 1, (d ?? 1) + 1, 0, 0, 0, 0).toISOString();
-}
-
-/** Narrows the `T | {ok:false}` the report channels return when access is refused. */
-function denied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
-  return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
-}
 
 export function ReportsScreen(): JSX.Element {
   const context = useSessionStore((s) => s.context);
@@ -71,15 +53,15 @@ export function ReportsScreen(): JSX.Element {
 
     setLoading(false);
 
-    if (denied(salesResult)) {
+    if (isDenied(salesResult)) {
       setError(salesResult.error);
       return;
     }
     setSales(salesResult);
-    if (!denied(gstResult)) setGst(gstResult);
-    if (!denied(hsnResult)) setHsn(hsnResult);
-    if (!denied(topResult)) setTop(topResult);
-    if (!denied(stockResult)) setStock(stockResult);
+    if (!isDenied(gstResult)) setGst(gstResult);
+    if (!isDenied(hsnResult)) setHsn(hsnResult);
+    if (!isDenied(topResult)) setTop(topResult);
+    if (!isDenied(stockResult)) setStock(stockResult);
   }, [context, user, from, to]);
 
   useEffect(() => {

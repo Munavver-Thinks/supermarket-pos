@@ -3,6 +3,8 @@ import { EXPIRY_ALERT_DAYS, formatIndianCurrency, paiseForCsv } from "@pos/busin
 import type { DeadStockRow, ExpiringBatchRow, MarginRow, ProfitReport, SlowMovingRow } from "@pos/types";
 import type { ReportRequest } from "@shared/ipc.js";
 
+import { isDenied } from "@/services/ipcResult.js";
+
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 
 import { reportsService } from "./services/reportsService.js";
@@ -20,10 +22,6 @@ interface InsightsReportsProps {
 const SLOW_LOOKBACK_DAYS = 30;
 const SLOW_MIN_COVER_DAYS = 60;
 const DEAD_DAYS = 90;
-
-function isDenied<T>(value: T | { ok: false; error: string }): value is { ok: false; error: string } {
-  return typeof value === "object" && value !== null && "ok" in value && (value as { ok: unknown }).ok === false;
-}
 
 function pct(value: number | null): string {
   return value === null ? "—" : `${value}%`;

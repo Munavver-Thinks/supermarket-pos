@@ -5,6 +5,8 @@ import type { BackupFile, NegativeStockPolicy, ReceiptLanguage } from "@shared/i
 
 import { printerService } from "@/services/printerService.js";
 import { storeSettingsService } from "@/services/storeSettingsService.js";
+import { formatWhen } from "@/utils/date.js";
+import { formatSize } from "@/utils/format.js";
 
 import { BlueprintCard } from "../../components/BlueprintCard.js";
 import { useConfirm } from "../../components/ConfirmDialog.js";
@@ -76,22 +78,6 @@ const RECEIPT_LANGUAGE_OPTIONS: Array<{ value: ReceiptLanguage; label: string; d
     detail: "Tamil names are left off the receipt.",
   },
 ];
-
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
-
-function formatWhen(iso: string): string {
-  return new Date(iso).toLocaleString("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
 
 export function SettingsScreen(): JSX.Element {
   const context = useSessionStore((s) => s.context);

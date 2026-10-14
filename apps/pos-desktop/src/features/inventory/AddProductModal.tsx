@@ -3,6 +3,7 @@ import { findMarginWarnings, isFractionalUom, marginConfirmText, roundQtyForUom 
 import type { Supplier } from "@pos/types";
 
 import { productsService } from "@/services/productsService.js";
+import { parseRupeesOrZero, parseRupeesStrict } from "@/utils/money.js";
 
 import { useConfirm } from "../../components/ConfirmDialog.js";
 import { useModalKeyboard } from "../../components/useModalKeyboard.js";
@@ -57,9 +58,9 @@ export function AddProductModal({ storeId, userId, suppliers, onCreated, onClose
     return () => window.removeEventListener("keydown", onKey);
   }, [busy, onClose]);
 
-  const costPricePaise = Math.round((Number(form.costPrice) || 0) * 100);
-  const salePricePaise = Math.round((Number(form.salePrice) || 0) * 100);
-  const wholesalePricePaise = form.wholesalePrice.trim() ? Math.round(Number(form.wholesalePrice) * 100) : null;
+  const costPricePaise = parseRupeesOrZero(form.costPrice);
+  const salePricePaise = parseRupeesOrZero(form.salePrice);
+  const wholesalePricePaise = form.wholesalePrice.trim() ? parseRupeesStrict(form.wholesalePrice) : null;
   const taxRatePercent = Number(form.taxRatePercent) || 0;
   const warnings = findMarginWarnings({
     costPricePaise,
@@ -109,10 +110,10 @@ export function AddProductModal({ storeId, userId, suppliers, onCreated, onClose
       taxRatePercent: Number(form.taxRatePercent) || 0,
       barcodes: form.barcode ? [form.barcode] : [],
       aliases: form.alias ? [form.alias] : [],
-      mrpPaise: Math.round(Number(form.mrp) * 100),
-      salePricePaise: Math.round(Number(form.salePrice) * 100),
-      costPricePaise: Math.round(Number(form.costPrice) * 100),
-      wholesalePricePaise: form.wholesalePrice.trim() ? Math.round(Number(form.wholesalePrice) * 100) : null,
+      mrpPaise: parseRupeesStrict(form.mrp),
+      salePricePaise: parseRupeesStrict(form.salePrice),
+      costPricePaise: parseRupeesStrict(form.costPrice),
+      wholesalePricePaise: form.wholesalePrice.trim() ? parseRupeesStrict(form.wholesalePrice) : null,
       isTaxInclusive: true,
       reorderLevel: Math.max(0, roundQtyForUom(Number(form.reorderLevel) || 0, form.uom)),
       rackLocation: form.rackLocation.trim() || null,
