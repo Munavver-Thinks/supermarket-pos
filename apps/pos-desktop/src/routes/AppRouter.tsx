@@ -1,8 +1,8 @@
 import type { ComponentType } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { ActivationScreen } from "@/features/auth/ActivationScreen.js";
-import { LoginScreen } from "@/features/auth/LoginScreen.js";
+import { ActivationScreen } from "@/features/auth/index.js";
+import { LoginScreen } from "@/features/auth/index.js";
 import {
   AiPage,
   BillingPage,

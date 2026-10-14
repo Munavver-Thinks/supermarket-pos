@@ -1,4 +1,4 @@
-import { SalesScreen } from "@/features/sales/SalesScreen.js";
+import { SalesScreen } from "@/features/sales/index.js";
 
 export function SalesPage(): JSX.Element {
   return <SalesScreen />;
