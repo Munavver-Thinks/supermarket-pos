@@ -3,23 +3,21 @@ import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { ActivationScreen } from "@/main-modules/auth/index.js";
 import { LoginScreen } from "@/main-modules/auth/index.js";
-import {
-  AiPage,
-  BillingPage,
-  CustomersPage,
-  DashboardPage,
-  EmployeesPage,
-  HelpPage,
-  InventoryPage,
-  MobilePage,
-  NotificationsPage,
-  PurchasesPage,
-  ReportsPage,
-  ReturnsPage,
-  SalesPage,
-  SettingsPage,
-  SuppliersPage,
-} from "@/pages/index.js";
+import { AiPage } from "@/pages/AiPage/AiPage.js";
+import { BillingPage } from "@/pages/BillingPage/BillingPage.js";
+import { CustomersPage } from "@/pages/CustomersPage/CustomersPage.js";
+import { DashboardPage } from "@/pages/DashboardPage/DashboardPage.js";
+import { EmployeesPage } from "@/pages/EmployeesPage/EmployeesPage.js";
+import { HelpPage } from "@/pages/HelpPage/HelpPage.js";
+import { InventoryPage } from "@/pages/InventoryPage/InventoryPage.js";
+import { MobilePage } from "@/pages/MobilePage/MobilePage.js";
+import { NotificationsPage } from "@/pages/NotificationsPage/NotificationsPage.js";
+import { PurchasesPage } from "@/pages/PurchasesPage/PurchasesPage.js";
+import { ReportsPage } from "@/pages/ReportsPage/ReportsPage.js";
+import { ReturnsPage } from "@/pages/ReturnsPage/ReturnsPage.js";
+import { SalesPage } from "@/pages/SalesPage/SalesPage.js";
+import { SettingsPage } from "@/pages/SettingsPage/SettingsPage.js";
+import { SuppliersPage } from "@/pages/SuppliersPage/SuppliersPage.js";
 import { useSessionStore } from "@/store/sessionStore.js";
 
 import { AppLayout } from "./AppLayout.js";
